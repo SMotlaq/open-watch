@@ -4,7 +4,7 @@ Hi! This repo includes the hardware (Schematics and PCBs) and software related f
 ## Progress
 - [x] Hardware design
 - [x] PCB design
-- [ ] Ordering components
+- [x] Ordering components
 - [ ] Ordering PCB
 - [ ] Soldeing
 - [ ] Programming
