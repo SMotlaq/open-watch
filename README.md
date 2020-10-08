@@ -1,6 +1,16 @@
 ## Welcome to handmade watch project ✋🏻😃
 Hi! This repo includes the hardware (Schematics and PCBs) and software related files.
 
+## Progress
+- [x] Hardware design
+- [x] PCB design
+- [ ] Ordering components
+- [ ] Ordering PCB
+- [ ] Soldeing
+- [ ] Programming
+- [ ] Assembling
+- [ ] Final test 
+
 ## Hardware components
  * Main proccessor: [STM32F030C8 (ARM core)](https://www.javanelec.com/Shops?searchFilter=STM32F030C8T6#)
  * Display: [0.96" OLED 64*128 pixels](https://www.javanelec.com/Shops?searchFilter=oled#)
