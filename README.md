@@ -9,7 +9,7 @@ Hi! This repo includes the hardware (Schematics and PCBs) and software related f
 - [ ] Soldeing
 - [ ] Programming
 - [ ] Assembling
-- [ ] Final test 
+- [ ] Final test 😍
 
 ## Hardware components
  * Main proccessor: [STM32F030C8 (ARM core)](https://www.javanelec.com/Shops?searchFilter=STM32F030C8T6#)
