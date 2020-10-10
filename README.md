@@ -3,11 +3,19 @@ Hi! This repo includes the hardware (Schematics and PCBs) and software related f
 
 ## Progress
 - [x] Hardware design
+  - [x] Microcontroller
+  - [x] Viberation motor
+  - [x] Bluetooth
 - [x] PCB design
 - [x] Ordering components
 - [ ] Ordering PCB
 - [ ] Soldeing
 - [ ] Programming
+  - [ ] RTC
+  - [ ] Bluetooth commands
+  - [ ] Vibration waves
+  - [ ] OLED
+  - [ ] Battery level indicator
 - [ ] Assembling
 - [ ] Final test 😍
 
