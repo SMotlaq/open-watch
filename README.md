@@ -16,6 +16,7 @@ Hi! This repo includes the hardware (Schematics and PCBs) and software related f
   - [ ] Vibration waves
   - [ ] OLED
   - [ ] Battery level indicator
+  - [ ] Battery management
 - [ ] Assembling
 - [ ] Final test 😍
 
