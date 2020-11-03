@@ -21,7 +21,7 @@ Hi! This repo includes the hardware (Schematics and PCBs) and software related f
 - [ ] Final test
 
 ## Hardware components
- * Main proccessor: [STM32F030C8 (ARM core)](https://www.javanelec.com/Shops?searchFilter=STM32F030C8T6#)
+ * Main proccessor: [STM32F030C8 (ARM core)](https://www.javanelec.com/Shops/ProductDetail/24347)
  * Display: [0.96" OLED 64*128 pixels](https://www.javanelec.com/Shops?searchFilter=oled#)
  * Viberation [motor](https://www.javanelec.com/Shops/ProductDetail/38512)
  * Bluetooth: [HC-05](https://www.javanelec.com/Shops/ProductDetail/30407)
