@@ -18,7 +18,7 @@ Hi! This repo includes the hardware (Schematics and PCBs) and software related f
   - [ ] Battery level indicator
   - [ ] Battery management
 - [ ] Assembling
-- [ ] Final test 
+- [ ] Final test 😎
 
 ## Hardware components
  * Main proccessor: [STM32F030C8 (ARM core)](https://www.javanelec.com/Shops/ProductDetail/24347)
