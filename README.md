@@ -6,6 +6,8 @@ Hi! This repo includes the hardware (Schematics and PCBs) and software related f
   - [x] Microcontroller
   - [x] Viberation motor
   - [x] Bluetooth
+  - [x] Buzzer
+  - [x] Touch keys
 - [x] PCB design
 - [x] Ordering components
 - [ ] Ordering PCB
