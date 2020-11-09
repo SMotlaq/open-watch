@@ -36,4 +36,4 @@ Hi! This repo includes the hardware (Schematics and PCBs) and software related f
 ![3D-front](photos/Pic14.JPG?raw=true "3D view of main PCB - front")
 ![3D-back](photos/Pic15.JPG?raw=true "3D view of main PCB - back")
 ### Body
-![Body]([photos/Pic5.jpg?raw=true "Body")
+![Body]([photos/Pic5.JPG?raw=true "Body")
