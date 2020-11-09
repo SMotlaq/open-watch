@@ -15,6 +15,7 @@ Hi! This repo includes the hardware (Schematics and PCBs) and software related f
   - [ ] Bluetooth commands
   - [ ] Vibration waves
   - [ ] OLED
+  - [ ] Touch buttons
   - [ ] Battery level indicator
   - [ ] Battery management
 - [ ] Assembling
