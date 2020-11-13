@@ -60,6 +60,8 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define TEMP_Pin GPIO_PIN_12
+#define TEMP_GPIO_Port GPIOA
 #define KEY1_Pin GPIO_PIN_15
 #define KEY1_GPIO_Port GPIOA
 #define KEY2_Pin GPIO_PIN_3
