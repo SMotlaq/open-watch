@@ -30,6 +30,9 @@ Hi! This repo includes the hardware (Schematics and PCBs) and software related f
  * Bluetooth: [HC-05](https://www.javanelec.com/Shops/ProductDetail/30407)
 
 ## Photos
+### Overview
+![overview-front](photos/Pic22.JPG?raw=true "Overview - Front")
+![overview-back](photos/Pic23.JPG?raw=true "Overview - Back")
 ### PCB - 2D
 ![2D](photos/Pic21.JPG?raw=true "2D view of main PCB - both layers")
 ### PCB - 3D
