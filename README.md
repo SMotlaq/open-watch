@@ -25,7 +25,7 @@ Hi! This repo includes the hardware (Schematics and PCBs) and software related f
 
 ## Hardware components
  * Main proccessor: [STM32F030C8 (ARM core)](https://www.javanelec.com/Shops/ProductDetail/24347)
- * Display: [0.96" OLED 64*128 pixels](https://www.javanelec.com/Shops?searchFilter=oled#)
+ * Display: [0.96" OLED 64*128 pixels](https://www.javanelec.com/Shops/ProductDetail/40906)
  * Viberation [motor](https://www.javanelec.com/Shops/ProductDetail/38512)
  * Bluetooth: [HC-05](https://www.javanelec.com/Shops/ProductDetail/30407)
  * Touch driver: [BS814-A](https://micromodern.ir/shop/touch-key-ic/bs814a-1-msop10/)
