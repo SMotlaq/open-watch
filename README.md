@@ -4,7 +4,7 @@ Hi! This repo includes the hardware (Schematics and PCBs) and software related f
 ## Progress
 - [x] Hardware design
   - [x] Microcontroller
-  - [x] Viberation motor
+  - [x] Vibration motor
   - [x] Bluetooth
   - [x] Buzzer
   - [x] Touch keys
@@ -20,7 +20,7 @@ Hi! This repo includes the hardware (Schematics and PCBs) and software related f
   - [ ] OLED
   - [ ] Touch buttons
   - [ ] Battery level indicator
-  - [ ] Battery management
+  - [ ] Power saving
 - [ ] Assembling
 - [ ] Final test 😎
 
