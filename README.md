@@ -8,8 +8,9 @@ Hi! This repo includes the hardware (Schematics and PCBs) and software related f
   - [x] Bluetooth
   - [x] Buzzer
   - [x] Touch keys
-- [x] PCB design
-- [x] Ordering components
+  - [ ] Charger
+- [ ] PCB design
+- [ ] Ordering components
 - [ ] Ordering PCB
 - [ ] Soldeing
 - [ ] Programming
