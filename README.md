@@ -1,5 +1,4 @@
 ## Welcome to handmade smart watch project ✋🏻😃
-Hi! This repo includes the hardware (Schematics and PCBs) and software related files.
 
 ## Progress
 - [x] Hardware design
