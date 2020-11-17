@@ -8,8 +8,8 @@ Hi! This repo includes the hardware (Schematics and PCBs) and software related f
   - [x] Bluetooth
   - [x] Buzzer
   - [x] Touch keys
-  - [ ] Charger
-- [ ] PCB design
+  - [x] Charger
+- [x] PCB design
 - [ ] Ordering components
 - [ ] Ordering PCB
 - [ ] Soldeing
@@ -39,9 +39,9 @@ Hi! This repo includes the hardware (Schematics and PCBs) and software related f
 ![overview-front](photos/Pic22.jpg?raw=true "Overview - Front")
 ![overview-back](photos/Pic23.jpg?raw=true "Overview - Back")
 ### PCB - 2D
-![2D](photos/Pic21.JPG?raw=true "2D view of main PCB - both layers")
+![2D](photos/Pic24.JPG?raw=true "2D view of main PCB - both layers")
 ### PCB - 3D
-![3D-front](photos/Pic20.JPG?raw=true "3D view of main PCB - front")
-![3D-back](photos/Pic19.JPG?raw=true "3D view of main PCB - back")
+![3D-front](photos/Pic27.JPG?raw=true "3D view of main PCB - front")
+![3D-back](photos/Pic28.JPG?raw=true "3D view of main PCB - back")
 ### Body
 ![Body](photos/Pic5.jpg?raw=true "main body")
