@@ -36,8 +36,8 @@ Hi! This repo includes the hardware (Schematics and PCBs) and software related f
 
 ## Photos
 ### Overview
-![overview-front](photos/Pic22.jpg?raw=true "Overview - Front")
-![overview-back](photos/Pic23.jpg?raw=true "Overview - Back")
+![overview-front](photos/Pic29.jpg?raw=true "Overview - Front")
+![overview-back](photos/Pic30.jpg?raw=true "Overview - Back")
 ### PCB - 2D
 ![2D](photos/24.JPG?raw=true "2D view of main PCB - both layers")
 ### PCB - 3D
