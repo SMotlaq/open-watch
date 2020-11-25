@@ -9,8 +9,8 @@
   - [x] Touch keys
   - [x] Charger
 - [x] PCB design
-- [ ] Ordering components
-- [ ] Ordering PCB
+- [x] Ordering components
+- [x] Ordering PCB
 - [ ] Soldeing
 - [ ] Programming
   - [ ] RTC
