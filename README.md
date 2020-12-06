@@ -10,7 +10,7 @@
   - [x] Charger
 - [x] PCB design
 - [x] Ordering components
-- [x] Ordering PCB
+- [ ] Ordering PCB
 - [ ] Soldeing
 - [ ] Programming
   - [ ] RTC
