@@ -10,7 +10,7 @@
   - [x] Charger
 - [x] PCB design
 - [x] Ordering components
-- [ ] Ordering PCB
+- [x] Ordering PCB
 - [ ] Soldeing
 - [ ] Programming
   - [ ] RTC
@@ -42,5 +42,8 @@
 ### PCB - 3D
 ![3D-front](photos/Pic27.JPG?raw=true "3D view of main PCB - front")
 ![3D-back](photos/Pic28.JPG?raw=true "3D view of main PCB - back")
+### PCB - Real
+![real-front](photos/Pic32.jpg?raw=true "Real PCB view - front")
+![real-back](photos/Pic31.jpg?raw=true "Real PCB view - back")
 ### Body
 ![Body](photos/Pic5.jpg?raw=true "main body")
