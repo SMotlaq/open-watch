@@ -8,9 +8,9 @@
   - [x] Buzzer
   - [x] Touch keys
   - [x] Charger
-- [x] PCB design
-- [x] Ordering components
-- [x] Ordering PCB
+- [ ] PCB design
+- [ ] Ordering components
+- [ ] Ordering PCB
 - [ ] Soldeing
 - [ ] Programming
   - [ ] RTC
