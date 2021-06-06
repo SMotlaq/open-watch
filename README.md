@@ -1,4 +1,11 @@
 ## Welcome to handmade smart watch project ✋🏻😃
+Do you want to suuport me in this project?
+
+<p align="left">
+  <a href="http://smotlaq.ir/LQgQF">
+  <img src="https://raw.githubusercontent.com/SMotlaq/LoRa/master/bmc.png" width="200" alt="Buy me a Coffee"/>
+  </a>
+</p>
 
 ## Progress
 - [x] Hardware design
