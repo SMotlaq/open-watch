@@ -15,6 +15,8 @@ Do you want to suuport me in this project?
   - [x] Buzzer
   - [x] Touch keys
   - [x] Charger
+  - [ ] PPG sensor
+  - [ ] MPU6059
 - [ ] PCB design
 - [ ] Ordering components
 - [ ] Ordering PCB
@@ -40,7 +42,8 @@ Do you want to suuport me in this project?
  * Tempereture sensor: [DS18B20](https://eshop.eca.ir/%D8%B3%D9%86%D8%B3%D9%88%D8%B1-%D8%AF%D9%85%D8%A7-%D8%B1%D8%B7%D9%88%D8%A8%D8%AA/1925-%D8%B3%D9%86%D8%B3%D9%88%D8%B1-%D8%AF%D9%85%D8%A7-%D8%AF%DB%8C%D8%AC%DB%8C%D8%AA%D8%A7%D9%84-ds18b20.html?search_query=DS18B20&results=14)
  * Battery: [3.7v Li-Po 400mAh](https://micromodern.ir/shop/battery-power-management/battery/lithium-polymer-battery-3-7v-400mah/)
 
-## Photos
+## Photos (**This pictures belong to the previous version**)
+
 ### Overview
 ![overview-front](photos/Pic29.jpg?raw=true "Overview - Front")
 ![overview-back](photos/Pic30.jpg?raw=true "Overview - Back")
