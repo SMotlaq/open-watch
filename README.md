@@ -29,6 +29,8 @@ Do you want to suuport me in this project?
   - [ ] Touch buttons
   - [ ] Battery level indicator
   - [ ] Power saving
+  - [ ] MPU6050
+  - [ ] PPG sensor
 - [ ] Assembling
 - [ ] Final test 😎
 
