@@ -16,7 +16,7 @@ Do you want to suuport me in this project?
   - [x] Touch keys
   - [x] Charger
   - [ ] PPG sensor
-  - [ ] MPU6059
+  - [ ] MPU6050
 - [ ] PCB design
 - [ ] Ordering components
 - [ ] Ordering PCB
