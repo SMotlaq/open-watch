@@ -46,7 +46,7 @@ Do you want to suuport me in this project?
  * Battery: [3.7v Li-Po 400mAh](https://micromodern.ir/shop/battery-power-management/battery/lithium-polymer-battery-3-7v-400mah/)
  * Batery charger: [TP4056](http://skytech.ir/product_details.aspx?ID_Parts=9929&TP4056%20SOP8)
 
-## Photos (**This pictures belong to the previous version**)
+## Photos (**These pictures belong to the previous version**)
 
 ### Overview
 ![overview-front](photos/Pic29.jpg?raw=true "Overview - Front")
