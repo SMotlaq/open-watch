@@ -15,12 +15,12 @@ Do you want to suuport me in this project?
   - [x] Buzzer
   - [x] Touch keys
   - [x] Charger
-  - [ ] PPG sensor
+  - [X] PPG sensor
   - [X] MPU6050
-- [ ] PCB design
-- [ ] Ordering components
-- [ ] Ordering PCB
+- [X] PCB design
+- [ ] PCB Ordering
 - [ ] Soldeing
+- [ ] 3D printed body
 - [ ] Programming
   - [ ] RTC
   - [ ] Bluetooth commands
@@ -36,13 +36,15 @@ Do you want to suuport me in this project?
 
 ## Hardware components
  * Main proccessor: [STM32F030C8 (ARM core)](https://www.javanelec.com/Shops/ProductDetail/24347)
+ * Heartbeat and pulse oximeter sensor: [MAX30102](https://www.aliexpress.com/item/1005001863759524.html?spm=a2g0o.productlist.0.0.6b035ffbNirD5e&algo_pvid=579c2689-3578-4e82-948e-484fa9c52af9&algo_exp_id=579c2689-3578-4e82-948e-484fa9c52af9-0)
+ * Motion sensor: [MPU6050](http://skytech.ir/product_details.aspx?ID_Parts=2830&MPU6050)
  * Display: [0.96" OLED 64*128 pixels](https://www.javanelec.com/Shops/ProductDetail/40906)
  * Vibration [motor](https://www.javanelec.com/Shops/ProductDetail/38512)
  * Bluetooth: [HC-05](https://www.javanelec.com/Shops/ProductDetail/30407)
  * Touch driver: [BS814-A](https://micromodern.ir/shop/touch-key-ic/bs814a-1-msop10/)
  * Buzzer: [CSPT12A](https://eshop.eca.ir/%D9%82%D8%B7%D8%B9%D8%A7%D8%AA-%D8%B5%D9%88%D8%AA%DB%8C/10822-%D8%A8%D8%A7%D8%B2%D8%B1-%D9%BE%D8%B3%DB%8C%D9%88-cspt12a-%D9%BE%DA%A9%DB%8C%DA%86-smd-1230.html?search_query=CSPT12A+&results=1)
- * Tempereture sensor: [DS18B20](https://eshop.eca.ir/%D8%B3%D9%86%D8%B3%D9%88%D8%B1-%D8%AF%D9%85%D8%A7-%D8%B1%D8%B7%D9%88%D8%A8%D8%AA/1925-%D8%B3%D9%86%D8%B3%D9%88%D8%B1-%D8%AF%D9%85%D8%A7-%D8%AF%DB%8C%D8%AC%DB%8C%D8%AA%D8%A7%D9%84-ds18b20.html?search_query=DS18B20&results=14)
  * Battery: [3.7v Li-Po 400mAh](https://micromodern.ir/shop/battery-power-management/battery/lithium-polymer-battery-3-7v-400mah/)
+ * Batery charger: [TP4056](http://skytech.ir/product_details.aspx?ID_Parts=9929&TP4056%20SOP8)
 
 ## Photos (**This pictures belong to the previous version**)
 
