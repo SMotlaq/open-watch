@@ -1,0 +1,1 @@
+# Docs about open-watch firmware
