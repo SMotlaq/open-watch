@@ -46,18 +46,16 @@ Do you want to suuport me in this project?
  * Battery: [3.7v Li-Po 400mAh](https://micmodshop.ir/eshop/battery-products/batteries/battery-lithium-polymer-3-7v-400mah-custom-00/)
  * Batery charger: [TP4056](http://skytech.ir/product_details.aspx?ID_Parts=9929&TP4056%20SOP8)
 
-## Photos (***These pictures belong to the previous version***)
+## Photos
 
 ### Overview
-![overview-front](photos/Pic29.jpg?raw=true "Overview - Front")
-![overview-back](photos/Pic30.jpg?raw=true "Overview - Back")
+![overview-front](photos/Pic38.jpg?raw=true "Overview - Front")
+![overview-back](photos/Pic39.jpg?raw=true "Overview - Back")
 ### PCB - 2D
-![2D](photos/Pic24.JPG?raw=true "2D view of main PCB - both layers")
+![2D](photos/Pic33.jpg?raw=true "2D view of main PCB - both layers")
 ### PCB - 3D
-![3D-front](photos/Pic27.JPG?raw=true "3D view of main PCB - front")
-![3D-back](photos/Pic28.JPG?raw=true "3D view of main PCB - back")
-### PCB - Real
+![3D-front](photos/Pic36.jpg?raw=true "3D view of main PCB - front")
+![3D-back](photos/Pic37.jpg?raw=true "3D view of main PCB - back")
+### PCB - Real (***These pictures belong to the previous version***)
 ![real-front](photos/Pic32.jpg?raw=true "Real PCB view - front")
 ![real-back](photos/Pic31.jpg?raw=true "Real PCB view - back")
-### Body
-![Body](photos/Pic5.jpg?raw=true "main body")
