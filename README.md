@@ -47,8 +47,8 @@ Do you want to suuport me in this project?
  * Vibration [motor](https://www.javanelec.com/Shops/ProductDetail/38512)
  * Bluetooth: [HC-05](https://www.javanelec.com/Shops/ProductDetail/30407)
  * Touch driver: [BS814-A](https://micromodern.ir/shop/touch-key-ic/bs814a-1-msop10/)
- * Battery: [3.7v Li-Po 400mAh](https://micmodshop.ir/eshop/battery-products/batteries/battery-lithium-polymer-3-7v-400mah-custom-00/)
- * Batery charger: [TP4056](http://skytech.ir/product_details.aspx?ID_Parts=9929&TP4056%20SOP8)
+ * Battery: [3.7v Li-Po](https://micmodshop.ir/eshop/battery-products/batteries/battery-lithium-polymer-3-7v-400mah-custom-00/)
+ * Battery charger: [TP4056](http://skytech.ir/product_details.aspx?ID_Parts=9929&TP4056%20SOP8)
 
 ## Photos
 
