@@ -1,4 +1,4 @@
-## Welcome to Open-Watch project ✋🏻😃
+# Welcome to Open-Watch project ✋🏻😃
 Open-Watch is an open source project developed by [@SMotlaq](http://github.com/SMotlaq) and [@SeyedSaleh](http://github.com/seyedsaleh) for the BSc final thesis.
 
 ## Donation
