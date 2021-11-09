@@ -17,10 +17,11 @@ Do you want to suuport me in this project?
   - [x] Charger
   - [X] PPG sensor
   - [X] MPU6050
-- [ ] PCB design
-- [ ] PCB Ordering
+- [X] PCB design
+- [X] PCB Ordering
+- [ ] Body design
+- [ ] 3D print
 - [ ] Soldeing
-- [ ] 3D printed body
 - [ ] Programming
   - [ ] RTC
   - [ ] Bluetooth commands
