@@ -1,4 +1,7 @@
-## Welcome to handmade smart watch project ✋🏻😃
+## Welcome to Open-Watch project ✋🏻😃
+Open-Watch is an open source project developed by [@SMotlaq](http://github.com/SMotlaq) and [@SeyedSaleh](http://github.com/seyedsaleh) for the BSc final thesis.
+
+## Donation
 Do you want to suuport me in this project?
 
 <p align="left">
@@ -22,7 +25,7 @@ Do you want to suuport me in this project?
 - [ ] Body design
 - [ ] 3D print
 - [ ] Soldeing
-- [ ] Programming
+- [ ] Firmware programming
   - [ ] RTC
   - [ ] Bluetooth commands
   - [ ] Vibration waves
@@ -32,6 +35,7 @@ Do you want to suuport me in this project?
   - [ ] Power saving
   - [ ] MPU6050
   - [ ] PPG sensor
+- [ ] Android programming
 - [ ] Assembling
 - [ ] Final test 😎
 
