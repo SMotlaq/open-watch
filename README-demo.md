@@ -35,7 +35,7 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
-        <li><a href="#built-with">Components</a></li>
+        <li><a href="#components">Components</a></li>
       </ul>
     </li>
     <li><a href="#roadmap">Roadmap</a></li>
