@@ -54,7 +54,9 @@
 ## About The Project
 <p> <img src="photos/Pic38.jpg?raw=true "Overview - Front"" width="900"> </p>  
 Welcome to Open-Watch ✋🏻😃
+
 Open-Watch is an open source project developed for the our BSc final thesis.
+
 Wait to hear more from us!
 <p align="right">(<a href="#top">back to top</a>)</p>
 
