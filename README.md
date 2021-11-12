@@ -1,12 +1,27 @@
 <div id="top"></div>
 
-
 <!-- PROJECT SHIELDS -->
 [![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
+
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li><a href="#about-the-project">About The Project</a></li>
+    <li><a href="#donation">Donation</a></li>
+    <li><a href="#components">Components</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#parts">Parts</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#license">License</a></li>
+    <li><a href="#refereces">Refereces</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</details>
 
 <!-- ABOUT THE PROJECT -->
 # About The Project
@@ -15,35 +30,26 @@ Welcome to Open-Watch ✋🏻😃
 
 Open-Watch is an open source project developed for our BSc final thesis. Wait to hear more from us!
 
-
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#components">Components</a></li>
-      </ul>
-    </li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#parts">Parts</a></li>
-    <li><a href="#results">Results</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#refereces">Refereces</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="#donation">Donation</a></li>
-  </ol>
-</details>
-
 <div align="center">
   <p> <img src="photos/Pic38.jpg?raw=true "Overview - Front"" width="900"> </p>  
 </div>
 <p align="right">(<a href="#top">back to top</a>)</p>
 
+<!-- DONATION -->
+# Donation
+
+Do you want to suuport us in this project?
+
+<p align="left">
+  <a href="http://smotlaq.ir/LQgQF">
+  <img src="https://raw.githubusercontent.com/SMotlaq/LoRa/master/bmc.png" width="200" alt="Buy me a Coffee"/>
+  </a>
+</p>
+
+<p align="right">(<a href="#top">back to top</a>)</p>
 
 
-### Components
+# Components
  * Main proccessor: [STM32F030C8 (ARM core)](https://www.javanelec.com/Shops/ProductDetail/24347)
  * Heartbeat and pulse oximeter sensor: [MAX30102](https://www.aliexpress.com/item/1005001863759524.html?spm=a2g0o.productlist.0.0.6b035ffbNirD5e&algo_pvid=579c2689-3578-4e82-948e-484fa9c52af9&algo_exp_id=579c2689-3578-4e82-948e-484fa9c52af9-0)
  * Motion sensor: [MPU6050](http://skytech.ir/product_details.aspx?ID_Parts=2830&MPU6050)
@@ -163,21 +169,6 @@ Salman AmiMotlaq - [@SMotlaq](https://github.com/SMotlaq) - pilot.motlaq@gmail.c
 Seyedmohammadsaleh Mirzatabatabaei - [@seyedsaleh](https://github.com/seyedsaleh) - seyedsaleh.edu@gmail.com
 
 Project Link: [https://github.com/SMotlaq/open-watch](https://github.com/SMotlaq/open-watch)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- DONATION -->
-# Donation
-
-Do you want to suuport us in this project?
-
-<p align="left">
-  <a href="http://smotlaq.ir/LQgQF">
-  <img src="https://raw.githubusercontent.com/SMotlaq/LoRa/master/bmc.png" width="200" alt="Buy me a Coffee"/>
-  </a>
-</p>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
