@@ -55,7 +55,7 @@
 <p> <img src="photos/logo1.png?raw=true "Overview - Front"" width="900"> </p>  
 Welcome to Open-Watch ✋🏻😃
 
-Open-Watch is an open source project developed for the our BSc final thesis.
+Open-Watch is an open source project developed for our BSc final thesis.
 
 Wait to hear more from us!
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -177,9 +177,9 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Seyedmohammadsaleh Mirzatabatabaei - [@seyedsaleh](https://github.com/seyedsaleh) - seyedsaleh.edu@gmail.com
+Salman AmiMotlaq - [@SMotlaq](https://github.com/SMotlaq) - pilot.motlaq@gmail.com
 
-Salman Amimotlagh - [@SMotlaq](https://github.com/SMotlaq) - pilot.motlaq@gmail.com
+Seyedmohammadsaleh Mirzatabatabaei - [@seyedsaleh](https://github.com/seyedsaleh) - seyedsaleh.edu@gmail.com
 
 Project Link: [https://github.com/SMotlaq/open-watch](https://github.com/SMotlaq/open-watch)
 
