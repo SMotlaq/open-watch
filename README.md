@@ -86,12 +86,22 @@ Do you want to support us in this project?
   - [ ] Bluetooth commands
   - [ ] Vibration waves
   - [ ] OLED
+    - [ ] UI/UX
   - [ ] Touch buttons
   - [ ] Battery level indicator
   - [ ] Power saving
   - [ ] MPU6050
+    - [ ] Get raw data
+    - [ ] Movement detection
   - [ ] PPG sensor
+    - [ ] Get raw data
+    - [ ] Transfer data using Bluetooth
 - [ ] Android programming
+  - [ ] Get blutooth data
+  - [ ] UI/UX
+  - [ ] PPG data analysis
+    - [ ] Heartbeat
+    - [ ] SpO2
 - [ ] Assembling
 - [ ] Final test 😎
 
