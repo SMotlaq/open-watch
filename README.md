@@ -28,7 +28,7 @@
 
 Welcome to Open-Watch ✋🏻😃
 
-Open-Watch is an open source project developed for our BSc final thesis. Wait to hear more from us!
+Open-Watch is an open source project developed for our **BSc final thesis.** 
 
 <div align="center">
   <p> <img src="photos/Pic38.jpg?raw=true "Overview - Front"" width="900"> </p>  
