@@ -38,7 +38,7 @@ Open-Watch is an open source project developed for our **BSc final thesis.**
 <!-- DONATION -->
 # Donation
 
-Do you want to suuport us in this project?
+Do you want to support us in this project?
 
 <p align="left">
   <a href="http://smotlaq.ir/LQgQF">
