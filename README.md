@@ -9,7 +9,7 @@
 [![MIT License][license-shield]][license-url]
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+# About The Project
 
 Welcome to Open-Watch ✋🏻😃
 
@@ -59,7 +59,7 @@ Open-Watch is an open source project developed for our BSc final thesis. Wait to
 
 
 <!-- ROADMAP -->
-## Roadmap
+# Roadmap
 
 - [x] Hardware design
   - [x] Microcontroller
@@ -95,7 +95,7 @@ See the [open issues](https://github.com/SMotlaq/open-watch/issues) for a full l
 
 
 <!-- PARTS -->
-## Parts
+# Parts
 
 **Overview**
 <p> <img src="photos/Pic38.jpg?raw=true "Overview - Front"" width="700"> </p> 
@@ -131,14 +131,14 @@ See the [open issues](https://github.com/SMotlaq/open-watch/issues) for a full l
 
 
 <!-- RESULTS -->
-## Results
+# Results
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
 
 <!-- LICENSE -->
-## License
+# License
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
@@ -147,7 +147,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 
 <!-- REFERENCES -->
-## Refereces
+# Refereces
 
 [1] *blablabla* 
 
@@ -156,7 +156,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 
 <!-- CONTACT -->
-## Contact
+# Contact
 
 Salman AmiMotlaq - [@SMotlaq](https://github.com/SMotlaq) - pilot.motlaq@gmail.com
 
@@ -169,7 +169,7 @@ Project Link: [https://github.com/SMotlaq/open-watch](https://github.com/SMotlaq
 
 
 <!-- DONATION -->
-## Donation
+# Donation
 
 Do you want to suuport us in this project?
 
