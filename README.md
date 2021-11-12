@@ -9,25 +9,6 @@
 [![MIT License][license-shield]][license-url]
 
 
-
-<!-- PROJECT LOGO -->
-<br />
-<div align="center">
-
-  <h3 align="center">open-watch</h3>
-
-  <p align="center">
-    Smart Wearable Health Monitoring and Fitness Tracking Device
-    <br />
-    <a href="https://github.com/SMotlaq/open-watch"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
-    <a href="https://github.com/SMotlaq/open-watch/issues">Report Bug & Request Feature</a>
-  </p>
-</div>
-
-
-
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
@@ -57,7 +38,7 @@ Welcome to Open-Watch ✋🏻😃
 
 Open-Watch is an open source project developed for our BSc final thesis. Wait to hear more from us!
 <div align="center">
-  <p> <img src="photos/logo1.png?raw=true "Overview - Front"" width="300"> </p>  
+  <p> <img src="photos/Pic38.jpg?raw=true "Overview - Front"" width="900"> </p>  
 </div>
 <p align="right">(<a href="#top">back to top</a>)</p>
 
