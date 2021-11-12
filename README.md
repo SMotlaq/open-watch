@@ -8,6 +8,13 @@
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
 
+<!-- ABOUT THE PROJECT -->
+## About The Project
+
+Welcome to Open-Watch ✋🏻😃
+
+Open-Watch is an open source project developed for our BSc final thesis. Wait to hear more from us!
+
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -29,14 +36,6 @@
   </ol>
 </details>
 
-
-
-<!-- ABOUT THE PROJECT -->
-## About The Project
-
-Welcome to Open-Watch ✋🏻😃
-
-Open-Watch is an open source project developed for our BSc final thesis. Wait to hear more from us!
 <div align="center">
   <p> <img src="photos/Pic38.jpg?raw=true "Overview - Front"" width="900"> </p>  
 </div>
