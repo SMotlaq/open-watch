@@ -28,7 +28,7 @@
 
 Welcome to Open-Watch ✋🏻😃
 
-Open-Watch is an open source project developed for our **BSc final thesis.** 
+Open-Watch is an open source smart watch project developed for our **BSc final thesis.** This smart watch can meassure the linear acceleration of your hand, rotaintional speed, your heartrate ans SpO2 (oxygen saturation). You can see all important components used in this project [here](#components).
 
 <div align="center">
   <p> <img src="photos/Blocks.png?raw=true "Overview - Front"" width="800"> </p>  
