@@ -31,7 +31,7 @@ Welcome to Open-Watch ✋🏻😃
 Open-Watch is an open source project developed for our **BSc final thesis.** 
 
 <div align="center">
-  <p> <img src="photos/Pic38.jpg?raw=true "Overview - Front"" width="900"> </p>  
+  <p> <img src="photos/Blocks.png?raw=true "Overview - Front"" width="900"> </p>  
 </div>
 <p align="right">(<a href="#top">back to top</a>)</p>
 
