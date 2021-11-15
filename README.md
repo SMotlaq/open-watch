@@ -92,6 +92,7 @@ Do you want to support us in this project?
   - [ ] Power saving
   - [ ] MPU6050
     - [ ] Get raw data
+    - [ ] Kalman filter
     - [ ] Movement detection
   - [ ] PPG sensor
     - [ ] Get raw data
