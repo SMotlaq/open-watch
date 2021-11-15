@@ -28,15 +28,15 @@
 
 Welcome to Open-Watch ✋🏻😃
 
-Open-Watch is an open source smart watch project developed for our **BSc final thesis.** This smart watch can meassure the linear acceleration of your hand, rotaintional speed, your heartrate ans SpO2 (oxygen saturation). All of these data will be processed by a STM32 processor with an ARM Cortex-M core. You can find all of these important components [here](#components).
+Open-Watch is an open-source smartwatch project developed for our **B.Sc. final thesis.** This smartwatch can measure the linear acceleration of your hand, rotational speed, your heart rate and SpO2 (oxygen saturation). All of these data will be processed by a STM32 processor with an ARM Cortex-M core. You can find all of these important components [here](#components).
 
 MPU6050 was used for IMU purposes. We use Kalman filter to reduce the noise effect and extract a clean data (3-axis linear acceleration, 3-axis rotational velocity and 3-axis rotation angle) from the sensor.
 
-MAX30102 is the sensor used for health care purposes. We just read raw data and devolve the processes to the smart phone.
+MAX30102 is the sensor used for health care purposes. We just read raw data and devolve the processes to the smartphone.
 
-These collected data will be sent to a smart phone via a bluetooth module. On the smart phone side, an Android app reads the data from bluetooth and processes them. For health care applicaions like heartrate and SpO2 analysis, we use ML based algorithms to extract these parameters from raw data read from pulse-oximeter sensor.
+These collected data will be sent to a smartphone via a Bluetooth module. On the smartphone side, an Android app reads the data from Bluetooth and processes them. For health care applications like hear trate and SpO2 analysis, we use ML based algorithms to extract these parameters from raw data read from pulse-oximeter sensor.
 
-The final valuable data will be shown on smart phone as well as the smart watch screen.
+The final valuable data will be shown on smartphone as well as the smartwatch screen.
 
 <div align="center">
   <p> <img src="photos/Blocks.png?raw=true "Overview - Front"" width="800"> </p>  
