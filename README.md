@@ -181,7 +181,7 @@ MIMIC-III Database (https://mimic.mit.edu)
   
   [2]	*Moody, B., Moody, G., Villarroel, M., Clifford, G., & Silva, I. (2020). MIMIC-III Waveform Database (version 1.0). PhysioNet. https://doi.org/10.13026/c2607m*
   
-  [3]	*	Kemp, J., Zhang, K., & Dai, A. (2020). MIMIC-III - SequenceExamples for TensorFlow modeling (version1.0.0). PhysioNet. https://doi.org/10.13026/n2v5-5b32.*
+  [3]	*Kemp, J., Zhang, K., & Dai, A. (2020). MIMIC-III - SequenceExamples for TensorFlow modeling (version1.0.0). PhysioNet. https://doi.org/10.13026/n2v5-5b32.*
   
 **Main references:**
 
