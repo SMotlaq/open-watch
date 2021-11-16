@@ -28,15 +28,15 @@
 
 Welcome to Open-Watch ✋🏻😃
 
-Open-Watch is an open-source smartwatch project developed for [our](#contact) **B.Sc. final thesis.** This smartwatch can measure the linear acceleration of your hand, rotational speed, your heart rate and SpO2 (oxygen saturation). All of these data will be processed by a STM32 processor with an ARM Cortex-M core. You can find these important components [here](#components).
+Open-Watch is an open-source smartwatch project developed for [our](#contact) **B.Sc. final thesis.**. This smartwatch can measure the linear acceleration of your hand, rotational speed, heart rate, and SpO2 (oxygen saturation). All of these data will be processed by an STM32 processor with an ARM Cortex-M core. You can find these essential components [here](#components).
 
-MPU6050 was used for IMU purposes. We use Kalman filter to reduce the noise effect and extract a clean data (3-axis linear acceleration, 3-axis rotational velocity and 3-axis rotation angle) from the sensor.
+MPU6050 was used for IMU purposes. We use the Kalman filter to reduce the noise effect and extract clean data from the sensor (3-axis linear acceleration, 3-axis rotational velocity, and 3-axis rotation angle).
 
 MAX30102 is the sensor used for health care purposes. We just read raw data and devolve the processes to the smartphone.
 
-These collected data will be sent to a smartphone via a Bluetooth module. On the smartphone side, an Android app reads the data from Bluetooth and processes them. For health care applications like hear trate and SpO2 analysis, we use ML based algorithms to extract these parameters from raw data read from pulse-oximeter sensor.
+Open-watch will send these collected data to a smartphone via a Bluetooth module. On the smartphone side, an Android app reads the data from Bluetooth and processes them. For health care applications like heart rate and SpO2 analysis, we use ML-based algorithms to extract these parameters from raw data read from the pulse-oximeter sensor.
 
-The final valuable data will be shown on smartphone as well as the smartwatch screen.
+The final valuable data will be shown on a smartphone as well as the smartwatch screen.
 
 <div align="center">
   <p> <img src="photos/Blocks.png?raw=true "Overview - Front"" width="800"> </p>  
@@ -173,11 +173,28 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 <!-- REFERENCES -->
 # Refereces
+**Dataset:**
 
-[1] *blablabla* 
+MIMIC-III Database (https://mimic.mit.edu)
+
+  [1] *Johnson, A., Pollard, T., & Mark, R. (2016). MIMIC-III Clinical Database (version 1.4). PhysioNet. https://doi.org/10.13026/C2XW26.*
+  
+  [2]	*Moody, B., Moody, G., Villarroel, M., Clifford, G., & Silva, I. (2020). MIMIC-III Waveform Database (version 1.0). PhysioNet. https://doi.org/10.13026/c2607m*
+  
+  [3]	*	Kemp, J., Zhang, K., & Dai, A. (2020). MIMIC-III - SequenceExamples for TensorFlow modeling (version1.0.0). PhysioNet. https://doi.org/10.13026/n2v5-5b32.*
+  
+**Main references:**
+
+ [1]	*Kiyasseh et al, CLOCS: Contrastive learning of cardiac signals across space, time, and patients, In Proc. ICML 2021*
+ 
+ [2]	*Torres-Soto, J., Ashley, E.A. Multi-task deep learning for cardiac rhythm detection in wearable devices. npj Digit. Med. 3, 116 (2020). https://doi.org/10.1038/s41746-020-00320-4*
+ 
+ [3]	*El Hajj C, Kyriacou P.A. Cuffless blood pressure estimation from PPG signals and its derivatives using deep learning models, Biomedical Signal Processing and Control. 70 (2021) https://doi.org/10.1016/j.bspc.2021.102984* 
+ 
+ [4]	*Solà, J., & Delgado-Gonzalo, R. (2019). The Handbook of Cuffless Blood Pressure Monitoring: A Practical Guide for Clinicians, Researchers, and Engineers. The Handbook of Cuffless Blood Pressure Monitoring. https://doi.org/10.1007/978-3-030-24701-0*
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 <!-- CONTACT -->
