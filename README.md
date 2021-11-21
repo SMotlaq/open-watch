@@ -15,7 +15,7 @@
     <li><a href="#donation">Donation</a></li>
     <li><a href="#components">Components</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#parts">Parts</a></li>
+    <li><a href="#pictures">Pictures</a></li>
     <li><a href="#results">Results</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#refereces">Refereces</a></li>
@@ -120,7 +120,7 @@ See the [open issues](https://github.com/SMotlaq/open-watch/issues) for a full l
 
 
 <!-- PARTS -->
-# Parts
+# Picures
 
 **Overview**
 <p> <img src="photos/Pic38.jpg?raw=true "Overview - Front"" width="700"> </p> 
@@ -144,9 +144,9 @@ See the [open issues](https://github.com/SMotlaq/open-watch/issues) for a full l
 ![3D-back](photos/Pic37.jpg?raw=true "3D view of main PCB - back") -->
 
 
-**PCB - Real** (***These pictures belong to the previous version***) 
-<p> <img src="photos/Pic32.jpg?raw=true "Real PCB view - front"" width="700"> </p>  
-<p> <img src="photos/Pic31.jpg?raw=true "Real PCB view - back"" width="700"> </p> 
+**PCB - Real**
+<p> <img src="photos/Pic40.jpg?raw=true "Real PCB view - front"" width="700"> </p>  
+<p> <img src="photos/Pic41.jpg?raw=true "Real PCB view - back"" width="700"> </p> 
 
 <!-- ![real-front](photos/Pic32.jpg?raw=true "Real PCB view - front")
 ![real-back](photos/Pic31.jpg?raw=true "Real PCB view - back") -->
