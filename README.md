@@ -147,7 +147,8 @@ See the [open issues](https://github.com/SMotlaq/open-watch/issues) for a full l
 
 **PCB - Real**
 <p> <img src="photos/Pic40.jpg?raw=true "Real PCB view - front"" width="700"> </p>  
-<p> <img src="photos/Pic41.jpg?raw=true "Real PCB view - back"" width="700"> </p> 
+<p> <img src="photos/Pic41.jpg?raw=true "Real PCB view - back"" width="700"> </p>
+<p> <img src="photos/Pic42.jpg?raw=true "Real PCB view - soldered"" width="700"> </p>
 
 <!-- ![real-front](photos/Pic32.jpg?raw=true "Real PCB view - front")
 ![real-back](photos/Pic31.jpg?raw=true "Real PCB view - back") -->
