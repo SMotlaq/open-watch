@@ -20,6 +20,8 @@ my_watch_software\stm32f0xx_hal_exti.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm3
 my_watch_software\stm32f0xx_hal_exti.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_dma.h
 my_watch_software\stm32f0xx_hal_exti.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_dma_ex.h
 my_watch_software\stm32f0xx_hal_exti.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_cortex.h
+my_watch_software\stm32f0xx_hal_exti.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_adc.h
+my_watch_software\stm32f0xx_hal_exti.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_adc_ex.h
 my_watch_software\stm32f0xx_hal_exti.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_flash.h
 my_watch_software\stm32f0xx_hal_exti.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_flash_ex.h
 my_watch_software\stm32f0xx_hal_exti.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_i2c.h

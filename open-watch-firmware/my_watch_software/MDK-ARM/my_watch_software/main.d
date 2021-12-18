@@ -21,6 +21,8 @@ my_watch_software\main.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_exti
 my_watch_software\main.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_dma.h
 my_watch_software\main.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_dma_ex.h
 my_watch_software\main.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_cortex.h
+my_watch_software\main.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_adc.h
+my_watch_software\main.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_adc_ex.h
 my_watch_software\main.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_flash.h
 my_watch_software\main.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_flash_ex.h
 my_watch_software\main.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_i2c.h
@@ -33,3 +35,15 @@ my_watch_software\main.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim.
 my_watch_software\main.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim_ex.h
 my_watch_software\main.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h
 my_watch_software\main.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h
+my_watch_software\main.o: ../Inc/adc.h
+my_watch_software\main.o: ../Inc/dma.h
+my_watch_software\main.o: ../Inc/i2c.h
+my_watch_software\main.o: ../Inc/rtc.h
+my_watch_software\main.o: ../Inc/tim.h
+my_watch_software\main.o: ../Inc/usart.h
+my_watch_software\main.o: ../Inc/gpio.h
+my_watch_software\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+my_watch_software\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+my_watch_software\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+my_watch_software\main.o: ..\MyDrivers\ey_iran.h
+my_watch_software\main.o: ..\MyDrivers\pitches.h
