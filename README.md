@@ -96,7 +96,7 @@ Do you want to support us in this project?
   - [x] Buzzer
   - [ ] OLED
     - [ ] UI/UX
-  - [ ] Touch buttons
+  - [x] Touch buttons
   - [x] Battery level indicator
   - [ ] Power saving
   - [ ] MPU6050
