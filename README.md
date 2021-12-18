@@ -88,15 +88,16 @@ Do you want to support us in this project?
 - [X] PCB Ordering
 - [ ] Body design
 - [ ] 3D print
-- [ ] Soldeing
+- [x] Soldeing
 - [ ] Firmware programming
   - [ ] RTC
   - [ ] Bluetooth commands
   - [ ] Vibration waves
+  - [x] Buzzer
   - [ ] OLED
     - [ ] UI/UX
   - [ ] Touch buttons
-  - [ ] Battery level indicator
+  - [x] Battery level indicator
   - [ ] Power saving
   - [ ] MPU6050
     - [ ] Get raw data
