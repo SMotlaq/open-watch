@@ -92,8 +92,8 @@ Do you want to support us in this project?
 - [x] Soldeing
 - [ ] Firmware programming
   - [x] RTC
-  - [ ] Bluetooth commands
-  - [ ] Vibration waves
+  - [x] Bluetooth commands
+  - [x] Vibration waves
   - [x] Buzzer
   - [ ] OLED
     - [ ] UI/UX
