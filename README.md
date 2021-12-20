@@ -58,7 +58,7 @@ Do you want to support us in this project?
 
 
 # Components
- * Main proccessor: [STM32F030C8 (ARM core)](https://www.javanelec.com/Shops/ProductDetail/24347)
+ * Main proccessor: [STM32F030C8 (ARM Cortex-M0)](https://www.javanelec.com/Shops/ProductDetail/24347)
  * Heartbeat and pulse oximeter sensor: [MAX30102](https://www.aliexpress.com/item/1005001863759524.html?spm=a2g0o.productlist.0.0.6b035ffbNirD5e&algo_pvid=579c2689-3578-4e82-948e-484fa9c52af9&algo_exp_id=579c2689-3578-4e82-948e-484fa9c52af9-0)
  * Motion sensor: [MPU6050](http://skytech.ir/product_details.aspx?ID_Parts=2830&MPU6050)
  * Display: [1.3" OLED 64*128 pixels](http://skytech.ir/product_details.aspx?ID_Parts=2006&1.3-inch-I2C-OLED-SSD1306-Module)
