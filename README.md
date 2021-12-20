@@ -91,7 +91,7 @@ Do you want to support us in this project?
 - [ ] 3D print
 - [x] Soldeing
 - [ ] Firmware programming
-  - [ ] RTC
+  - [x] RTC
   - [ ] Bluetooth commands
   - [ ] Vibration waves
   - [x] Buzzer
@@ -101,7 +101,7 @@ Do you want to support us in this project?
   - [x] Battery level indicator
   - [ ] Power saving
   - [ ] MPU6050
-    - [ ] Get raw data
+    - [x] Get raw data
     - [ ] Kalman filter
     - [ ] Movement detection
   - [ ] PPG sensor
