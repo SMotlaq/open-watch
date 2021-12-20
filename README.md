@@ -28,7 +28,7 @@
 
 ### Welcome to Open-Watch ✋🏻😃 a wearable device for health monitoring and fitness tracking.
 
-**Special thanks to [PCBWay](https://www.pcbway.com/) for sponsoring ua on this open-source project and providing [these](#pictures) awesome 4-layer PCBs!** Open-Watch is an open-source smartwatch project developed for our B.Sc. final thesis. This smartwatch can measure the linear acceleration of your hand, rotational speed, heart rate, and SpO2 (oxygen saturation). All of these data will be processed by an STM32 processor with an ARM Cortex-M core. You can find these essential components [here](#components).
+**Special thanks to [PCBWay](https://www.pcbway.com/) for sponsoring us on this open-source project and providing [these](#pictures) awesome 4-layer PCBs!** Open-Watch is an open-source smartwatch project developed for our B.Sc. final thesis. This smartwatch can measure the linear acceleration of your hand, rotational speed, heart rate, and SpO2 (oxygen saturation). All of these data will be processed by an STM32 processor with an ARM Cortex-M core. You can find these essential components [here](#components).
 
 MPU6050 was used for IMU purposes. We use the Kalman filter to reduce the noise effect and extract clean data from the sensor (3-axis linear acceleration, 3-axis rotational velocity, and 3-axis rotation angle).
 
