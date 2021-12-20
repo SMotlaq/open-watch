@@ -58,7 +58,7 @@ Do you want to support us in this project?
 
 
 # Components
- * 4-layer PCB: The PCBs of this project are provided by [PCBWay](https://www.pcbway.com), one of the best PCB factories in he world.
+ * 4-layer PCB: The PCBs of this project are provided by [PCBWay](https://www.pcbway.com), one of the best PCB factories in the world.
  * Main proccessor: [STM32F030C8 (ARM Cortex-M0)](https://www.javanelec.com/Shops/ProductDetail/24347)
  * Heartbeat and pulse oximeter sensor: [MAX30102](https://www.aliexpress.com/item/1005001863759524.html?spm=a2g0o.productlist.0.0.6b035ffbNirD5e&algo_pvid=579c2689-3578-4e82-948e-484fa9c52af9&algo_exp_id=579c2689-3578-4e82-948e-484fa9c52af9-0)
  * Motion sensor: [MPU6050](http://skytech.ir/product_details.aspx?ID_Parts=2830&MPU6050)
