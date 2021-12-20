@@ -34,7 +34,7 @@ MPU6050 was used for IMU purposes. We use the Kalman filter to reduce the noise 
 
 MAX30102 is the sensor used for health care purposes. We just read raw data and devolve the processes to the smartphone.
 
-Open-watch will send these collected data to a smartphone via a Bluetooth module. On the smartphone side, an Android app reads the data from Bluetooth and processes them. For health care applications like heart rate and SpO2 analysis, we use ML-based algorithms to extract these parameters from raw data read from the pulse-oximeter sensor. In this section a real-time algorithm for analysis of photoplethysmography signal (PPG) for measurement of SpO2 will be implemeneted.
+Open-watch will send these collected data to a smartphone via a Bluetooth module. On the smartphone side, an Android app reads the data from Bluetooth and processes them. For health care applications like heart rate and SpO2 analysis, we use ML-based algorithms to extract these parameters from raw data read from the pulse-oximeter sensor. In this section a real-time algorithm for analysis of photoplethysmography signal (PPG) for measurement of SpO2 will be implemented.
 
 The final valuable data will be shown on a smartphone as well as the smartwatch screen.
 
