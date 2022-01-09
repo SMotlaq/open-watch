@@ -34,6 +34,8 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "ey_iran.h"
+#include "MPU6050.h"
+#include "max30100_for_stm32_hal.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -55,16 +57,34 @@
 /* USER CODE BEGIN PV */
 int _index = 0;
 char TxBuffer[50];
+char RxBuffer[50];
 uint32_t adcVals[1000];
 float voltage = 0.0;
 uint32_t sum = 0;
+
+uint8_t _spo2;
+uint8_t heartReat;
+int16_t diff;
+
+RTC_DateTypeDef CurrentDate;
+RTC_TimeTypeDef CurrentTime;
+
+//RawData_Def myAccelRaw, myGyroRaw;
+//ScaledData_Def myAccelScaled, myGyroScaled;
+
+//MPU_ConfigTypeDef myMpuConfig;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
+void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc);
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc);
+void set_vib(int speed, int duration);
 void set_tone(int freq, int duration);
+void set_tone_vib(int freq, int duration);
+float map(uint16_t x, uint16_t in_min, uint16_t in_max, uint16_t out_min, uint16_t out_max);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -109,34 +129,118 @@ int main(void)
   MX_ADC_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
+	
+	/* I2C Scanner */
+	/*
+	uint8_t Buffer[25] = {0};
+	uint8_t Space[] = " - ";
+	uint8_t StartMSG[] = "Starting I2C Scanning: \n\r";
+	uint8_t EndMSG[] = "\n\rDone! \n\r";
+	int ret = 0;
+	
+	HAL_GPIO_WritePin(MAX_EN_GPIO_Port, MAX_EN_Pin, GPIO_PIN_SET);
+	HAL_UART_Transmit(&huart2, StartMSG, sizeof(StartMSG), 10000);
+	for(int i=1; i<128; i++){
+		ret = HAL_I2C_IsDeviceReady(&hi2c1, (uint16_t)(i<<1), 3, 5);
+		if (ret != HAL_OK)
+			HAL_UART_Transmit(&huart2, Space, sizeof(Space), 10000);
+		else if(ret == HAL_OK){
+			sprintf((char*)Buffer, "0x%X", i);
+			HAL_UART_Transmit(&huart2, Buffer, sizeof(Buffer), 10000);
+		}
+	}
+	HAL_UART_Transmit(&huart2, EndMSG, sizeof(EndMSG), 10000);
+	HAL_GPIO_WritePin(MAX_EN_GPIO_Port, MAX_EN_Pin, GPIO_PIN_RESET);	
+	//*/
+
+	
+	/*
+	//1. Initialise the MPU6050 module and I2C
+		MPU6050_Init(&hi2c1);
+	//2. Configure Accel and Gyro parameters
+		myMpuConfig.Accel_Full_Scale = AFS_SEL_4g;
+		myMpuConfig.ClockSource = Internal_8MHz;
+		myMpuConfig.CONFIG_DLPF = DLPF_5_Hz;
+		myMpuConfig.Gyro_Full_Scale = FS_SEL_2000;
+		myMpuConfig.Sleep_Mode_Bit = 0;  //1: sleep mode, 0: normal mode
+		MPU6050_Config(&myMpuConfig); 
+	//*/
+	
+	RTC_DateTypeDef DateToBeSet;
+	DateToBeSet.Year = 98;
+	DateToBeSet.Month = 10;
+	DateToBeSet.Date = 23;
+	DateToBeSet.WeekDay = RTC_WEEKDAY_FRIDAY;
+	
+	RTC_TimeTypeDef TimeToBeSet;
+	TimeToBeSet.Hours = 0;
+	TimeToBeSet.Minutes = 0;
+	TimeToBeSet.Seconds = 0;
+	
+	HAL_RTC_SetDate(&hrtc, &DateToBeSet, RTC_FORMAT_BIN);
+	HAL_RTC_SetTime(&hrtc, &TimeToBeSet, RTC_FORMAT_BIN);
+		
+	HAL_UART_Receive_DMA(&huart2, (uint8_t*)RxBuffer, 5); 
+	
+  uint8_t psize = sprintf(TxBuffer, "Started\n");
+	HAL_UART_Transmit(&huart2, (uint8_t*)TxBuffer, psize, 1000);
+	
 	HAL_ADC_Start_DMA(&hadc, adcVals, 100);
 	HAL_TIM_Base_Start(&htim1);
+	
+	HAL_GPIO_WritePin(MAX_EN_GPIO_Port, MAX_EN_Pin, GPIO_PIN_SET);
+  max30102_init();
+	
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
 	{
-		/* Music */
+		/* Music + Vibration*/
 		/*
 		for(int thisNote=0; thisNote<sizeof(melody)/sizeof(int); thisNote++){
-			set_tone(melody[thisNote], 1000/noteDurations[thisNote]);
+			set_tone_vib(melody[thisNote], 1000/noteDurations[thisNote]);
 		}
 		//*/
 		
-		/* Blueooth */
-		/*
-		uint8_t psize = sprintf(TxBuffer, "Hello #%d", _index++);
+		/* Battery level + Date and Time */
+		//*
+		HAL_RTC_GetDate(&hrtc, &CurrentDate, RTC_FORMAT_BIN);
+		HAL_RTC_GetTime(&hrtc, &CurrentTime, RTC_FORMAT_BIN);
+		uint8_t psize = sprintf(TxBuffer, "Battery: %.1f%% - DateTime: 19%02d-%02d-%02d %02d:%02d:%02d\n", map(voltage, 3000, 3907, 0, 100),
+														CurrentDate.Year , CurrentDate.Month  , CurrentDate.Date,
+														CurrentTime.Hours, CurrentTime.Minutes, CurrentTime.Seconds);
 		HAL_UART_Transmit(&huart2, (uint8_t*)TxBuffer, psize, 1000);
-		HAL_Delay(500);
+		
+		psize = sprintf(TxBuffer, "|____ HeartRate: %3d - SpO2: %3d \n", heartReat, _spo2);
+		HAL_UART_Transmit(&huart2, (uint8_t*)TxBuffer, psize, 1000);
+		
+		HAL_Delay(1000);
+		//*/
+	
+		/* Gyro */
+		/*
+		MPU6050_Get_Accel_Scale(&myAccelScaled);
+		MPU6050_Get_Gyro_Scale(&myGyroScaled);
+		uint8_t psize = sprintf(TxBuffer, "Accel x: %.1f y: %.1f z: %.1f - Gyro: x: %.1f y: %.1f z: %.1f\n\r",
+														myAccelScaled.x, myAccelScaled.y, myAccelScaled.z,
+														myGyroScaled.x , myGyroScaled.y , myGyroScaled.z);
+		HAL_UART_Transmit(&huart2, (uint8_t*)TxBuffer, psize, 1000);
+		HAL_Delay(100);
 		//*/
 		
-		
+		/* Vibraion */
+		/*
+		set_vib(0, 800);
+		set_vib(300, 300);
+		set_vib(900, 100);
+		//*/
 		
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-  }
+  } 
   /* USER CODE END 3 */
 }
 
@@ -163,7 +267,10 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.HSI14State = RCC_HSI14_ON;
   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
   RCC_OscInitStruct.HSI14CalibrationValue = 16;
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
+  RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL12;
+  RCC_OscInitStruct.PLL.PREDIV = RCC_PREDIV_DIV1;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
@@ -172,11 +279,11 @@ void SystemClock_Config(void)
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1;
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
   {
     Error_Handler();
   }
@@ -192,14 +299,40 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc)
-{
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
+	if (GPIO_Pin == MAX_INT_Pin) {
+		max30102_cal();
+    _spo2 = max30102_getSpO2();
+    heartReat = max30102_getHeartRate();
+		diff = max30102_getDiff();
+	}
+}
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
+	//HAL_UART_Transmit(&huart2, (uint8_t*)RxBuffer, 5, 1000);
+}
+
+void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc){
+  _index++;
+}
+
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
 	sum = 0;
 	for(int i = 0; i<1000; i++){
 		sum += adcVals[i];
 	}
 	voltage = sum/100.0;
 	
+}
+
+void set_vib(int speed, int duration){
+	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_4);
+	__HAL_TIM_SET_AUTORELOAD(&htim1, 5000);
+	__HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_4, speed);
+	HAL_Delay(duration);
+	HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_4);
+	HAL_Delay((int)(duration*0.3));
 }
 
 void set_tone(int freq, int duration){
@@ -210,6 +343,24 @@ void set_tone(int freq, int duration){
 	HAL_TIM_PWM_Stop(&htim3, TIM_CHANNEL_3);
 	HAL_Delay((int)(duration*0.3));
 }
+
+void set_tone_vib(int freq, int duration){
+	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_4);
+	__HAL_TIM_SET_AUTORELOAD(&htim1, 5000);
+	__HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_4, (int)map(freq, 260, 500, 2000, 5000));
+	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_3);
+	__HAL_TIM_SET_AUTORELOAD(&htim3, 1000000/freq);
+	__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, 1000000/freq/2);
+	HAL_Delay(duration);
+	HAL_TIM_PWM_Stop(&htim3, TIM_CHANNEL_3);
+	HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_4);
+	HAL_Delay((int)(duration*0.3));
+}
+
+float map(uint16_t x, uint16_t in_min, uint16_t in_max, uint16_t out_min, uint16_t out_max){
+  return (x - in_min) * (out_max - out_min) / (float)(in_max - in_min) + out_min;
+}
+
 /* USER CODE END 4 */
 
 /**

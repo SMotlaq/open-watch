@@ -62,18 +62,25 @@ void Error_Handler(void);
 #define MAX_EN_GPIO_Port GPIOC
 #define USB_DET_Pin GPIO_PIN_6
 #define USB_DET_GPIO_Port GPIOF
+#define USB_DET_EXTI_IRQn EXTI4_15_IRQn
 #define KEY1_Pin GPIO_PIN_15
 #define KEY1_GPIO_Port GPIOA
+#define KEY1_EXTI_IRQn EXTI4_15_IRQn
 #define KEY2_Pin GPIO_PIN_3
 #define KEY2_GPIO_Port GPIOB
+#define KEY2_EXTI_IRQn EXTI2_3_IRQn
 #define KEY3_Pin GPIO_PIN_4
 #define KEY3_GPIO_Port GPIOB
+#define KEY3_EXTI_IRQn EXTI4_15_IRQn
 #define KEY4_Pin GPIO_PIN_5
 #define KEY4_GPIO_Port GPIOB
+#define KEY4_EXTI_IRQn EXTI4_15_IRQn
 #define MPU_INT_Pin GPIO_PIN_8
 #define MPU_INT_GPIO_Port GPIOB
+#define MPU_INT_EXTI_IRQn EXTI4_15_IRQn
 #define MAX_INT_Pin GPIO_PIN_9
 #define MAX_INT_GPIO_Port GPIOB
+#define MAX_INT_EXTI_IRQn EXTI4_15_IRQn
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

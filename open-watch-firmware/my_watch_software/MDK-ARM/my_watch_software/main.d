@@ -47,3 +47,7 @@ my_watch_software\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 my_watch_software\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 my_watch_software\main.o: ..\MyDrivers\ey_iran.h
 my_watch_software\main.o: ..\MyDrivers\pitches.h
+my_watch_software\main.o: ..\MyDrivers\MPU\MPU6050.h
+my_watch_software\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+my_watch_software\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+my_watch_software\main.o: ..\MyDrivers\MAX30102\max30100_for_stm32_hal.h

@@ -10,6 +10,9 @@
 "my_watch_software\usart.o"
 "my_watch_software\stm32f0xx_it.o"
 "my_watch_software\stm32f0xx_hal_msp.o"
+"my_watch_software\system_stm32f0xx.o"
+"my_watch_software\mpu6050.o"
+"my_watch_software\max30100_for_stm32_hal.o"
 "my_watch_software\stm32f0xx_hal_adc.o"
 "my_watch_software\stm32f0xx_hal_adc_ex.o"
 "my_watch_software\stm32f0xx_hal_rcc.o"
@@ -31,7 +34,6 @@
 "my_watch_software\stm32f0xx_hal_tim_ex.o"
 "my_watch_software\stm32f0xx_hal_uart.o"
 "my_watch_software\stm32f0xx_hal_uart_ex.o"
-"my_watch_software\system_stm32f0xx.o"
 --library_type=microlib --strict --scatter "my_watch_software\my_watch_software.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
