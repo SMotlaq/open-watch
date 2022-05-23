@@ -105,7 +105,7 @@ Do you want to support us in this project?
     - [ ] Kalman filter
     - [ ] Movement detection
   - [ ] PPG sensor
-    - [ ] Get raw data
+    - [x] Get raw data
     - [ ] Transfer data using Bluetooth
 - [ ] Android programming
   - [ ] Get blutooth data
