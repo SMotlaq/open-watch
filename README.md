@@ -87,8 +87,8 @@ Do you want to support us in this project?
   - [X] MPU6050
 - [X] PCB design
 - [X] PCB Ordering
-- [ ] Body design
-- [ ] 3D print
+- [X] Body design
+- [X] 3D print
 - [x] Soldeing
 - [ ] Firmware programming
   - [x] RTC
