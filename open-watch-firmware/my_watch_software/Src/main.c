@@ -62,6 +62,8 @@ uint32_t adcVals[1000];
 float voltage = 0.0;
 uint32_t sum = 0;
 
+SAMPLE _sampleBuff[5];
+uint8_t unreadSampleCount;
 uint8_t _spo2;
 uint8_t heartReat;
 int16_t diff;
@@ -188,8 +190,8 @@ int main(void)
 	HAL_ADC_Start_DMA(&hadc, adcVals, 100);
 	HAL_TIM_Base_Start(&htim1);
 	
-	HAL_GPIO_WritePin(MAX_EN_GPIO_Port, MAX_EN_Pin, GPIO_PIN_SET);
-  max30102_init();
+	//HAL_GPIO_WritePin(MAX_EN_GPIO_Port, MAX_EN_Pin, GPIO_PIN_SET);
+  //max30102_init();
 	
   /* USER CODE END 2 */
 
@@ -198,14 +200,14 @@ int main(void)
   while (1)
 	{
 		/* Music + Vibration*/
-		/*
+		//*
 		for(int thisNote=0; thisNote<sizeof(melody)/sizeof(int); thisNote++){
 			set_tone_vib(melody[thisNote], 1000/noteDurations[thisNote]);
 		}
 		//*/
-		
+		 
 		/* Battery level + Date and Time */
-		//*
+		/*
 		HAL_RTC_GetDate(&hrtc, &CurrentDate, RTC_FORMAT_BIN);
 		HAL_RTC_GetTime(&hrtc, &CurrentTime, RTC_FORMAT_BIN);
 		uint8_t psize = sprintf(TxBuffer, "Battery: %.1f%% - DateTime: 19%02d-%02d-%02d %02d:%02d:%02d\n", map(voltage, 3000, 3907, 0, 100),
@@ -213,12 +215,12 @@ int main(void)
 														CurrentTime.Hours, CurrentTime.Minutes, CurrentTime.Seconds);
 		HAL_UART_Transmit(&huart2, (uint8_t*)TxBuffer, psize, 1000);
 		
-		psize = sprintf(TxBuffer, "|____ HeartRate: %3d - SpO2: %3d \n", heartReat, _spo2);
-		HAL_UART_Transmit(&huart2, (uint8_t*)TxBuffer, psize, 1000);
+		//psize = sprintf(TxBuffer, "|____ HeartRate: %3d - SpO2: %3d \n", heartReat, _spo2);
+		//HAL_UART_Transmit(&huart2, (uint8_t*)TxBuffer, psize, 1000);
 		
 		HAL_Delay(1000);
 		//*/
-	
+	 
 		/* Gyro */
 		/*
 		MPU6050_Get_Accel_Scale(&myAccelScaled);
@@ -302,10 +304,14 @@ void SystemClock_Config(void)
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 	if (GPIO_Pin == MAX_INT_Pin) {
-		max30102_cal();
-    _spo2 = max30102_getSpO2();
-    heartReat = max30102_getHeartRate();
-		diff = max30102_getDiff();
+		//max30102_cal();
+    //_spo2 = max30102_getSpO2();
+    //heartReat = max30102_getHeartRate();
+		//diff = max30102_getDiff();
+		unreadSampleCount = max30102_getUnreadSampleCount();
+    max30102_getFIFO(_sampleBuff, unreadSampleCount);
+		uint8_t psize = sprintf(TxBuffer, "%d\n", _sampleBuff[0].iRed);
+		HAL_UART_Transmit(&huart2, (uint8_t*)TxBuffer, psize, 1000);
 	}
 }
 

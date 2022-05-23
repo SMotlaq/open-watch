@@ -203,7 +203,12 @@
         <Ww>
           <count>10</count>
           <WinNumber>1</WinNumber>
-          <ItemText>diff,0x0A</ItemText>
+          <ItemText>unreadSampleCount,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>11</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>_sampleBuff,0x0A</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>
