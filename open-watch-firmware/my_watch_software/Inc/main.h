@@ -47,7 +47,7 @@ extern "C" {
 
 /* Exported macro ------------------------------------------------------------*/
 /* USER CODE BEGIN EM */
-
+#define SAMPLING_TIME ((htim6.Init.Period+1)/((float)1e6)); /*** KALMAN_TIMER ***/
 /* USER CODE END EM */
 
 /* Exported functions prototypes ---------------------------------------------*/
@@ -90,5 +90,3 @@ void Error_Handler(void);
 #endif
 
 #endif /* __MAIN_H */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

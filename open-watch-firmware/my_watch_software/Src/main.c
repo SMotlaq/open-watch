@@ -17,7 +17,6 @@
   ******************************************************************************
   */
 /* USER CODE END Header */
-
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "adc.h"
@@ -35,6 +34,7 @@
 #include "stdlib.h"
 #include "ey_iran.h"
 #include "MPU6050.h"
+#include "Kalman.h"
 #include "max30100_for_stm32_hal.h"
 /* USER CODE END Includes */
 
@@ -45,6 +45,9 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define KALMAN_TIMER htim6
+#define BUZZER_TIMER htim3
+#define ADCVIB_TIMER htim1
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -56,11 +59,12 @@
 
 /* USER CODE BEGIN PV */
 int _index = 0;
-char TxBuffer[50];
+char TxBuffer[24];
 char RxBuffer[50];
 uint32_t adcVals[1000];
 float voltage = 0.0;
 uint32_t sum = 0;
+int debug = 0;
 
 SAMPLE _sampleBuff[5];
 uint8_t unreadSampleCount;
@@ -71,10 +75,12 @@ int16_t diff;
 RTC_DateTypeDef CurrentDate;
 RTC_TimeTypeDef CurrentTime;
 
-//RawData_Def myAccelRaw, myGyroRaw;
-//ScaledData_Def myAccelScaled, myGyroScaled;
+RawData_Def myAccelRaw, myGyroRaw;
+KalmanScaler KAccel;
+Kalman2D1R KGyroXZ;
+Kalman2D2R KGyroY;
 
-//MPU_ConfigTypeDef myMpuConfig;
+MPU_ConfigTypeDef myMpuConfig;
 
 /* USER CODE END PV */
 
@@ -130,6 +136,7 @@ int main(void)
   MX_USART1_UART_Init();
   MX_ADC_Init();
   MX_USART2_UART_Init();
+  MX_TIM6_Init();
   /* USER CODE BEGIN 2 */
 	
 	/* I2C Scanner */
@@ -156,18 +163,18 @@ int main(void)
 	//*/
 
 	
-	/*
+	//*
 	//1. Initialise the MPU6050 module and I2C
 		MPU6050_Init(&hi2c1);
 	//2. Configure Accel and Gyro parameters
 		myMpuConfig.Accel_Full_Scale = AFS_SEL_4g;
 		myMpuConfig.ClockSource = Internal_8MHz;
-		myMpuConfig.CONFIG_DLPF = DLPF_5_Hz;
+		myMpuConfig.CONFIG_DLPF = DLPF_94A_98G_Hz;
 		myMpuConfig.Gyro_Full_Scale = FS_SEL_2000;
 		myMpuConfig.Sleep_Mode_Bit = 0;  //1: sleep mode, 0: normal mode
 		MPU6050_Config(&myMpuConfig); 
 	//*/
-	
+		
 	RTC_DateTypeDef DateToBeSet;
 	DateToBeSet.Year = 98;
 	DateToBeSet.Month = 10;
@@ -184,11 +191,13 @@ int main(void)
 		
 	HAL_UART_Receive_DMA(&huart2, (uint8_t*)RxBuffer, 5); 
 	
-  uint8_t psize = sprintf(TxBuffer, "Started\n");
-	HAL_UART_Transmit(&huart2, (uint8_t*)TxBuffer, psize, 1000);
-	
 	HAL_ADC_Start_DMA(&hadc, adcVals, 100);
-	HAL_TIM_Base_Start(&htim1);
+	HAL_TIM_Base_Start(&ADCVIB_TIMER);
+	
+	kalman_scaler_init(&KAccel, 0.3, 900);
+	kalman_2d1r_init(&KGyroXZ, 0.1, 1);
+	kalman_2d2r_init(&KGyroY, 0.3, 1, 0.04);
+	HAL_TIM_Base_Start_IT(&KALMAN_TIMER);	
 	
 	//HAL_GPIO_WritePin(MAX_EN_GPIO_Port, MAX_EN_Pin, GPIO_PIN_SET);
   //max30102_init();
@@ -200,7 +209,7 @@ int main(void)
   while (1)
 	{
 		/* Music + Vibration*/
-		//*
+		/*
 		for(int thisNote=0; thisNote<sizeof(melody)/sizeof(int); thisNote++){
 			set_tone_vib(melody[thisNote], 1000/noteDurations[thisNote]);
 		}
@@ -219,17 +228,6 @@ int main(void)
 		//HAL_UART_Transmit(&huart2, (uint8_t*)TxBuffer, psize, 1000);
 		
 		HAL_Delay(1000);
-		//*/
-	 
-		/* Gyro */
-		/*
-		MPU6050_Get_Accel_Scale(&myAccelScaled);
-		MPU6050_Get_Gyro_Scale(&myGyroScaled);
-		uint8_t psize = sprintf(TxBuffer, "Accel x: %.1f y: %.1f z: %.1f - Gyro: x: %.1f y: %.1f z: %.1f\n\r",
-														myAccelScaled.x, myAccelScaled.y, myAccelScaled.z,
-														myGyroScaled.x , myGyroScaled.y , myGyroScaled.z);
-		HAL_UART_Transmit(&huart2, (uint8_t*)TxBuffer, psize, 1000);
-		HAL_Delay(100);
 		//*/
 		
 		/* Vibraion */
@@ -260,7 +258,8 @@ void SystemClock_Config(void)
   */
   HAL_PWR_EnableBkUpAccess();
   __HAL_RCC_LSEDRIVE_CONFIG(RCC_LSEDRIVE_HIGH);
-  /** Initializes the CPU, AHB and APB busses clocks
+  /** Initializes the RCC Oscillators according to the specified parameters
+  * in the RCC_OscInitTypeDef structure.
   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI|RCC_OSCILLATORTYPE_HSI14
                               |RCC_OSCILLATORTYPE_LSE;
@@ -277,7 +276,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  /** Initializes the CPU, AHB and APB busses clocks
+  /** Initializes the CPU, AHB and APB buses clocks
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1;
@@ -301,6 +300,78 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+	if(htim==&KALMAN_TIMER){
+		/* Gyro */
+		//*
+		MPU6050_Get_Accel_RawData(&myAccelRaw);
+		MPU6050_Get_Gyro_RawData(&myGyroRaw);
+//		uint8_t psize = sprintf(TxBuffer, "Accel x: %.1f y: %.1f z: %.1f - Gyro: x: %.1f y: %.1f z: %.1f\n\r",
+//														myAccelScaled.x, myAccelScaled.y, myAccelScaled.z,
+//														myGyroScaled.x , myGyroScaled.y , myGyroScaled.z);
+		TxBuffer[0] = (uint8_t)(myAccelRaw.x & 0x00FF);
+		TxBuffer[1] = (uint8_t)((myAccelRaw.x & 0xFF00)>>8);
+		
+		TxBuffer[2] = (uint8_t)(myAccelRaw.y & 0x00FF);
+		TxBuffer[3] = (uint8_t)((myAccelRaw.y & 0xFF00)>>8);
+
+		TxBuffer[4] = (uint8_t)(myAccelRaw.z & 0x00FF);
+		TxBuffer[5] = (uint8_t)((myAccelRaw.z & 0xFF00)>>8);
+		
+		TxBuffer[6] = (uint8_t)(myGyroRaw.x & 0x00FF);
+		TxBuffer[7] = (uint8_t)((myGyroRaw.x & 0xFF00)>>8);
+		
+		TxBuffer[8] = (uint8_t)(myGyroRaw.y & 0x00FF);
+		TxBuffer[9] = (uint8_t)((myGyroRaw.y & 0xFF00)>>8);
+		
+		TxBuffer[10] = (uint8_t)(myGyroRaw.z & 0x00FF);
+		TxBuffer[11] = (uint8_t)((myGyroRaw.z & 0xFF00)>>8);
+		
+		// Filtering ---------------------------------------
+		
+		/* Accelerometer */
+		KAccel.z_x = myAccelRaw.x;
+		KAccel.z_y = myAccelRaw.y;
+		KAccel.z_z = myAccelRaw.z;
+		kalman_scaler_update(&KAccel);
+		
+		/* Gyroscope (X and Z) */
+		KGyroXZ.z_x = myGyroRaw.x;
+		KGyroXZ.z_z = myGyroRaw.z;
+		kalman_2d1r_update(&KGyroXZ);
+		
+		/* Gyroscope (Y) */
+		KGyroY.z_y = myGyroRaw.x;
+		KGyroY.z_ay = KAccel.x_hat;
+		kalman_2d2r_update(&KGyroY);
+
+		// Filtererd data ----------------------------------
+		
+		TxBuffer[12] = (uint8_t)(KAccel.x_hat & 0x00FF);
+		TxBuffer[13] = (uint8_t)((KAccel.x_hat & 0xFF00)>>8);
+		
+		TxBuffer[14] = (uint8_t)(KAccel.y_hat & 0x00FF);
+		TxBuffer[15] = (uint8_t)((KAccel.y_hat & 0xFF00)>>8);
+
+		TxBuffer[16] = (uint8_t)(KAccel.z_hat & 0x00FF);
+		TxBuffer[17] = (uint8_t)((KAccel.z_hat & 0xFF00)>>8);
+		
+		TxBuffer[18] = (uint8_t)(KGyroXZ.wx_hat & 0x00FF);
+		TxBuffer[19] = (uint8_t)((KGyroXZ.wx_hat & 0xFF00)>>8);
+		
+		TxBuffer[20] = (uint8_t)(KGyroY.wy_hat & 0x00FF);
+		TxBuffer[21] = (uint8_t)((KGyroY.wy_hat & 0xFF00)>>8);
+		
+		TxBuffer[22] = (uint8_t)(KGyroXZ.wz_hat & 0x00FF);
+		TxBuffer[23] = (uint8_t)((KGyroXZ.wz_hat & 0xFF00)>>8);
+		
+		HAL_UART_Transmit(&huart1, (uint8_t*)TxBuffer, 24, 10); 
+		//*/
+	}
+}
+
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 	if (GPIO_Pin == MAX_INT_Pin) {
@@ -333,33 +404,33 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
 }
 
 void set_vib(int speed, int duration){
-	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_4);
-	__HAL_TIM_SET_AUTORELOAD(&htim1, 5000);
-	__HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_4, speed);
+	HAL_TIM_PWM_Start(&ADCVIB_TIMER, TIM_CHANNEL_4);
+	__HAL_TIM_SET_AUTORELOAD(&ADCVIB_TIMER, 5000);
+	__HAL_TIM_SET_COMPARE(&ADCVIB_TIMER, TIM_CHANNEL_4, speed);
 	HAL_Delay(duration);
-	HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_4);
+	HAL_TIM_PWM_Stop(&ADCVIB_TIMER, TIM_CHANNEL_4);
 	HAL_Delay((int)(duration*0.3));
 }
 
 void set_tone(int freq, int duration){
-	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_3);
-	__HAL_TIM_SET_AUTORELOAD(&htim3, 1000000/freq);
-	__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, 1000000/freq/2);
+	HAL_TIM_PWM_Start(&BUZZER_TIMER, TIM_CHANNEL_3);
+	__HAL_TIM_SET_AUTORELOAD(&BUZZER_TIMER, 1000000/freq);
+	__HAL_TIM_SET_COMPARE(&BUZZER_TIMER, TIM_CHANNEL_3, 1000000/freq/2);
 	HAL_Delay(duration);
-	HAL_TIM_PWM_Stop(&htim3, TIM_CHANNEL_3);
+	HAL_TIM_PWM_Stop(&BUZZER_TIMER, TIM_CHANNEL_3);
 	HAL_Delay((int)(duration*0.3));
 }
 
 void set_tone_vib(int freq, int duration){
-	HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_4);
-	__HAL_TIM_SET_AUTORELOAD(&htim1, 5000);
-	__HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_4, (int)map(freq, 260, 500, 2000, 5000));
-	HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_3);
-	__HAL_TIM_SET_AUTORELOAD(&htim3, 1000000/freq);
-	__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_3, 1000000/freq/2);
+	HAL_TIM_PWM_Start(&ADCVIB_TIMER, TIM_CHANNEL_4);
+	__HAL_TIM_SET_AUTORELOAD(&ADCVIB_TIMER, 5000);
+	__HAL_TIM_SET_COMPARE(&ADCVIB_TIMER, TIM_CHANNEL_4, (int)map(freq, 260, 500, 2000, 5000));
+	HAL_TIM_PWM_Start(&BUZZER_TIMER, TIM_CHANNEL_3);
+	__HAL_TIM_SET_AUTORELOAD(&BUZZER_TIMER, 1000000/freq);
+	__HAL_TIM_SET_COMPARE(&BUZZER_TIMER, TIM_CHANNEL_3, 1000000/freq/2);
 	HAL_Delay(duration);
-	HAL_TIM_PWM_Stop(&htim3, TIM_CHANNEL_3);
-	HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_4);
+	HAL_TIM_PWM_Stop(&BUZZER_TIMER, TIM_CHANNEL_3);
+	HAL_TIM_PWM_Stop(&ADCVIB_TIMER, TIM_CHANNEL_4);
 	HAL_Delay((int)(duration*0.3));
 }
 
@@ -398,4 +469,3 @@ void assert_failed(uint8_t *file, uint32_t line)
 }
 #endif /* USE_FULL_ASSERT */
 
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

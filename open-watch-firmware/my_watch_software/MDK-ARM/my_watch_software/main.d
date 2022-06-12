@@ -13,6 +13,7 @@ my_watch_software\main.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
 my_watch_software\main.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
 my_watch_software\main.o: ../Drivers/CMSIS/Device/ST/STM32F0xx/Include/system_stm32f0xx.h
 my_watch_software\main.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h
+my_watch_software\main.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
 my_watch_software\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 my_watch_software\main.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc_ex.h
 my_watch_software\main.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_gpio.h
@@ -50,4 +51,5 @@ my_watch_software\main.o: ..\MyDrivers\pitches.h
 my_watch_software\main.o: ..\MyDrivers\MPU\MPU6050.h
 my_watch_software\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 my_watch_software\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+my_watch_software\main.o: ..\MyDrivers\KalmanFilter\Kalman.h
 my_watch_software\main.o: ..\MyDrivers\MAX30102\max30100_for_stm32_hal.h

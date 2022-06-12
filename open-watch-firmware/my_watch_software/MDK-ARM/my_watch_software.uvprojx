@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F030x8</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc; ../Drivers/STM32F0xx_HAL_Driver/Inc; ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy; ../Drivers/CMSIS/Device/ST/STM32F0xx/Include; ../Drivers/CMSIS/Include; ..\MyDrivers; ..\MyDrivers\MPU; ..\MyDrivers\MAX30102</IncludePath>
+              <IncludePath>../Inc;../Drivers/STM32F0xx_HAL_Driver/Inc;../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F0xx/Include;../Drivers/CMSIS/Include;..\MyDrivers;..\MyDrivers\MPU;..\MyDrivers\MAX30102;..\MyDrivers\KalmanFilter</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -472,6 +472,11 @@
               <FileName>max30100_for_stm32_hal.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\MyDrivers\MAX30102\max30100_for_stm32_hal.c</FilePath>
+            </File>
+            <File>
+              <FileName>Kalman.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\MyDrivers\KalmanFilter\Kalman.c</FilePath>
             </File>
           </Files>
         </Group>
