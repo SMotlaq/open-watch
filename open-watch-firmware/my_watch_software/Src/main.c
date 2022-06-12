@@ -77,8 +77,7 @@ RTC_TimeTypeDef CurrentTime;
 
 RawData_Def myAccelRaw, myGyroRaw;
 KalmanScaler KAccel;
-Kalman2D1R KGyroXZ;
-Kalman2D2R KGyroY;
+Kalman2D1R KGyro;
 
 MPU_ConfigTypeDef myMpuConfig;
 
@@ -195,13 +194,12 @@ int main(void)
 	HAL_TIM_Base_Start(&ADCVIB_TIMER);
 	
 	kalman_scaler_init(&KAccel, 0.3, 900);
-	kalman_2d1r_init(&KGyroXZ, 0.1, 1);
-	kalman_2d2r_init(&KGyroY, 0.3, 1, 0.04);
+	kalman_2d1r_init(&KGyro, 0.1, 1);
 	HAL_TIM_Base_Start_IT(&KALMAN_TIMER);	
 	
 	//HAL_GPIO_WritePin(MAX_EN_GPIO_Port, MAX_EN_Pin, GPIO_PIN_SET);
   //max30102_init();
-	
+	 
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -338,14 +336,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		kalman_scaler_update(&KAccel);
 		
 		/* Gyroscope (X and Z) */
-		KGyroXZ.z_x = myGyroRaw.x;
-		KGyroXZ.z_z = myGyroRaw.z;
-		kalman_2d1r_update(&KGyroXZ);
-		
-		/* Gyroscope (Y) */
-		KGyroY.z_y = myGyroRaw.x;
-		KGyroY.z_ay = KAccel.x_hat;
-		kalman_2d2r_update(&KGyroY);
+		KGyro.z_x = myGyroRaw.x;
+		KGyro.z_y = myGyroRaw.y;
+		KGyro.z_z = myGyroRaw.z;
+		kalman_2d1r_update(&KGyro);
 
 		// Filtererd data ----------------------------------
 		
@@ -358,14 +352,14 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		TxBuffer[16] = (uint8_t)(KAccel.z_hat & 0x00FF);
 		TxBuffer[17] = (uint8_t)((KAccel.z_hat & 0xFF00)>>8);
 		
-		TxBuffer[18] = (uint8_t)(KGyroXZ.wx_hat & 0x00FF);
-		TxBuffer[19] = (uint8_t)((KGyroXZ.wx_hat & 0xFF00)>>8);
+		TxBuffer[18] = (uint8_t)(KGyro.wx_hat & 0x00FF);
+		TxBuffer[19] = (uint8_t)((KGyro.wx_hat & 0xFF00)>>8);
 		
-		TxBuffer[20] = (uint8_t)(KGyroY.wy_hat & 0x00FF);
-		TxBuffer[21] = (uint8_t)((KGyroY.wy_hat & 0xFF00)>>8);
+		TxBuffer[20] = (uint8_t)(KGyro.wy_hat & 0x00FF);
+		TxBuffer[21] = (uint8_t)((KGyro.wy_hat & 0xFF00)>>8);
 		
-		TxBuffer[22] = (uint8_t)(KGyroXZ.wz_hat & 0x00FF);
-		TxBuffer[23] = (uint8_t)((KGyroXZ.wz_hat & 0xFF00)>>8);
+		TxBuffer[22] = (uint8_t)(KGyro.wz_hat & 0x00FF);
+		TxBuffer[23] = (uint8_t)((KGyro.wz_hat & 0xFF00)>>8);
 		
 		HAL_UART_Transmit(&huart1, (uint8_t*)TxBuffer, 24, 10); 
 		//*/
