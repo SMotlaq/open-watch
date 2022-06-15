@@ -23,20 +23,12 @@ References:
 //Library Variable
 //1- I2C Handle 
 static I2C_HandleTypeDef i2cHandler;
-//2- Accel & Gyro Scaling Factor
-static float accelScalingFactor, gyroScalingFactor;
-//3- Bias varaibles
-static float A_X_Bias = 0.0f;
-static float A_Y_Bias = 0.0f;
-static float A_Z_Bias = 0.0f;
-
 static int16_t GyroRW[3];
 
 //Fucntion Definitions
 //1- i2c Handler 
 void MPU6050_Init(I2C_HandleTypeDef *I2Chnd)
 {
-	//Copy I2C CubeMX handle to local library
 	memcpy(&i2cHandler, I2Chnd, sizeof(*I2Chnd));
 }
 
@@ -91,53 +83,6 @@ void MPU6050_Config(MPU_ConfigTypeDef *config)
 	I2C_Write8(ACCEL_CONFIG_REG, Buffer);
 	//Set SRD To Default
 	MPU6050_Set_SMPRT_DIV(0x04);
-	
-	
-	//Accelerometer Scaling Factor, Set the Accelerometer and Gyroscope Scaling Factor
-	switch (config->Accel_Full_Scale)
-	{
-		case AFS_SEL_2g:
-			accelScalingFactor = (2000.0f/32768.0f);
-			break;
-		
-		case AFS_SEL_4g:
-			accelScalingFactor = (4000.0f/32768.0f);
-				break;
-		
-		case AFS_SEL_8g:
-			accelScalingFactor = (8000.0f/32768.0f);
-			break;
-		
-		case AFS_SEL_16g:
-			accelScalingFactor = (16000.0f/32768.0f);
-			break;
-		
-		default:
-			break;
-	}
-	//Gyroscope Scaling Factor 
-	switch (config->Gyro_Full_Scale)
-	{
-		case FS_SEL_250:
-			gyroScalingFactor = 250.0f/32768.0f;
-			break;
-		
-		case FS_SEL_500:
-				gyroScalingFactor = 500.0f/32768.0f;
-				break;
-		
-		case FS_SEL_1000:
-			gyroScalingFactor = 1000.0f/32768.0f;
-			break;
-		
-		case FS_SEL_2000:
-			gyroScalingFactor = 2000.0f/32768.0f;
-			break;
-		
-		default:
-			break;
-	}
-	
 }
 
 //5- Get Sample Rate Divider
@@ -200,30 +145,7 @@ void MPU6050_Get_Accel_RawData(RawData_Def *rawDef)
 	}
 }
 
-//10- Get Accel scaled data (g unit of gravity, 1g = 9.81m/s2)
-void MPU6050_Get_Accel_Scale(ScaledData_Def *scaledDef)
-{
 
-	RawData_Def AccelRData;
-	MPU6050_Get_Accel_RawData(&AccelRData);
-	
-	//Accel Scale data 
-	scaledDef->x = ((AccelRData.x+0.0f)*accelScalingFactor);
-	scaledDef->y = ((AccelRData.y+0.0f)*accelScalingFactor);
-	scaledDef->z = ((AccelRData.z+0.0f)*accelScalingFactor);
-}
-
-//11- Get Accel calibrated data
-void MPU6050_Get_Accel_Cali(ScaledData_Def *CaliDef)
-{
-	ScaledData_Def AccelScaled;
-	MPU6050_Get_Accel_Scale(&AccelScaled);
-	
-	//Accel Scale data 
-	CaliDef->x = (AccelScaled.x) - A_X_Bias; // x-Axis
-	CaliDef->y = (AccelScaled.y) - A_Y_Bias;// y-Axis
-	CaliDef->z = (AccelScaled.z) - A_Z_Bias;// z-Axis
-}
 //12- Get Gyro Raw Data
 void MPU6050_Get_Gyro_RawData(RawData_Def *rawDef)
 {
@@ -233,29 +155,4 @@ void MPU6050_Get_Gyro_RawData(RawData_Def *rawDef)
 	rawDef->y = GyroRW[1];
 	rawDef->z = GyroRW[2];
 	
-}
-
-//13- Get Gyro scaled data
-void MPU6050_Get_Gyro_Scale(ScaledData_Def *scaledDef)
-{
-	RawData_Def myGyroRaw;
-	MPU6050_Get_Gyro_RawData(&myGyroRaw);
-	
-	//Gyro Scale data 
-	scaledDef->x = (myGyroRaw.x)*gyroScalingFactor; // x-Axis
-	scaledDef->y = (myGyroRaw.y)*gyroScalingFactor; // y-Axis
-	scaledDef->z = (myGyroRaw.z)*gyroScalingFactor; // z-Axis
-}
-
-//14- Accel Calibration
-void _Accel_Cali(float x_min, float x_max, float y_min, float y_max, float z_min, float z_max)
-{
-	//1* X-Axis calibrate
-	A_X_Bias		= (x_max + x_min)/2.0f;
-	
-	//2* Y-Axis calibrate
-	A_Y_Bias		= (y_max + y_min)/2.0f;
-	
-	//3* Z-Axis calibrate
-	A_Z_Bias		= (z_max + z_min)/2.0f;
 }
