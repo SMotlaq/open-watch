@@ -23,7 +23,6 @@ References:
 //Library Variable
 //1- I2C Handle 
 static I2C_HandleTypeDef i2cHandler;
-static int16_t GyroRW[3];
 
 //Fucntion Definitions
 //1- i2c Handler 
@@ -123,7 +122,7 @@ void MPU6050_Set_FSYNC(enum EXT_SYNC_SET_ENUM ext_Sync)
 }
 
 //9- Get Accel Raw Data
-void MPU6050_Get_Accel_RawData(RawData_Def *rawDef)
+void MPU6050_Get_RawData(RawData_Def *rawDefA, RawData_Def *rawDefG)
 {
 	uint8_t i2cBuf[2];
 	uint8_t AcceArr[6], GyroArr[6];
@@ -134,25 +133,13 @@ void MPU6050_Get_Accel_RawData(RawData_Def *rawDef)
 		I2C_Read(ACCEL_XOUT_H_REG, AcceArr,6);
 		
 		//Accel Raw Data
-		rawDef->x = ((AcceArr[0]<<8) + AcceArr[1]); // x-Axis
-		rawDef->y = ((AcceArr[2]<<8) + AcceArr[3]); // y-Axis
-		rawDef->z = ((AcceArr[4]<<8) + AcceArr[5]); // z-Axis
+		rawDefA->x = ((AcceArr[0]<<8) + AcceArr[1]); // x-Axis
+		rawDefA->y = ((AcceArr[2]<<8) + AcceArr[3]); // y-Axis
+		rawDefA->z = ((AcceArr[4]<<8) + AcceArr[5]); // z-Axis
 		//Gyro Raw Data
 		I2C_Read(GYRO_XOUT_H_REG, GyroArr,6);
-		GyroRW[0] = ((GyroArr[0]<<8) + GyroArr[1]);
-		GyroRW[1] = (GyroArr[2]<<8) + GyroArr[3];
-		GyroRW[2] = ((GyroArr[4]<<8) + GyroArr[5]);
+		rawDefG->x = (GyroArr[0]<<8) + GyroArr[1];
+		rawDefG->y = (GyroArr[2]<<8) + GyroArr[3];
+		rawDefG->z = (GyroArr[4]<<8) + GyroArr[5];
 	}
-}
-
-
-//12- Get Gyro Raw Data
-void MPU6050_Get_Gyro_RawData(RawData_Def *rawDef)
-{
-	
-	//Accel Raw Data
-	rawDef->x = GyroRW[0];
-	rawDef->y = GyroRW[1];
-	rawDef->z = GyroRW[2];
-	
 }

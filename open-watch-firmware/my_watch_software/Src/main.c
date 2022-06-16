@@ -45,12 +45,22 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
+#define RX_BUFFER_SIZE 	40
+#define TX_BUFFER_SIZE 	50
+
 #define KALMAN_TIMER		htim6
 #define BUZZER_TIMER		htim3
 #define ADCVIB_TIMER		htim1
 
 #define DEBUG_UART			huart1
 #define BLUETOOTH_UART	huart2
+
+#define DEBUG_ENABLE		0
+#define BLE_DEBUG 			1
+
+#if DEBUG_ENABLE
+	#include "stdarg.h"
+#endif
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -68,9 +78,11 @@ uint8_t pedflag = 0;
 uint8_t screen_enable = 0;
 uint8_t screenflag = 0;
 
+		
+
 /* Commiunication */
-char TxBuffer[50];
-char RxBuffer[50];
+char TxBuffer[TX_BUFFER_SIZE];
+char RxBuffer[RX_BUFFER_SIZE];
 
 /* Batery Level */
 uint32_t adcVals[1000];
@@ -99,6 +111,7 @@ Kalman2D1R KGyro;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
+void DEBUG(const char* _str, ...);
 void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc);
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc);
 void set_vib(int speed, int duration);
@@ -138,7 +151,7 @@ int main(void)
 
   /* USER CODE END SysInit */
 
-  /* Initialize all configured peripherals */
+  /* Initialize all configured peripherals */ 
   MX_GPIO_Init();
   MX_DMA_Init();
   MX_I2C1_Init();
@@ -151,71 +164,92 @@ int main(void)
   MX_TIM6_Init();
   /* USER CODE BEGIN 2 */
 	
-	/* I2C Scanner */
-	/*
-	uint8_t Buffer[25] = {0};
-	uint8_t Space[] = " - ";
-	uint8_t StartMSG[] = "Starting I2C Scanning: \n\r";
-	uint8_t EndMSG[] = "\n\rDone! \n\r";
-	int ret = 0;
-	
-	HAL_GPIO_WritePin(MAX_EN_GPIO_Port, MAX_EN_Pin, GPIO_PIN_SET);
-	HAL_UART_Transmit(&BLUETOOTH_UART, StartMSG, sizeof(StartMSG), 10000);
-	for(int i=1; i<128; i++){
-		ret = HAL_I2C_IsDeviceReady(&hi2c1, (uint16_t)(i<<1), 3, 5);
-		if (ret != HAL_OK)
-			HAL_UART_Transmit(&BLUETOOTH_UART, Space, sizeof(Space), 10000);
-		else if(ret == HAL_OK){
-			sprintf((char*)Buffer, "0x%X", i);
-			HAL_UART_Transmit(&BLUETOOTH_UART, Buffer, sizeof(Buffer), 10000);
+	/* // I2C scanner
+		int ret = 0;		
+		HAL_GPIO_WritePin(MAX_EN_GPIO_Port, MAX_EN_Pin, GPIO_PIN_SET);
+		DEBUG("Starting I2C Scanning: \n\r ");
+		for(int i=1; i<128; i++){
+			ret = HAL_I2C_IsDeviceReady(&hi2c1, (uint16_t)(i<<1), 3, 5);
+			if (ret != HAL_OK)
+				DEBUG(" - ");
+			else if(ret == HAL_OK)
+				DEBUG("0x%X", i);
 		}
-	}
-	HAL_UART_Transmit(&BLUETOOTH_UART, EndMSG, sizeof(EndMSG), 10000);
-	HAL_GPIO_WritePin(MAX_EN_GPIO_Port, MAX_EN_Pin, GPIO_PIN_RESET);	
+		DEBUG("\n\rDone! \n\r ");
+		HAL_GPIO_WritePin(MAX_EN_GPIO_Port, MAX_EN_Pin, GPIO_PIN_RESET);	
 	//*/
 
-	
-	//*
+	//* // MPU6050 Configurations
+	DEBUG("MPU6050 Configurations... \n\r ");
 		MPU6050_Init(&hi2c1);
 		myMpuConfig.Accel_Full_Scale = AFS_SEL_4g;
 		myMpuConfig.ClockSource = Internal_8MHz;
 		myMpuConfig.CONFIG_DLPF = DLPF_94A_98G_Hz;
 		myMpuConfig.Gyro_Full_Scale = FS_SEL_2000;
-		myMpuConfig.Sleep_Mode_Bit = 0;  //1: sleep mode, 0: normal mode
+		myMpuConfig.Sleep_Mode_Bit = 0;
 		MPU6050_Config(&myMpuConfig); 
+	DEBUG("  --Done!-- \n\r ");
 	//*/
+	
+	//*/ // Date and Time setting
+	DEBUG("Date and Time setting... \n\r ");
+		RTC_DateTypeDef DateToBeSet;
+		DateToBeSet.Year = 98;
+		DateToBeSet.Month = 10;
+		DateToBeSet.Date = 23;
+		DateToBeSet.WeekDay = RTC_WEEKDAY_FRIDAY;
 		
-	RTC_DateTypeDef DateToBeSet;
-	DateToBeSet.Year = 98;
-	DateToBeSet.Month = 10;
-	DateToBeSet.Date = 23;
-	DateToBeSet.WeekDay = RTC_WEEKDAY_FRIDAY;
-	
-	RTC_TimeTypeDef TimeToBeSet;
-	TimeToBeSet.Hours = 0;
-	TimeToBeSet.Minutes = 0;
-	TimeToBeSet.Seconds = 10;
-	
-	HAL_RTC_SetDate(&hrtc, &DateToBeSet, RTC_FORMAT_BIN);
-	HAL_RTC_SetTime(&hrtc, &TimeToBeSet, RTC_FORMAT_BIN);
+		RTC_TimeTypeDef TimeToBeSet;
+		TimeToBeSet.Hours = 0;
+		TimeToBeSet.Minutes = 0;
+		TimeToBeSet.Seconds = 10;
 		
-	HAL_UART_Receive_DMA(&BLUETOOTH_UART, (uint8_t*)RxBuffer, 40); 
-	//uint8_t psize = sprintf(TxBuffer, "AT+NAMEOpenWatch");
-	//uint8_t psize = sprintf(TxBuffer, "AT+PIN8569");
-	//uint8_t psize = sprintf(TxBuffer, "AT+BAUD8"); // 115200 bps
-	//uint8_t psize = sprintf(TxBuffer, "AT");
-	//HAL_UART_Transmit(&BLUETOOTH_UART, (uint8_t*)TxBuffer, psize, 1000);
-	//while(1);
+		HAL_RTC_SetDate(&hrtc, &DateToBeSet, RTC_FORMAT_BIN);
+		HAL_RTC_SetTime(&hrtc, &TimeToBeSet, RTC_FORMAT_BIN);
+	DEBUG("  --Done!-- \n\r ");
+	//*/
 	
-	HAL_ADC_Start_DMA(&hadc, adcVals, 100);
-	HAL_TIM_Base_Start(&ADCVIB_TIMER);
+	//* // Bluetooth receive DMA
+	DEBUG("Bluetooth settings... \n\r ");
+		HAL_UART_Receive_DMA(&BLUETOOTH_UART, (uint8_t*)RxBuffer, RX_BUFFER_SIZE);
 	
-	kalman_scaler_init(&KAccel, 0.8, 900);
-	kalman_2d1r_init(&KGyro, 0.1, 1);
-	HAL_TIM_Base_Start_IT(&KALMAN_TIMER);	
+	/* // Bluetooth settings
+		uint8_t psize = 0;
+		psize = sprintf(TxBuffer, "AT+NAMEOpenWatch");
+		HAL_UART_Transmit(&BLUETOOTH_UART, (uint8_t*)TxBuffer, psize, 1000);
+		psize = sprintf(TxBuffer, "AT+PIN8569");
+		HAL_UART_Transmit(&BLUETOOTH_UART, (uint8_t*)TxBuffer, psize, 1000);
+		psize = sprintf(TxBuffer, "AT+BAUD8"); // 115200 bps
+		HAL_UART_Transmit(&BLUETOOTH_UART, (uint8_t*)TxBuffer, psize, 1000);
+		psize = sprintf(TxBuffer, "AT");
+		HAL_UART_Transmit(&BLUETOOTH_UART, (uint8_t*)TxBuffer, psize, 1000);
+		while(1);
+	//*/
 	
-	//HAL_GPIO_WritePin(MAX_EN_GPIO_Port, MAX_EN_Pin, GPIO_PIN_SET);
-  //max30102_init();
+	DEBUG("  --Done!-- \n\r ");
+	//*/
+	
+	//* // Baettery level ADC settings
+	DEBUG("Baettery level ADC settings... \n\r ");
+		HAL_ADC_Start_DMA(&hadc, adcVals, 100);
+		HAL_TIM_Base_Start(&ADCVIB_TIMER); 
+	DEBUG("  --Done!-- \n\r ");
+	//*/
+	
+	//* // Kalman filter initializtions
+	DEBUG("Kalman filter initializtions \n\r ");
+		kalman_scaler_init(&KAccel, 0.8, 900);
+		kalman_2d1r_init(&KGyro, 0.1, 1);
+		HAL_TIM_Base_Start_IT(&KALMAN_TIMER);	
+	DEBUG("  --Done!-- \n\r ");
+	//*/
+	
+	/* // MAX30102 initializations
+	DEBUG("MAX30102 initializations\n\r ");
+		HAL_GPIO_WritePin(MAX_EN_GPIO_Port, MAX_EN_Pin, GPIO_PIN_SET);
+		max30102_init();
+	DEBUG("  --Done!-- \n\r ");
+	//*/
 	 
   /* USER CODE END 2 */
 
@@ -252,11 +286,15 @@ int main(void)
 		set_vib(900, 100);
 		//*/
 		
+		//*
 		if(screen_enable){
-			HAL_Delay(2000);
+			//HAL_Delay(2000);
+			set_tone(1000,1500);
 			screen_enable = 0;
+			
 		}
-		
+		//*/
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -324,11 +362,7 @@ void SystemClock_Config(void)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
 	if(htim == &KALMAN_TIMER){
-		MPU6050_Get_Accel_RawData(&myAccelRaw);
-		MPU6050_Get_Gyro_RawData(&myGyroRaw);
-//		uint8_t psize = sprintf(TxBuffer, "Accel x: %.1f y: %.1f z: %.1f - Gyro: x: %.1f y: %.1f z: %.1f\n\r",
-//														myAccelScaled.x, myAccelScaled.y, myAccelScaled.z,
-//														myGyroScaled.x , myGyroScaled.y , myGyroScaled.z);
+		MPU6050_Get_RawData(&myAccelRaw, &myGyroRaw);
 		
 		/*
 		TxBuffer[0] = (uint8_t)(myAccelRaw.x & 0x00FF);
@@ -355,15 +389,15 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		/* Accelerometer */
 		KAccel.z_x = myAccelRaw.x;
 		#if ALLXYX_MODE
-		KAccel.z_y = myAccelRaw.y;
-		KAccel.z_z = myAccelRaw.z;
+			KAccel.z_y = myAccelRaw.y;
+			KAccel.z_z = myAccelRaw.z;
 		#endif
 		kalman_scaler_update(&KAccel);
 		
 		/* Gyroscope */
 		#if ALLXYX_MODE
-		KGyro.z_x = myGyroRaw.x;
-		KGyro.z_z = myGyroRaw.z;
+			KGyro.z_x = myGyroRaw.x;
+			KGyro.z_z = myGyroRaw.z;
 		#endif
 		KGyro.z_y = myGyroRaw.y;
 		kalman_2d1r_update(&KGyro); 
@@ -385,30 +419,29 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		else if((KAccel.x_hat < 2000)&&(screenflag)){
 			screenflag = 0;
 		}
-
+		
 		// Filtererd data ----------------------------------
 		/*
-		TxBuffer[12-12] = (uint8_t)(KAccel.x_hat & 0x00FF);
-		TxBuffer[13-12] = (uint8_t)((KAccel.x_hat & 0xFF00)>>8);
+		TxBuffer[12] = (uint8_t)(KAccel.x_hat & 0x00FF);
+		TxBuffer[13] = (uint8_t)((KAccel.x_hat & 0xFF00)>>8);
 		
-		TxBuffer[14-12] = (uint8_t)(KAccel.y_hat & 0x00FF);
-		TxBuffer[15-12] = (uint8_t)((KAccel.y_hat & 0xFF00)>>8);
+		TxBuffer[14] = (uint8_t)(KAccel.y_hat & 0x00FF);
+		TxBuffer[15] = (uint8_t)((KAccel.y_hat & 0xFF00)>>8);
 
-		TxBuffer[16-12] = (uint8_t)(KAccel.z_hat & 0x00FF);
-		TxBuffer[17-12] = (uint8_t)((KAccel.z_hat & 0xFF00)>>8);
+		TxBuffer[16] = (uint8_t)(KAccel.z_hat & 0x00FF);
+		TxBuffer[17] = (uint8_t)((KAccel.z_hat & 0xFF00)>>8);
 		
-		TxBuffer[18-12] = (uint8_t)(KGyro.wx_hat & 0x00FF);
-		TxBuffer[19-12] = (uint8_t)((KGyro.wx_hat & 0xFF00)>>8);
+		TxBuffer[18] = (uint8_t)(KGyro.wx_hat & 0x00FF);
+		TxBuffer[19] = (uint8_t)((KGyro.wx_hat & 0xFF00)>>8);
 		
-		TxBuffer[20-12] = (uint8_t)(KGyro.wy_hat & 0x00FF);
-		TxBuffer[21-12] = (uint8_t)((KGyro.wy_hat & 0xFF00)>>8);
+		TxBuffer[20] = (uint8_t)(KGyro.wy_hat & 0x00FF);
+		TxBuffer[21] = (uint8_t)((KGyro.wy_hat & 0xFF00)>>8);
 		
-		TxBuffer[22-12] = (uint8_t)(KGyro.wz_hat & 0x00FF);
-		TxBuffer[23-12] = (uint8_t)((KGyro.wz_hat & 0xFF00)>>8);
+		TxBuffer[22] = (uint8_t)(KGyro.wz_hat & 0x00FF);
+		TxBuffer[23] = (uint8_t)((KGyro.wz_hat & 0xFF00)>>8);
 		//*/
 		
-		//HAL_UART_Transmit(&DEBUG_UART, (uint8_t*)TxBuffer, 24, 10); 
-		//HAL_UART_Transmit(&BLUETOOTH_UART, (uint8_t*)TxBuffer, 12, 10); 
+		//HAL_UART_Transmit(&DEBUG_UART, (uint8_t*)TxBuffer, 24, 10);
 	}
 }
 
@@ -421,13 +454,12 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 		//diff = max30102_getDiff();
 		unreadSampleCount = max30102_getUnreadSampleCount();
     max30102_getFIFO(_sampleBuff, unreadSampleCount);
-		uint8_t psize = sprintf(TxBuffer, "%d\n", _sampleBuff[0].iRed);
-		HAL_UART_Transmit(&BLUETOOTH_UART, (uint8_t*)TxBuffer, psize, 1000);
+		DEBUG("%d\n", _sampleBuff[0].iRed);
 	}
 }
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
-	HAL_UART_Transmit(&BLUETOOTH_UART, (uint8_t*)RxBuffer, 5, 1000);
+	//HAL_UART_Transmit(&BLUETOOTH_UART, (uint8_t*)RxBuffer, RX_BUFFER_SIZE, 1000);
 }
 
 void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc){
@@ -436,9 +468,8 @@ void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc){
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
 	sum = 0;
-	for(int i = 0; i<1000; i++){
+	for(int i = 0; i<1000; i++)
 		sum += adcVals[i];
-	}
 	voltage = sum/100.0;
 	
 }
@@ -478,6 +509,20 @@ float map(uint16_t x, uint16_t in_min, uint16_t in_max, uint16_t out_min, uint16
   return (x - in_min) * (out_max - out_min) / (float)(in_max - in_min) + out_min;
 }
 
+void DEBUG(const char* _str, ...){
+	#if DEBUG_ENABLE
+		va_list args;
+		va_start(args, _str);
+		char buffer[200];
+		memset(buffer, 0, 200);
+		int buffer_size = vsprintf(buffer, _str, args);
+		#if BLE_DEBUG
+			HAL_UART_Transmit(&BLUETOOTH_UART, (uint8_t*)buffer, buffer_size, 1000);
+		#else
+			HAL_UART_Transmit(&DEBUG_UART, (uint8_t*)buffer, buffer_size, 5000);
+		#endif
+	#endif
+}
 /* USER CODE END 4 */
 
 /**

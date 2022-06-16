@@ -139,14 +139,5 @@ uint8_t MPU6050_Get_FSYNC(void);
 //8- Set External Frame Sync.
 void MPU6050_Set_FSYNC(enum EXT_SYNC_SET_ENUM ext_Sync);
 //9- Get Accel Raw Data
-void MPU6050_Get_Accel_RawData(RawData_Def *rawDef);//************
-//10- Get Accel scaled data
-void MPU6050_Get_Accel_Scale(ScaledData_Def *scaledDef);//***********
-//11- Get Accel calibrated data
-void MPU6050_Get_Accel_Cali(ScaledData_Def *CaliDef);
-//12- Get Gyro Raw Data
-void MPU6050_Get_Gyro_RawData(RawData_Def *rawDef);
-//13- Get Gyro scaled data
-void MPU6050_Get_Gyro_Scale(ScaledData_Def *scaledDef);
-//14- Accel Calibration
-void _Accel_Cali(float x_min, float x_max, float y_min, float y_max, float z_min, float z_max);
+void MPU6050_Get_RawData(RawData_Def *rawDefA, RawData_Def *rawDefG);//************
+
