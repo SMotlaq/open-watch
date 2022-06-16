@@ -100,10 +100,10 @@ Do you want to support us in this project?
   - [x] Touch buttons
   - [x] Battery level indicator
   - [ ] Power saving
-  - [ ] MPU6050
+  - [x] MPU6050
     - [x] Get raw data
     - [x] Kalman filter
-    - [ ] Movement detection
+    - [x] Movement detection
   - [ ] PPG sensor
     - [x] Get raw data
     - [ ] Transfer data using Bluetooth
