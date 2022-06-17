@@ -831,10 +831,10 @@ HAL_StatusTypeDef HAL_RTC_GetTime(RTC_HandleTypeDef *hrtc, RTC_TimeTypeDef *sTim
   assert_param(IS_RTC_FORMAT(Format));
 
   /* Get subseconds structure field from the corresponding register*/
-  //sTime->SubSeconds = (uint32_t)(hrtc->Instance->SSR);
+  sTime->SubSeconds = (uint32_t)(hrtc->Instance->SSR);
 
   /* Get SecondFraction structure field from the corresponding register field*/
-  //sTime->SecondFraction = (uint32_t)(hrtc->Instance->PRER & RTC_PRER_PREDIV_S);
+  sTime->SecondFraction = (uint32_t)(hrtc->Instance->PRER & RTC_PRER_PREDIV_S);
 
   /* Get the TR register */
   tmpreg = (uint32_t)(hrtc->Instance->TR & RTC_TR_RESERVED_MASK);

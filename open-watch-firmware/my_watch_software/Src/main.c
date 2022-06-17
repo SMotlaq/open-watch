@@ -32,6 +32,7 @@
 #include "string.h"
 #include "stdio.h"
 #include "stdlib.h"
+#include "system.h"
 #include "ey_iran.h"
 #include "MPU6050.h"
 #include "Kalman.h"
@@ -48,9 +49,10 @@
 #define RX_BUFFER_SIZE 	40
 #define TX_BUFFER_SIZE 	50
 
-#define KALMAN_TIMER		htim6
-#define BUZZER_TIMER		htim3
-#define ADCVIB_TIMER		htim1
+#define BATERY_TIMER		htim15		// IT mode - each 2 seconds
+#define KALMAN_TIMER		htim6			// IT mode - each 1 milli second
+#define BUZZER_TIMER		htim3			// PWM mode - 1KHz - Value from 0 to 999
+#define VIBMOT_TIMER		htim1			// PWM mode - 1KHz - Value from 0 to 999
 
 #define DEBUG_UART			huart1
 #define BLUETOOTH_UART	huart2
@@ -78,14 +80,12 @@ uint8_t pedflag = 0;
 uint8_t screen_enable = 0;
 uint8_t screenflag = 0;
 
-		
-
 /* Commiunication */
 char TxBuffer[TX_BUFFER_SIZE];
 char RxBuffer[RX_BUFFER_SIZE];
 
 /* Batery Level */
-uint32_t adcVals[1000];
+uint32_t adcVals[100];
 float voltage = 0.0;
 uint32_t sum = 0;
 
@@ -151,7 +151,7 @@ int main(void)
 
   /* USER CODE END SysInit */
 
-  /* Initialize all configured peripherals */ 
+  /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_DMA_Init();
   MX_I2C1_Init();
@@ -162,6 +162,7 @@ int main(void)
   MX_ADC_Init();
   MX_USART2_UART_Init();
   MX_TIM6_Init();
+  MX_TIM15_Init();
   /* USER CODE BEGIN 2 */
 	
 	/* // I2C scanner
@@ -180,7 +181,7 @@ int main(void)
 	//*/
 
 	//* // MPU6050 Configurations
-	DEBUG("MPU6050 Configurations... \n\r ");
+	DEBUG("MPU6050 Configurations...  ");
 		MPU6050_Init(&hi2c1);
 		myMpuConfig.Accel_Full_Scale = AFS_SEL_4g;
 		myMpuConfig.ClockSource = Internal_8MHz;
@@ -188,11 +189,13 @@ int main(void)
 		myMpuConfig.Gyro_Full_Scale = FS_SEL_2000;
 		myMpuConfig.Sleep_Mode_Bit = 0;
 		MPU6050_Config(&myMpuConfig); 
-	DEBUG("  --Done!-- \n\r ");
+	DEBUG("  Done! \n\r ");
 	//*/
 	
+	//HAL_Delay(2000);
+	
 	//*/ // Date and Time setting
-	DEBUG("Date and Time setting... \n\r ");
+	DEBUG("Date and Time setting...  ");
 		RTC_DateTypeDef DateToBeSet;
 		DateToBeSet.Year = 98;
 		DateToBeSet.Month = 10;
@@ -206,11 +209,13 @@ int main(void)
 		
 		HAL_RTC_SetDate(&hrtc, &DateToBeSet, RTC_FORMAT_BIN);
 		HAL_RTC_SetTime(&hrtc, &TimeToBeSet, RTC_FORMAT_BIN);
-	DEBUG("  --Done!-- \n\r ");
+	DEBUG("  Done! \n\r ");
 	//*/
 	
+	//HAL_Delay(2000);
+	
 	//* // Bluetooth receive DMA
-	DEBUG("Bluetooth settings... \n\r ");
+	DEBUG("Bluetooth settings...  ");
 		HAL_UART_Receive_DMA(&BLUETOOTH_UART, (uint8_t*)RxBuffer, RX_BUFFER_SIZE);
 	
 	/* // Bluetooth settings
@@ -226,29 +231,33 @@ int main(void)
 		while(1);
 	//*/
 	
-	DEBUG("  --Done!-- \n\r ");
+	DEBUG("  Done! \n\r ");
 	//*/
+	
+	//HAL_Delay(2000);
 	
 	//* // Baettery level ADC settings
-	DEBUG("Baettery level ADC settings... \n\r ");
+	DEBUG("Baettery level ADC settings...  ");
 		HAL_ADC_Start_DMA(&hadc, adcVals, 100);
-		HAL_TIM_Base_Start(&ADCVIB_TIMER); 
-	DEBUG("  --Done!-- \n\r ");
+		HAL_TIM_Base_Start(&BATERY_TIMER); 
+	DEBUG("  Done! \n\r ");
 	//*/
 	
+	//HAL_Delay(2000);
+	
 	//* // Kalman filter initializtions
-	DEBUG("Kalman filter initializtions \n\r ");
+	DEBUG("Kalman filter initializtions...  ");
 		kalman_scaler_init(&KAccel, 0.8, 900);
 		kalman_2d1r_init(&KGyro, 0.1, 1);
 		HAL_TIM_Base_Start_IT(&KALMAN_TIMER);	
-	DEBUG("  --Done!-- \n\r ");
+	DEBUG("  Done! \n\r ");
 	//*/
 	
 	/* // MAX30102 initializations
-	DEBUG("MAX30102 initializations\n\r ");
+	DEBUG("MAX30102 initializations...  ");
 		HAL_GPIO_WritePin(MAX_EN_GPIO_Port, MAX_EN_Pin, GPIO_PIN_SET);
 		max30102_init();
-	DEBUG("  --Done!-- \n\r ");
+	DEBUG("  Done! \n\r ");
 	//*/
 	 
   /* USER CODE END 2 */
@@ -257,42 +266,40 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
 	{
+		
 		/* Music + Vibration*/
 		/*
-		for(int thisNote=0; thisNote<sizeof(melody)/sizeof(int); thisNote++){
-			set_tone_vib(melody[thisNote], 1000/noteDurations[thisNote]);
-		}
+			for(int thisNote=0; thisNote<sizeof(melody)/sizeof(int); thisNote++)
+				set_tone_vib(melody[thisNote], 1000/noteDurations[thisNote]);
 		//*/
 		 
 		/* Battery level + Date and Time */
 		/*
-		HAL_RTC_GetDate(&hrtc, &CurrentDate, RTC_FORMAT_BIN);
-		HAL_RTC_GetTime(&hrtc, &CurrentTime, RTC_FORMAT_BIN);
-		uint8_t psize = sprintf(TxBuffer, "Battery: %.1f%% - DateTime: 19%02d-%02d-%02d %02d:%02d:%02d\n", map(voltage, 3000, 3907, 0, 100),
-														CurrentDate.Year , CurrentDate.Month  , CurrentDate.Date,
-														CurrentTime.Hours, CurrentTime.Minutes, CurrentTime.Seconds);
-		HAL_UART_Transmit(&BLUETOOTH_UART, (uint8_t*)TxBuffer, psize, 1000);
-		
-		//psize = sprintf(TxBuffer, "|____ HeartRate: %3d - SpO2: %3d \n", heartReat, _spo2);
-		//HAL_UART_Transmit(&BLUETOOTH_UART, (uint8_t*)TxBuffer, psize, 1000);
-		
-		HAL_Delay(1000);
+			HAL_RTC_GetDate(&hrtc, &CurrentDate, RTC_FORMAT_BIN);
+			HAL_RTC_GetTime(&hrtc, &CurrentTime, RTC_FORMAT_BIN);
+			uint8_t psize = sprintf(TxBuffer, "Battery: %.1f%% - DateTime: 19%02d-%02d-%02d %02d:%02d:%02d\n", map(voltage, 3000, 3907, 0, 100),
+															CurrentDate.Year , CurrentDate.Month  , CurrentDate.Date,
+															CurrentTime.Hours, CurrentTime.Minutes, CurrentTime.Seconds);
+			HAL_UART_Transmit(&BLUETOOTH_UART, (uint8_t*)TxBuffer, psize, 1000);
+					
+			HAL_Delay(1000);
 		//*/
 		
 		/* Vibraion */
 		/*
-		set_vib(0, 800);
-		set_vib(300, 300);
-		set_vib(900, 100);
+			set_vib(0, 800);
+			set_vib(300, 300);
+			set_vib(900, 100);
 		//*/
 		
+		/* Screen trigger */
 		//*
-		if(screen_enable){
-			//HAL_Delay(2000);
-			set_tone(1000,1500);
-			screen_enable = 0;
-			
-		}
+			if(screen_enable){
+				HAL_Delay(1000);
+				//set_tone(1000,1500);
+				screen_enable = 0;
+				
+			}
 		//*/
 
     /* USER CODE END WHILE */
@@ -319,13 +326,10 @@ void SystemClock_Config(void)
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI|RCC_OSCILLATORTYPE_HSI14
-                              |RCC_OSCILLATORTYPE_LSE;
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI|RCC_OSCILLATORTYPE_LSE;
   RCC_OscInitStruct.LSEState = RCC_LSE_ON;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
-  RCC_OscInitStruct.HSI14State = RCC_HSI14_ON;
   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
-  RCC_OscInitStruct.HSI14CalibrationValue = 16;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
   RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL12;
@@ -388,14 +392,14 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		
 		/* Accelerometer */
 		KAccel.z_x = myAccelRaw.x;
-		#if ALLXYX_MODE
+		#if ALLXYZ_MODE
 			KAccel.z_y = myAccelRaw.y;
 			KAccel.z_z = myAccelRaw.z;
 		#endif
 		kalman_scaler_update(&KAccel);
 		
 		/* Gyroscope */
-		#if ALLXYX_MODE
+		#if ALLXYZ_MODE
 			KGyro.z_x = myGyroRaw.x;
 			KGyro.z_z = myGyroRaw.z;
 		#endif
@@ -412,12 +416,12 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		}
 		
 		/* Enable screen */
-		if((KGyro.wy_hat >= 4000)&&(!screenflag)){
+		if((KGyro.wy_hat >= 8000)&&(!screenflag)){
 			screenflag = 1;
-			screen_enable = 1;
 		}
-		else if((KAccel.x_hat < 2000)&&(screenflag)){
+		else if((KAccel.x_hat < 1000)&&(screenflag)){
 			screenflag = 0;
+			screen_enable = 1;
 		}
 		
 		// Filtererd data ----------------------------------
@@ -468,18 +472,18 @@ void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc){
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
 	sum = 0;
-	for(int i = 0; i<1000; i++)
+	for(uint32_t i = 0; i<100; i++)
 		sum += adcVals[i];
 	voltage = sum/100.0;
 	
 }
 
 void set_vib(int speed, int duration){
-	HAL_TIM_PWM_Start(&ADCVIB_TIMER, TIM_CHANNEL_4);
-	__HAL_TIM_SET_AUTORELOAD(&ADCVIB_TIMER, 5000);
-	__HAL_TIM_SET_COMPARE(&ADCVIB_TIMER, TIM_CHANNEL_4, speed);
+	HAL_TIM_PWM_Start(&VIBMOT_TIMER, TIM_CHANNEL_4);
+	__HAL_TIM_SET_AUTORELOAD(&VIBMOT_TIMER, 5000);
+	__HAL_TIM_SET_COMPARE(&VIBMOT_TIMER, TIM_CHANNEL_4, speed);
 	HAL_Delay(duration);
-	HAL_TIM_PWM_Stop(&ADCVIB_TIMER, TIM_CHANNEL_4);
+	HAL_TIM_PWM_Stop(&VIBMOT_TIMER, TIM_CHANNEL_4);
 	HAL_Delay((int)(duration*0.3));
 }
 
@@ -493,15 +497,15 @@ void set_tone(int freq, int duration){
 }
 
 void set_tone_vib(int freq, int duration){
-	HAL_TIM_PWM_Start(&ADCVIB_TIMER, TIM_CHANNEL_4);
-	__HAL_TIM_SET_AUTORELOAD(&ADCVIB_TIMER, 5000);
-	__HAL_TIM_SET_COMPARE(&ADCVIB_TIMER, TIM_CHANNEL_4, (int)map(freq, 260, 500, 2000, 5000));
+	HAL_TIM_PWM_Start(&VIBMOT_TIMER, TIM_CHANNEL_4);
+	__HAL_TIM_SET_AUTORELOAD(&VIBMOT_TIMER, 5000);
+	__HAL_TIM_SET_COMPARE(&VIBMOT_TIMER, TIM_CHANNEL_4, (int)map(freq, 260, 500, 2000, 5000));
 	HAL_TIM_PWM_Start(&BUZZER_TIMER, TIM_CHANNEL_3);
 	__HAL_TIM_SET_AUTORELOAD(&BUZZER_TIMER, 1000000/freq);
 	__HAL_TIM_SET_COMPARE(&BUZZER_TIMER, TIM_CHANNEL_3, 1000000/freq/2);
 	HAL_Delay(duration);
 	HAL_TIM_PWM_Stop(&BUZZER_TIMER, TIM_CHANNEL_3);
-	HAL_TIM_PWM_Stop(&ADCVIB_TIMER, TIM_CHANNEL_4);
+	HAL_TIM_PWM_Stop(&VIBMOT_TIMER, TIM_CHANNEL_4);
 	HAL_Delay((int)(duration*0.3));
 }
 
@@ -513,8 +517,8 @@ void DEBUG(const char* _str, ...){
 	#if DEBUG_ENABLE
 		va_list args;
 		va_start(args, _str);
-		char buffer[200];
-		memset(buffer, 0, 200);
+		char buffer[50];
+		memset(buffer, 0, 50);
 		int buffer_size = vsprintf(buffer, _str, args);
 		#if BLE_DEBUG
 			HAL_UART_Transmit(&BLUETOOTH_UART, (uint8_t*)buffer, buffer_size, 1000);
