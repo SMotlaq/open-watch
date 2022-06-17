@@ -2,7 +2,7 @@
 #include "math.h"
 
 void kalman_scaler_init(KalmanScaler* hkalman, float Q, float R){
-	#if ALLXYX_MODE	
+	#if ALLXYZ_MODE	
 		hkalman->y_hat = 0;
 		hkalman->z_hat = 0;
 		
@@ -26,7 +26,7 @@ void kalman_scaler_init(KalmanScaler* hkalman, float Q, float R){
 }
 
 void kalman_2d1r_init(Kalman2D1R* hkalman, float Q, float R){
-	#if ALLXYX_MODE
+	#if ALLXYZ_MODE
 		hkalman->wx_hat = 0;
 		hkalman->dwx_hat = 0;
 
@@ -79,7 +79,7 @@ void kalman_scaler_update(KalmanScaler* hkalman){
 	hkalman->x_hat = hkalman->R/((float)(hkalman->pre_Pn1+hkalman->Q+hkalman->R))*hkalman->pre_x_hat + (hkalman->pre_Pn1+hkalman->Q)/((float)(hkalman->pre_Pn1+hkalman->Q+hkalman->R))*hkalman->z_x;
 	hkalman->pre_x_hat = hkalman->x_hat;
 
-	#if ALLXYX_MODE
+	#if ALLXYZ_MODE
 		hkalman->y_hat = hkalman->R/((float)(hkalman->pre_Pn1+hkalman->Q+hkalman->R))*hkalman->pre_y_hat + (hkalman->pre_Pn1+hkalman->Q)/((float)(hkalman->pre_Pn1+hkalman->Q+hkalman->R))*hkalman->z_y;
 		hkalman->pre_y_hat = hkalman->y_hat;
 		
@@ -107,7 +107,7 @@ void kalman_2d1r_update(Kalman2D1R* hkalman){
 		hkalman->K[1] = 0.312276; 
 	#endif
 
-	#if ALLXYX_MODE
+	#if ALLXYZ_MODE
 		hkalman->wx_hat = -hkalman->K[0]*hkalman->wx_hat + hkalman->wx_hat -hkalman->K[0]*T*hkalman->dwx_hat + T*hkalman->dwx_hat + hkalman->K[0]*hkalman->z_x;
 		hkalman->dwx_hat = -hkalman->K[1]*hkalman->wx_hat - hkalman->K[1]*T*hkalman->dwx_hat + hkalman->dwx_hat + hkalman->K[1]*hkalman->z_x;
 		hkalman->pre_wx_hat = hkalman->wx_hat;

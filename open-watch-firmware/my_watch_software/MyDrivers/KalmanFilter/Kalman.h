@@ -4,7 +4,7 @@
 #endif
 #include "tim.h"
 
-#define ALLXYX_MODE 0
+#define ALLXYZ_MODE 0
 #define LOWMEM_MODE 1  
 
 typedef struct{
@@ -12,7 +12,7 @@ typedef struct{
 	int16_t z_x;
 	int16_t pre_x_hat;
 	
-	#if ALLXYX_MODE	
+	#if ALLXYZ_MODE	
 		int16_t y_hat;
 		int16_t z_y;
 		int16_t pre_y_hat;
@@ -38,7 +38,7 @@ typedef struct{
 	int16_t pre_wy_hat;
 	int16_t pre_dwy_hat;
 	
-	#if ALLXYX_MODE
+	#if ALLXYZ_MODE
 		int16_t wx_hat;
 		int16_t dwx_hat;
 		int16_t z_x;
