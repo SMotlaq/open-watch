@@ -37,3 +37,4 @@ my_watch_software\system.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_ti
 my_watch_software\system.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim_ex.h
 my_watch_software\system.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h
 my_watch_software\system.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h
+my_watch_software\system.o: ..\MyDrivers\pitches.h

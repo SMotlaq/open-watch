@@ -46,8 +46,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define RX_BUFFER_SIZE 	40
-#define TX_BUFFER_SIZE 	50
+
 
 #define BATERY_TIMER		htim15		// IT mode - each 2 seconds
 #define KALMAN_TIMER		htim6			// IT mode - each 1 milli second
@@ -212,7 +211,7 @@ int main(void)
 	DEBUG("  Done! \n\r ");
 	//*/
 	
-	//HAL_Delay(2000);
+	HAL_Delay(2000);
 	
 	//* // Bluetooth receive DMA
 	DEBUG("Bluetooth settings...  ");
@@ -234,7 +233,7 @@ int main(void)
 	DEBUG("  Done! \n\r ");
 	//*/
 	
-	//HAL_Delay(2000);
+	HAL_Delay(2000);
 	
 	//* // Baettery level ADC settings
 	DEBUG("Baettery level ADC settings...  ");
@@ -243,13 +242,13 @@ int main(void)
 	DEBUG("  Done! \n\r ");
 	//*/
 	
-	//HAL_Delay(2000);
+	HAL_Delay(2000);
 	
 	//* // Kalman filter initializtions
 	DEBUG("Kalman filter initializtions...  ");
 		kalman_scaler_init(&KAccel, 0.8, 900);
 		kalman_2d1r_init(&KGyro, 0.1, 1);
-		HAL_TIM_Base_Start_IT(&KALMAN_TIMER);	
+		//HAL_TIM_Base_Start_IT(&KALMAN_TIMER);	
 	DEBUG("  Done! \n\r ");
 	//*/
 	
@@ -274,14 +273,14 @@ int main(void)
 		//*/
 		 
 		/* Battery level + Date and Time */
-		/*
+		//*
 			HAL_RTC_GetDate(&hrtc, &CurrentDate, RTC_FORMAT_BIN);
 			HAL_RTC_GetTime(&hrtc, &CurrentTime, RTC_FORMAT_BIN);
 			uint8_t psize = sprintf(TxBuffer, "Battery: %.1f%% - DateTime: 19%02d-%02d-%02d %02d:%02d:%02d\n", map(voltage, 3000, 3907, 0, 100),
 															CurrentDate.Year , CurrentDate.Month  , CurrentDate.Date,
 															CurrentTime.Hours, CurrentTime.Minutes, CurrentTime.Seconds);
 			HAL_UART_Transmit(&BLUETOOTH_UART, (uint8_t*)TxBuffer, psize, 1000);
-					
+			_index++;
 			HAL_Delay(1000);
 		//*/
 		
@@ -293,7 +292,7 @@ int main(void)
 		//*/
 		
 		/* Screen trigger */
-		//*
+		/*
 			if(screen_enable){
 				HAL_Delay(1000);
 				//set_tone(1000,1500);
