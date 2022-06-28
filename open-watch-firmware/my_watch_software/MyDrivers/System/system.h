@@ -10,6 +10,15 @@
 
 #define NOTIF_DURATION 5
 
+#define ISCHARGING_MASK			7
+#define ISPSAVING_MASK			6
+#define ISPPGENABLED_MASK		5
+#define SCREENFLAG_MASK			4
+#define SCREENENABLED_MASK	3
+#define PEDFLAG_MASK				2
+#define VIBENENABLED_MASK		1
+#define SOUNDENABLED_MASK		0
+
 typedef struct{
 	
 	uint32_t pedometer;
@@ -30,8 +39,7 @@ typedef struct{
 	// ------------------------------------------------------------------------------------------------------------------------- //
 	
 	
-	uint8_t _TxBuffer[TX_BUFFER_SIZE];
-	uint8_t _RxBuffer[RX_BUFFER_SIZE];
+	uint8_t TxBuffer[TX_BUFFER_SIZE];
 	
 	uint8_t heart_beat;
 	
@@ -42,7 +50,7 @@ typedef struct{
 
 
 // Constructor
-System init(void);
+System sys_init(void);
 
 // Get Flags
 uint8_t getCharging(System* sys);
@@ -63,3 +71,7 @@ void setScreenEable(System* sys, uint8_t state);
 void setPedFlag(System* sys, uint8_t state);
 void setVibEnable(System* sys, uint8_t state);
 void setSoundEnable(System* sys, uint8_t state);
+
+
+// Main functions
+void RxParser(uint8_t* RxBuffer);

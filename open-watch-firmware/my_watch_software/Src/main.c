@@ -25,13 +25,10 @@
 #include "rtc.h"
 #include "tim.h"
 #include "usart.h"
-#include "gpio.h"
+#include "gpio.h" 
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "string.h"
-#include "stdio.h"
-#include "stdlib.h"
 #include "system.h"
 #include "ey_iran.h"
 #include "MPU6050.h"
@@ -49,18 +46,22 @@
 
 
 #define BATERY_TIMER		htim15		// IT mode - each 2 seconds
+#define FREEEE_TIMER		htim14		// IT mode - each 0.5 seconds
 #define KALMAN_TIMER		htim6			// IT mode - each 1 milli second
 #define BUZZER_TIMER		htim3			// PWM mode - 1KHz - Value from 0 to 999
 #define VIBMOT_TIMER		htim1			// PWM mode - 1KHz - Value from 0 to 999
 
-#define DEBUG_UART			huart1
+#define DEBUG_UART			huart1 
 #define BLUETOOTH_UART	huart2
 
 #define DEBUG_ENABLE		0
-#define BLE_DEBUG 			1
+#define BLE_DEBUG 			0
 
 #if DEBUG_ENABLE
 	#include "stdarg.h"
+	#include "string.h"
+	#include "stdio.h"
+	#include "stdlib.h"
 #endif
 /* USER CODE END PD */
 
@@ -72,16 +73,14 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+
+System sys;
+
 int _index = 0; 
 int debug = 0;
-uint16_t pedometer = 0;
-uint8_t pedflag = 0;
-uint8_t screen_enable = 0;
-uint8_t screenflag = 0;
 
 /* Commiunication */
-char TxBuffer[TX_BUFFER_SIZE];
-char RxBuffer[RX_BUFFER_SIZE];
+uint8_t RxBuffer[RX_BUFFER_SIZE];
 
 /* Batery Level */
 uint32_t adcVals[100];
@@ -89,7 +88,7 @@ float voltage = 0.0;
 uint32_t sum = 0;
 
 /* PPG Sensor */
-SAMPLE _sampleBuff[5];
+SAMPLE _sampleBuff[50];
 uint8_t unreadSampleCount;
 uint8_t _spo2;
 uint8_t heartReat;
@@ -162,7 +161,16 @@ int main(void)
   MX_USART2_UART_Init();
   MX_TIM6_Init();
   MX_TIM15_Init();
+  MX_TIM14_Init();
   /* USER CODE BEGIN 2 */
+	
+	//* // System initiation
+	DEBUG("System initiation...  ");
+		sys = sys_init();
+	DEBUG("  Done! \n\r ");
+	HAL_Delay(2000);
+	//*/
+	
 	
 	/* // I2C scanner
 		int ret = 0;		
@@ -179,7 +187,7 @@ int main(void)
 		HAL_GPIO_WritePin(MAX_EN_GPIO_Port, MAX_EN_Pin, GPIO_PIN_RESET);	
 	//*/
 
-	//* // MPU6050 Configurations
+	/* // MPU6050 Configurations
 	DEBUG("MPU6050 Configurations...  ");
 		MPU6050_Init(&hi2c1);
 		myMpuConfig.Accel_Full_Scale = AFS_SEL_4g;
@@ -189,9 +197,8 @@ int main(void)
 		myMpuConfig.Sleep_Mode_Bit = 0;
 		MPU6050_Config(&myMpuConfig); 
 	DEBUG("  Done! \n\r ");
+	HAL_Delay(2000);
 	//*/
-	
-	//HAL_Delay(2000);
 	
 	//*/ // Date and Time setting
 	DEBUG("Date and Time setting...  ");
@@ -209,10 +216,9 @@ int main(void)
 		HAL_RTC_SetDate(&hrtc, &DateToBeSet, RTC_FORMAT_BIN);
 		HAL_RTC_SetTime(&hrtc, &TimeToBeSet, RTC_FORMAT_BIN);
 	DEBUG("  Done! \n\r ");
-	//*/
-	
 	HAL_Delay(2000);
-	
+	//*/
+		
 	//* // Bluetooth receive DMA
 	DEBUG("Bluetooth settings...  ");
 		HAL_UART_Receive_DMA(&BLUETOOTH_UART, (uint8_t*)RxBuffer, RX_BUFFER_SIZE);
@@ -231,34 +237,34 @@ int main(void)
 	//*/
 	
 	DEBUG("  Done! \n\r ");
-	//*/
-	
 	HAL_Delay(2000);
+	//*/
 	
 	//* // Baettery level ADC settings
 	DEBUG("Baettery level ADC settings...  ");
 		HAL_ADC_Start_DMA(&hadc, adcVals, 100);
 		HAL_TIM_Base_Start(&BATERY_TIMER); 
 	DEBUG("  Done! \n\r ");
-	//*/
-	
 	HAL_Delay(2000);
-	
-	//* // Kalman filter initializtions
-	DEBUG("Kalman filter initializtions...  ");
-		kalman_scaler_init(&KAccel, 0.8, 900);
-		kalman_2d1r_init(&KGyro, 0.1, 1);
-		//HAL_TIM_Base_Start_IT(&KALMAN_TIMER);	
-	DEBUG("  Done! \n\r ");
 	//*/
 	
-	/* // MAX30102 initializations
+	//* // MAX30102 initializations
 	DEBUG("MAX30102 initializations...  ");
 		HAL_GPIO_WritePin(MAX_EN_GPIO_Port, MAX_EN_Pin, GPIO_PIN_SET);
 		max30102_init();
 	DEBUG("  Done! \n\r ");
+	HAL_Delay(2000);
 	//*/
-	 
+	
+	/* // Kalman filter initializtions
+	DEBUG("Kalman filter initializtions...  ");
+		kalman_scaler_init(&KAccel, 0.8, 900);
+		kalman_2d1r_init(&KGyro, 0.1, 1);
+		HAL_TIM_Base_Start_IT(&KALMAN_TIMER);	
+	DEBUG("  Done! \n\r ");
+	HAL_Delay(2000);
+	//*/
+		 
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -273,13 +279,12 @@ int main(void)
 		//*/
 		 
 		/* Battery level + Date and Time */
-		//*
+		/*
 			HAL_RTC_GetDate(&hrtc, &CurrentDate, RTC_FORMAT_BIN);
 			HAL_RTC_GetTime(&hrtc, &CurrentTime, RTC_FORMAT_BIN);
-			uint8_t psize = sprintf(TxBuffer, "Battery: %.1f%% - DateTime: 19%02d-%02d-%02d %02d:%02d:%02d\n", map(voltage, 3000, 3907, 0, 100),
+			DEBUG("Battery: %.1f%% - DateTime: 19%02d-%02d-%02d %02d:%02d:%02d\n\r", map(voltage, 3000, 3907, 0, 100),
 															CurrentDate.Year , CurrentDate.Month  , CurrentDate.Date,
-															CurrentTime.Hours, CurrentTime.Minutes, CurrentTime.Seconds);
-			HAL_UART_Transmit(&BLUETOOTH_UART, (uint8_t*)TxBuffer, psize, 1000);
+															CurrentTime.Hours, CurrentTime.Minutes, CurrentTime.Seconds); 
 			_index++;
 			HAL_Delay(1000);
 		//*/
@@ -292,12 +297,11 @@ int main(void)
 		//*/
 		
 		/* Screen trigger */
-		/*
-			if(screen_enable){
+		//*
+			if(getScreenEable(&sys)){
 				HAL_Delay(1000);
 				//set_tone(1000,1500);
-				screen_enable = 0;
-				
+				setScreenEable(&sys,0);
 			}
 		//*/
 
@@ -406,21 +410,21 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		kalman_2d1r_update(&KGyro); 
 
 		/* Pedometer */
-		if((KAccel.x_hat >= 1500)&&(!pedflag)){
-			pedflag = 1;
-			pedometer++;
+		if((KAccel.x_hat >= 1500)&&(!getPedFlag(&sys))){
+			setPedFlag(&sys,1);
+			sys.pedometer++;
 		}
-		else if((KAccel.x_hat < 1000)&&(pedflag)){
-			pedflag = 0;
+		else if((KAccel.x_hat < 1000)&&(getPedFlag(&sys))){
+			setPedFlag(&sys,0);
 		}
 		
 		/* Enable screen */
-		if((KGyro.wy_hat >= 8000)&&(!screenflag)){
-			screenflag = 1;
+		if((KGyro.wy_hat >= 8000)&&(!getScreenFlag(&sys))){
+			setScreenFlag(&sys,1);
 		}
-		else if((KAccel.x_hat < 1000)&&(screenflag)){
-			screenflag = 0;
-			screen_enable = 1;
+		else if((KAccel.x_hat < 1000)&&(getScreenFlag(&sys))){
+			setScreenFlag(&sys,0);
+			setScreenEable(&sys,1);
 		}
 		
 		// Filtererd data ----------------------------------
@@ -448,21 +452,28 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 	}
 }
 
-
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 	if (GPIO_Pin == MAX_INT_Pin) {
 		//max30102_cal();
     //_spo2 = max30102_getSpO2();
     //heartReat = max30102_getHeartRate();
 		//diff = max30102_getDiff();
+		
 		unreadSampleCount = max30102_getUnreadSampleCount();
-    max30102_getFIFO(_sampleBuff, unreadSampleCount);
+		//DEBUG("%d\n\r",unreadSampleCount);
+		max30102_getFIFO(_sampleBuff, unreadSampleCount);
+		
 		DEBUG("%d\n", _sampleBuff[0].iRed);
+		//HAL_UART_Transmit(&BLUETOOTH_UART, (uint8_t*)_sampleBuff[0].iRed, 5, 1000);
 	}
 }
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
-	//HAL_UART_Transmit(&BLUETOOTH_UART, (uint8_t*)RxBuffer, RX_BUFFER_SIZE, 1000);
+	if(huart==&BLUETOOTH_UART){
+		//HAL_UART_Transmit(&BLUETOOTH_UART, (uint8_t*)RxBuffer, RX_BUFFER_SIZE, 1000);
+		RxParser(RxBuffer);
+	}
+	
 }
 
 void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc){

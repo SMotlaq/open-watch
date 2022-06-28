@@ -86,9 +86,15 @@ void kalman_scaler_update(KalmanScaler* hkalman){
 		hkalman->z_hat = hkalman->R/((float)(hkalman->pre_Pn1+hkalman->Q+hkalman->R))*hkalman->pre_z_hat + (hkalman->pre_Pn1+hkalman->Q)/((float)(hkalman->pre_Pn1+hkalman->Q+hkalman->R))*hkalman->z_z;
 		hkalman->pre_z_hat = hkalman->z_hat;
 	#endif
-
-  hkalman->Pn = hkalman->R*(hkalman->pre_Pn1+hkalman->Q)/((float)(hkalman->pre_Pn1+hkalman->Q+hkalman->R));	
-	hkalman->pre_Pn1 = hkalman->Pn;
+	
+	#if LOWMEM_MODE	
+		hkalman->Pn = 26.4357548;
+		hkalman->pre_Pn1 = 26.4357548;
+	#else
+		hkalman->Pn = hkalman->R*(hkalman->pre_Pn1+hkalman->Q)/((float)(hkalman->pre_Pn1+hkalman->Q+hkalman->R));	
+		hkalman->pre_Pn1 = hkalman->Pn;
+	#endif
+	
 }
 
 void kalman_2d1r_update(Kalman2D1R* hkalman){

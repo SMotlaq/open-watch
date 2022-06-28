@@ -22,36 +22,37 @@ Dialog DLL:      TARMCM1.DLL V1.14.2.0
  
 <h2>Project:</h2>
 D:\ac\Projects\my-watch\open-watch-firmware\my_watch_software\MDK-ARM\my_watch_software.uvprojx
-Project File Date:  06/17/2022
+Project File Date:  06/26/2022
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'my_watch_software'
-compiling system.c...
-..\MyDrivers\System\system.h(32): error:  #65: expected a ";"
-  	const uint8_t melody[] = {NOTE_D4,  NOTE_A4,  NOTE_A4,  NOTE_A4,  NOTE_D4};
-..\MyDrivers\System\system.c: 0 warnings, 1 error
 compiling main.c...
-..\MyDrivers\System\system.h(32): error:  #65: expected a ";"
-  	const uint8_t melody[] = {NOTE_D4,  NOTE_A4,  NOTE_A4,  NOTE_A4,  NOTE_D4};
-../Src/main.c(180): warning:  #9-D: nested comment is not allowed
+..\MyDrivers\System\system.h(77): warning:  #1-D: last line of file ends without a newline
+  void RxParser(uint8_t* RxBuffer);
+../Src/main.c(188): warning:  #9-D: nested comment is not allowed
   	//*/
-../Src/main.c(231): warning:  #9-D: nested comment is not allowed
+../Src/main.c(201): warning:  #9-D: nested comment is not allowed
   	//*/
-../Src/main.c(260): warning:  #9-D: nested comment is not allowed
+../Src/main.c(237): warning:  #9-D: nested comment is not allowed
   	//*/
-../Src/main.c(273): warning:  #9-D: nested comment is not allowed
+../Src/main.c(266): warning:  #9-D: nested comment is not allowed
+  	//*/
+../Src/main.c(279): warning:  #9-D: nested comment is not allowed
   		//*/
-../Src/main.c(292): warning:  #9-D: nested comment is not allowed
+../Src/main.c(290): warning:  #9-D: nested comment is not allowed
   		//*/
-../Src/main.c(302): warning:  #9-D: nested comment is not allowed
+../Src/main.c(297): warning:  #9-D: nested comment is not allowed
   		//*/
-../Src/main.c(388): warning:  #9-D: nested comment is not allowed
+../Src/main.c(392): warning:  #9-D: nested comment is not allowed
   		//*/
-../Src/main.c(445): warning:  #9-D: nested comment is not allowed
+../Src/main.c(449): warning:  #9-D: nested comment is not allowed
   		//*/
-../Src/main.c: 8 warnings, 1 error
-"my_watch_software\my_watch_software.axf" - 2 Error(s), 8 Warning(s).
+../Src/main.c: 10 warnings, 0 errors
+linking...
+Program Size: Code=16908 RO-data=236 RW-data=44 ZI-data=3532  
+FromELF: creating hex file...
+"my_watch_software\my_watch_software.axf" - 0 Error(s), 10 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -74,8 +75,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.4.0
-Target not created.
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>

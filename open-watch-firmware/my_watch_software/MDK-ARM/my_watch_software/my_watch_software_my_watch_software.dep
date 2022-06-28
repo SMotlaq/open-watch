@@ -1,10 +1,10 @@
 Dependencies for Project 'my_watch_software', Target 'my_watch_software': (DO NOT MODIFY !)
 CompilerVersion: 5060750::V5.06 update 6 (build 750)::.\ARMCC
-F (startup_stm32f030x8.s)(0x62AC9DED)(--cpu Cortex-M0 -g --apcs=interwork --pd "__MICROLIB SETA 1"-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include--pd "__UVISION_VERSION SETA 530" --pd "_RTE_ SETA 1" --pd "STM32F030x8 SETA 1" --pd "_RTE_ SETA 1"--list startup_stm32f030x8.lst --xref -o my_watch_software\startup_stm32f030x8.o --depend my_watch_software\startup_stm32f030x8.d)
-F (../Src/main.c)(0x62B70906)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\main.o --omf_browse my_watch_software\main.crf --depend my_watch_software\main.d)
-I (../Inc/main.h)(0x62AC9DE9)
+F (startup_stm32f030x8.s)(0x62B84E05)(--cpu Cortex-M0 -g --apcs=interwork --pd "__MICROLIB SETA 1"-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include--pd "__UVISION_VERSION SETA 530" --pd "_RTE_ SETA 1" --pd "STM32F030x8 SETA 1" --pd "_RTE_ SETA 1"--list startup_stm32f030x8.lst --xref -o my_watch_software\startup_stm32f030x8.o --depend my_watch_software\startup_stm32f030x8.d)
+F (../Src/main.c)(0x62BB1EFA)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\main.o --omf_browse my_watch_software\main.crf --depend my_watch_software\main.d)
+I (../Inc/main.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_hal_conf.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_hal_conf.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x61CE19EA)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x61CE19EA)
@@ -38,29 +38,27 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim_ex.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x61CE19EA)
-I (../Inc/adc.h)(0x62AC9DE7)
-I (../Inc/dma.h)(0x62AC9DE8)
-I (../Inc/i2c.h)(0x62AC9DE8)
-I (../Inc/rtc.h)(0x62AC9DE8)
-I (../Inc/tim.h)(0x62AC9DE8)
-I (../Inc/usart.h)(0x62AC9DE9)
-I (../Inc/gpio.h)(0x62AC9DE7)
-I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5E538194)
-I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5E538194)
-I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5E538194)
-I (..\MyDrivers\System\system.h)(0x62B70992)
+I (../Inc/adc.h)(0x62B84DFF)
+I (../Inc/dma.h)(0x62B84DFF)
+I (../Inc/i2c.h)(0x62B84DFF)
+I (../Inc/rtc.h)(0x62B84E00)
+I (../Inc/tim.h)(0x62B84E00)
+I (../Inc/usart.h)(0x62B84E00)
+I (../Inc/gpio.h)(0x62B84DFD)
+I (..\MyDrivers\System\system.h)(0x62BB1E29)
 I (..\MyDrivers\pitches.h)(0x61B6134D)
 I (..\MyDrivers\ey_iran.h)(0x61E569C4)
 I (..\MyDrivers\MPU\MPU6050.h)(0x62AA2E16)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5E538194)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E538194)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x5E538192)
 I (..\MyDrivers\KalmanFilter\Kalman.h)(0x62AB2DD4)
 I (..\MyDrivers\MAX30102\max30100_for_stm32_hal.h)(0x61D87C8F)
-F (../Src/gpio.c)(0x62AC9DE7)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\gpio.o --omf_browse my_watch_software\gpio.crf --depend my_watch_software\gpio.d)
-I (../Inc/gpio.h)(0x62AC9DE7)
-I (../Inc/main.h)(0x62AC9DE9)
+F (../Src/gpio.c)(0x62B84DFD)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\gpio.o --omf_browse my_watch_software\gpio.crf --depend my_watch_software\gpio.d)
+I (../Inc/gpio.h)(0x62B84DFD)
+I (../Inc/main.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_hal_conf.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_hal_conf.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x61CE19EA)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x61CE19EA)
@@ -94,11 +92,11 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim_ex.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x61CE19EA)
-F (../Src/adc.c)(0x62AC9DE7)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\adc.o --omf_browse my_watch_software\adc.crf --depend my_watch_software\adc.d)
-I (../Inc/adc.h)(0x62AC9DE7)
-I (../Inc/main.h)(0x62AC9DE9)
+F (../Src/adc.c)(0x62B84DFF)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\adc.o --omf_browse my_watch_software\adc.crf --depend my_watch_software\adc.d)
+I (../Inc/adc.h)(0x62B84DFF)
+I (../Inc/main.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_hal_conf.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_hal_conf.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x61CE19EA)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x61CE19EA)
@@ -132,11 +130,11 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim_ex.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x61CE19EA)
-F (../Src/dma.c)(0x62AC9DE8)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\dma.o --omf_browse my_watch_software\dma.crf --depend my_watch_software\dma.d)
-I (../Inc/dma.h)(0x62AC9DE8)
-I (../Inc/main.h)(0x62AC9DE9)
+F (../Src/dma.c)(0x62B84DFF)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\dma.o --omf_browse my_watch_software\dma.crf --depend my_watch_software\dma.d)
+I (../Inc/dma.h)(0x62B84DFF)
+I (../Inc/main.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_hal_conf.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_hal_conf.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x61CE19EA)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x61CE19EA)
@@ -170,11 +168,11 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim_ex.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x61CE19EA)
-F (../Src/i2c.c)(0x62AC9DE8)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\i2c.o --omf_browse my_watch_software\i2c.crf --depend my_watch_software\i2c.d)
-I (../Inc/i2c.h)(0x62AC9DE8)
-I (../Inc/main.h)(0x62AC9DE9)
+F (../Src/i2c.c)(0x62B84DFF)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\i2c.o --omf_browse my_watch_software\i2c.crf --depend my_watch_software\i2c.d)
+I (../Inc/i2c.h)(0x62B84DFF)
+I (../Inc/main.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_hal_conf.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_hal_conf.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x61CE19EA)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x61CE19EA)
@@ -208,11 +206,11 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim_ex.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x61CE19EA)
-F (../Src/rtc.c)(0x62AC9DE8)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\rtc.o --omf_browse my_watch_software\rtc.crf --depend my_watch_software\rtc.d)
-I (../Inc/rtc.h)(0x62AC9DE8)
-I (../Inc/main.h)(0x62AC9DE9)
+F (../Src/rtc.c)(0x62B84DFF)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\rtc.o --omf_browse my_watch_software\rtc.crf --depend my_watch_software\rtc.d)
+I (../Inc/rtc.h)(0x62B84E00)
+I (../Inc/main.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_hal_conf.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_hal_conf.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x61CE19EA)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x61CE19EA)
@@ -246,11 +244,11 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim_ex.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x61CE19EA)
-F (../Src/tim.c)(0x62AC9E8D)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\tim.o --omf_browse my_watch_software\tim.crf --depend my_watch_software\tim.d)
-I (../Inc/tim.h)(0x62AC9DE8)
-I (../Inc/main.h)(0x62AC9DE9)
+F (../Src/tim.c)(0x62B84E00)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\tim.o --omf_browse my_watch_software\tim.crf --depend my_watch_software\tim.d)
+I (../Inc/tim.h)(0x62B84E00)
+I (../Inc/main.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_hal_conf.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_hal_conf.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x61CE19EA)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x61CE19EA)
@@ -284,11 +282,11 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim_ex.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x61CE19EA)
-F (../Src/usart.c)(0x62B7036D)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\usart.o --omf_browse my_watch_software\usart.crf --depend my_watch_software\usart.d)
-I (../Inc/usart.h)(0x62AC9DE9)
-I (../Inc/main.h)(0x62AC9DE9)
+F (../Src/usart.c)(0x62B851C1)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\usart.o --omf_browse my_watch_software\usart.crf --depend my_watch_software\usart.d)
+I (../Inc/usart.h)(0x62B84E00)
+I (../Inc/main.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_hal_conf.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_hal_conf.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x61CE19EA)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x61CE19EA)
@@ -322,10 +320,10 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim_ex.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x61CE19EA)
-F (../Src/stm32f0xx_it.c)(0x62AC9DE9)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\stm32f0xx_it.o --omf_browse my_watch_software\stm32f0xx_it.crf --depend my_watch_software\stm32f0xx_it.d)
-I (../Inc/main.h)(0x62AC9DE9)
+F (../Src/stm32f0xx_it.c)(0x62B84E00)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\stm32f0xx_it.o --omf_browse my_watch_software\stm32f0xx_it.crf --depend my_watch_software\stm32f0xx_it.d)
+I (../Inc/main.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_hal_conf.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_hal_conf.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x61CE19EA)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x61CE19EA)
@@ -359,11 +357,11 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim_ex.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_it.h)(0x62AC9DE9)
-F (../Src/stm32f0xx_hal_msp.c)(0x62AC9DE9)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\stm32f0xx_hal_msp.o --omf_browse my_watch_software\stm32f0xx_hal_msp.crf --depend my_watch_software\stm32f0xx_hal_msp.d)
-I (../Inc/main.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_it.h)(0x62B84E00)
+F (../Src/stm32f0xx_hal_msp.c)(0x62B84E01)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\stm32f0xx_hal_msp.o --omf_browse my_watch_software\stm32f0xx_hal_msp.crf --depend my_watch_software\stm32f0xx_hal_msp.d)
+I (../Inc/main.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_hal_conf.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_hal_conf.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x61CE19EA)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x61CE19EA)
@@ -407,7 +405,7 @@ I (../Drivers/CMSIS/Include/cmsis_compiler.h)(0x61CE19C5)
 I (../Drivers/CMSIS/Include/cmsis_armcc.h)(0x61CE19C5)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/system_stm32f0xx.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_hal_conf.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_hal_conf.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h)(0x61CE19EA)
@@ -436,9 +434,9 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x61CE19EA)
 F (..\MyDrivers\ey_iran.h)(0x61E569C4)()
 F (..\MyDrivers\MPU\MPU6050.c)(0x62AA2E50)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\mpu6050.o --omf_browse my_watch_software\mpu6050.crf --depend my_watch_software\mpu6050.d)
 I (..\MyDrivers\MPU\MPU6050.h)(0x62AA2E16)
-I (../Inc/main.h)(0x62AC9DE9)
+I (../Inc/main.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_hal_conf.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_hal_conf.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x61CE19EA)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x61CE19EA)
@@ -475,11 +473,11 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x61CE19EA)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5E538194)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5E538194)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x5E538192)
-F (..\MyDrivers\MAX30102\max30100_for_stm32_hal.c)(0x61D87C8E)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\max30100_for_stm32_hal.o --omf_browse my_watch_software\max30100_for_stm32_hal.crf --depend my_watch_software\max30100_for_stm32_hal.d)
+F (..\MyDrivers\MAX30102\max30100_for_stm32_hal.c)(0x62B84167)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\max30100_for_stm32_hal.o --omf_browse my_watch_software\max30100_for_stm32_hal.crf --depend my_watch_software\max30100_for_stm32_hal.d)
 I (..\MyDrivers\MAX30102\max30100_for_stm32_hal.h)(0x61D87C8F)
-I (../Inc/main.h)(0x62AC9DE9)
+I (../Inc/main.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_hal_conf.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_hal_conf.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x61CE19EA)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x61CE19EA)
@@ -513,12 +511,12 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim_ex.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x61CE19EA)
-I (../Inc/i2c.h)(0x62AC9DE8)
-F (..\MyDrivers\KalmanFilter\Kalman.c)(0x62AB04B1)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\kalman.o --omf_browse my_watch_software\kalman.crf --depend my_watch_software\kalman.d)
+I (../Inc/i2c.h)(0x62B84DFF)
+F (..\MyDrivers\KalmanFilter\Kalman.c)(0x62B83CCC)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\kalman.o --omf_browse my_watch_software\kalman.crf --depend my_watch_software\kalman.d)
 I (..\MyDrivers\KalmanFilter\Kalman.h)(0x62AB2DD4)
-I (../Inc/main.h)(0x62AC9DE9)
+I (../Inc/main.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_hal_conf.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_hal_conf.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x61CE19EA)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x61CE19EA)
@@ -552,13 +550,13 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim_ex.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x61CE19EA)
-I (../Inc/tim.h)(0x62AC9DE8)
+I (../Inc/tim.h)(0x62B84E00)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x5E538192)
-F (..\MyDrivers\System\system.c)(0x62AB2E16)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\system.o --omf_browse my_watch_software\system.crf --depend my_watch_software\system.d)
-I (..\MyDrivers\System\system.h)(0x62B70992)
-I (../Inc/main.h)(0x62AC9DE9)
+F (..\MyDrivers\System\system.c)(0x62BB1D6B)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\system.o --omf_browse my_watch_software\system.crf --depend my_watch_software\system.d)
+I (..\MyDrivers\System\system.h)(0x62BB1E29)
+I (../Inc/main.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_hal_conf.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_hal_conf.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x61CE19EA)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x61CE19EA)
@@ -595,7 +593,7 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x61CE19EA)
 I (..\MyDrivers\pitches.h)(0x61B6134D)
 F (../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_adc.c)(0x61CE19EA)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\stm32f0xx_hal_adc.o --omf_browse my_watch_software\stm32f0xx_hal_adc.crf --depend my_watch_software\stm32f0xx_hal_adc.d)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_hal_conf.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_hal_conf.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x61CE19EA)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x61CE19EA)
@@ -631,7 +629,7 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x61CE19EA)
 F (../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_adc_ex.c)(0x61CE19EA)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\stm32f0xx_hal_adc_ex.o --omf_browse my_watch_software\stm32f0xx_hal_adc_ex.crf --depend my_watch_software\stm32f0xx_hal_adc_ex.d)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_hal_conf.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_hal_conf.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x61CE19EA)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x61CE19EA)
@@ -667,7 +665,7 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x61CE19EA)
 F (../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc.c)(0x61CE19EA)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\stm32f0xx_hal_rcc.o --omf_browse my_watch_software\stm32f0xx_hal_rcc.crf --depend my_watch_software\stm32f0xx_hal_rcc.d)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_hal_conf.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_hal_conf.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x61CE19EA)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x61CE19EA)
@@ -703,7 +701,7 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x61CE19EA)
 F (../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rcc_ex.c)(0x61CE19EA)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\stm32f0xx_hal_rcc_ex.o --omf_browse my_watch_software\stm32f0xx_hal_rcc_ex.crf --depend my_watch_software\stm32f0xx_hal_rcc_ex.d)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_hal_conf.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_hal_conf.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x61CE19EA)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x61CE19EA)
@@ -739,7 +737,7 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x61CE19EA)
 F (../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal.c)(0x61CE19EA)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\stm32f0xx_hal.o --omf_browse my_watch_software\stm32f0xx_hal.crf --depend my_watch_software\stm32f0xx_hal.d)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_hal_conf.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_hal_conf.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x61CE19EA)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x61CE19EA)
@@ -775,7 +773,7 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x61CE19EA)
 F (../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c.c)(0x61CE19EA)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\stm32f0xx_hal_i2c.o --omf_browse my_watch_software\stm32f0xx_hal_i2c.crf --depend my_watch_software\stm32f0xx_hal_i2c.d)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_hal_conf.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_hal_conf.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x61CE19EA)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x61CE19EA)
@@ -811,7 +809,7 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x61CE19EA)
 F (../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_i2c_ex.c)(0x61CE19EA)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\stm32f0xx_hal_i2c_ex.o --omf_browse my_watch_software\stm32f0xx_hal_i2c_ex.crf --depend my_watch_software\stm32f0xx_hal_i2c_ex.d)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_hal_conf.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_hal_conf.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x61CE19EA)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x61CE19EA)
@@ -847,7 +845,7 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x61CE19EA)
 F (../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_gpio.c)(0x61CE19EA)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\stm32f0xx_hal_gpio.o --omf_browse my_watch_software\stm32f0xx_hal_gpio.crf --depend my_watch_software\stm32f0xx_hal_gpio.d)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_hal_conf.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_hal_conf.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x61CE19EA)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x61CE19EA)
@@ -883,7 +881,7 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x61CE19EA)
 F (../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_dma.c)(0x61CE19EA)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\stm32f0xx_hal_dma.o --omf_browse my_watch_software\stm32f0xx_hal_dma.crf --depend my_watch_software\stm32f0xx_hal_dma.d)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_hal_conf.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_hal_conf.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x61CE19EA)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x61CE19EA)
@@ -919,7 +917,7 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x61CE19EA)
 F (../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_cortex.c)(0x61CE19EA)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\stm32f0xx_hal_cortex.o --omf_browse my_watch_software\stm32f0xx_hal_cortex.crf --depend my_watch_software\stm32f0xx_hal_cortex.d)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_hal_conf.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_hal_conf.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x61CE19EA)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x61CE19EA)
@@ -955,7 +953,7 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x61CE19EA)
 F (../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr.c)(0x61CE19EA)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\stm32f0xx_hal_pwr.o --omf_browse my_watch_software\stm32f0xx_hal_pwr.crf --depend my_watch_software\stm32f0xx_hal_pwr.d)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_hal_conf.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_hal_conf.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x61CE19EA)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x61CE19EA)
@@ -991,7 +989,7 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x61CE19EA)
 F (../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_pwr_ex.c)(0x61CE19EA)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\stm32f0xx_hal_pwr_ex.o --omf_browse my_watch_software\stm32f0xx_hal_pwr_ex.crf --depend my_watch_software\stm32f0xx_hal_pwr_ex.d)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_hal_conf.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_hal_conf.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x61CE19EA)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x61CE19EA)
@@ -1027,7 +1025,7 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x61CE19EA)
 F (../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash.c)(0x61CE19EA)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\stm32f0xx_hal_flash.o --omf_browse my_watch_software\stm32f0xx_hal_flash.crf --depend my_watch_software\stm32f0xx_hal_flash.d)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_hal_conf.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_hal_conf.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x61CE19EA)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x61CE19EA)
@@ -1063,7 +1061,7 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x61CE19EA)
 F (../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash_ex.c)(0x61CE19EA)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\stm32f0xx_hal_flash_ex.o --omf_browse my_watch_software\stm32f0xx_hal_flash_ex.crf --depend my_watch_software\stm32f0xx_hal_flash_ex.d)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_hal_conf.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_hal_conf.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x61CE19EA)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x61CE19EA)
@@ -1099,7 +1097,7 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x61CE19EA)
 F (../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_exti.c)(0x61CE19EA)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\stm32f0xx_hal_exti.o --omf_browse my_watch_software\stm32f0xx_hal_exti.crf --depend my_watch_software\stm32f0xx_hal_exti.d)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_hal_conf.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_hal_conf.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x61CE19EA)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x61CE19EA)
@@ -1133,9 +1131,9 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim_ex.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x61CE19EA)
-F (../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rtc.c)(0x62B1D9CE)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\stm32f0xx_hal_rtc.o --omf_browse my_watch_software\stm32f0xx_hal_rtc.crf --depend my_watch_software\stm32f0xx_hal_rtc.d)
+F (../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rtc.c)(0x62B854F6)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\stm32f0xx_hal_rtc.o --omf_browse my_watch_software\stm32f0xx_hal_rtc.crf --depend my_watch_software\stm32f0xx_hal_rtc.d)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_hal_conf.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_hal_conf.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x61CE19EA)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x61CE19EA)
@@ -1171,7 +1169,7 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x61CE19EA)
 F (../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rtc_ex.c)(0x61CE19EA)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\stm32f0xx_hal_rtc_ex.o --omf_browse my_watch_software\stm32f0xx_hal_rtc_ex.crf --depend my_watch_software\stm32f0xx_hal_rtc_ex.d)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_hal_conf.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_hal_conf.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x61CE19EA)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x61CE19EA)
@@ -1207,7 +1205,7 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x61CE19EA)
 F (../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim.c)(0x61CE19EA)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\stm32f0xx_hal_tim.o --omf_browse my_watch_software\stm32f0xx_hal_tim.crf --depend my_watch_software\stm32f0xx_hal_tim.d)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_hal_conf.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_hal_conf.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x61CE19EA)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x61CE19EA)
@@ -1243,7 +1241,7 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x61CE19EA)
 F (../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim_ex.c)(0x61CE19EA)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\stm32f0xx_hal_tim_ex.o --omf_browse my_watch_software\stm32f0xx_hal_tim_ex.crf --depend my_watch_software\stm32f0xx_hal_tim_ex.d)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_hal_conf.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_hal_conf.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x61CE19EA)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x61CE19EA)
@@ -1279,7 +1277,7 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x61CE19EA)
 F (../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart.c)(0x61CE19EA)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\stm32f0xx_hal_uart.o --omf_browse my_watch_software\stm32f0xx_hal_uart.crf --depend my_watch_software\stm32f0xx_hal_uart.d)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_hal_conf.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_hal_conf.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x61CE19EA)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x61CE19EA)
@@ -1315,7 +1313,7 @@ I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h)(0x61CE19EA)
 F (../Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_uart_ex.c)(0x61CE19EA)(--c99 -c --cpu Cortex-M0 -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc -I ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32F0xx/Include -I ../Drivers/CMSIS/Include -I ..\MyDrivers -I ..\MyDrivers\MPU -I ..\MyDrivers\MAX30102 -I ..\MyDrivers\KalmanFilter -I ..\MyDrivers\System-I.\RTE\_my_watch_software-IC:\Users\ASUS\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ASUS\AppData\Local\Arm\Packs\Keil\STM32F0xx_DFP\2.1.0\Drivers\CMSIS\Device\ST\STM32F0xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F030x8 -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F030x8-o my_watch_software\stm32f0xx_hal_uart_ex.o --omf_browse my_watch_software\stm32f0xx_hal_uart_ex.crf --depend my_watch_software\stm32f0xx_hal_uart_ex.d)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal.h)(0x61CE19EA)
-I (../Inc/stm32f0xx_hal_conf.h)(0x62AC9DE9)
+I (../Inc/stm32f0xx_hal_conf.h)(0x62B84E01)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_rcc.h)(0x61CE19EA)
 I (../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h)(0x61CE19EA)
 I (../Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f0xx.h)(0x61CE19EA)
