@@ -37,6 +37,5 @@ my_watch_software\mpu6050.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_t
 my_watch_software\mpu6050.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim_ex.h
 my_watch_software\mpu6050.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h
 my_watch_software\mpu6050.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h
-my_watch_software\mpu6050.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 my_watch_software\mpu6050.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 my_watch_software\mpu6050.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h

@@ -2,6 +2,8 @@
 
 System sys_init(){
 	System sys;
+	sys.pedometer = 0;
+	sys.flags = 0x08;
 	
 	sys.battery = 0;
 	
@@ -43,35 +45,35 @@ uint8_t getSoundEnable(System* sys){
 
 // SetFlags
 void setCharging(System* sys, uint8_t state){
-	sys->flags = state ? (sys->flags | (1 << ISCHARGING_MASK)) : (sys->flags | (1<<ISCHARGING_MASK));
+	sys->flags = state ? (sys->flags | (1 << ISCHARGING_MASK)) : (sys->flags & !(1<<ISCHARGING_MASK));
 }
 
 void setPSaving(System* sys, uint8_t state){
-	sys->flags = state ? (sys->flags | (1 << ISPSAVING_MASK)) : (sys->flags | (1<<ISPSAVING_MASK));
+	sys->flags = state ? (sys->flags | (1 << ISPSAVING_MASK)) : (sys->flags & !(1<<ISPSAVING_MASK));
 }
 
 void setPPGEnable(System* sys, uint8_t state){
-	sys->flags = state ? (sys->flags | (1 << ISPPGENABLED_MASK)) : (sys->flags | (1<<ISPPGENABLED_MASK));
+	sys->flags = state ? (sys->flags | (1 << ISPPGENABLED_MASK)) : (sys->flags & !(1<<ISPPGENABLED_MASK));
 }
 
 void setScreenFlag(System* sys, uint8_t state){
-	sys->flags = state ? (sys->flags | (1 << SCREENFLAG_MASK)) : (sys->flags | (1<<SCREENFLAG_MASK));
+	sys->flags = state ? (sys->flags | (1 << SCREENFLAG_MASK)) : (sys->flags & !(1<<SCREENFLAG_MASK));
 }
 
 void setScreenEable(System* sys, uint8_t state){
-	sys->flags = state ? (sys->flags | (1 << SCREENENABLED_MASK)) : (sys->flags | (1<<SCREENENABLED_MASK));
+	sys->flags = state ? (sys->flags | (1 << SCREENENABLED_MASK)) : (sys->flags & !(1<<SCREENENABLED_MASK));
 }
 
 void setPedFlag(System* sys, uint8_t state){
-	sys->flags = state ? (sys->flags | (1 << PEDFLAG_MASK)) : (sys->flags | (1<<PEDFLAG_MASK));
+	sys->flags = state ? (sys->flags | (1 << PEDFLAG_MASK)) : (sys->flags & !(1<<PEDFLAG_MASK));
 }
 
 void setVibEnable(System* sys, uint8_t state){
-	sys->flags = state ? (sys->flags | (1 << VIBENENABLED_MASK)) : (sys->flags | (1<<VIBENENABLED_MASK));
+	sys->flags = state ? (sys->flags | (1 << VIBENENABLED_MASK)) : (sys->flags & !(1<<VIBENENABLED_MASK));
 }
 
 void setSoundEnable(System* sys, uint8_t state){
-	sys->flags = state ? (sys->flags | (1 << SOUNDENABLED_MASK)) : (sys->flags | (1<<SOUNDENABLED_MASK));
+	sys->flags = state ? (sys->flags | (1 << SOUNDENABLED_MASK)) : (sys->flags & !(1<<SOUNDENABLED_MASK));
 }
 
 // Main functions

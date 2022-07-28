@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F030x8</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;      ../Drivers/STM32F0xx_HAL_Driver/Inc;      ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy;      ../Drivers/CMSIS/Device/ST/STM32F0xx/Include;      ../Drivers/CMSIS/Include;      ..\MyDrivers;      ..\MyDrivers\MPU;      ..\MyDrivers\MAX30102;      ..\MyDrivers\KalmanFilter;      ..\MyDrivers\System</IncludePath>
+              <IncludePath>../Inc; ../Drivers/STM32F0xx_HAL_Driver/Inc; ../Drivers/STM32F0xx_HAL_Driver/Inc/Legacy; ../Drivers/CMSIS/Device/ST/STM32F0xx/Include; ../Drivers/CMSIS/Include; ..\MyDrivers; ..\MyDrivers\MPU; ..\MyDrivers\MAX30102; ..\MyDrivers\KalmanFilter; ..\MyDrivers\System; ..\MyDrivers\Display</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -482,6 +482,16 @@
               <FileName>system.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\MyDrivers\System\system.c</FilePath>
+            </File>
+            <File>
+              <FileName>fonts.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\MyDrivers\Display\fonts.c</FilePath>
+            </File>
+            <File>
+              <FileName>ssd1306.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\MyDrivers\Display\ssd1306.c</FilePath>
             </File>
           </Files>
         </Group>
