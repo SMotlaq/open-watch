@@ -60,6 +60,7 @@ void DMA1_Channel4_5_IRQHandler(void);
 void ADC1_IRQHandler(void);
 void TIM6_IRQHandler(void);
 void TIM14_IRQHandler(void);
+void TIM16_IRQHandler(void);
 /* USER CODE BEGIN EFP */
 
 /* USER CODE END EFP */

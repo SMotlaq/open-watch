@@ -1,10 +1,8 @@
 #ifndef _FONTS_H
 #define _FONTS_H
 
-#ifndef __MAIN_H
-	#include "main.h"
-	#define __MAIN_H
-#endif
+#include "main.h"
+
 
 //
 //  Structure used to define fonts
@@ -14,6 +12,13 @@ typedef struct {
     uint8_t FontHeight;         /* Font height in pixels */
     const uint16_t *data;       /* Pointer to data font data array */
 } FontDef;
+
+typedef struct {
+    const uint8_t width;    /* Font width in pixels */
+    uint8_t height;         /* Font height in pixels */
+    const uint16_t *data;       /* Pointer to data font data array */
+} ShapeDef;
+
 
 //
 //  Export the 3 available fonts
@@ -104,5 +109,20 @@ static const uint8_t new_map [] = {
 extern FontDef Font_7x10;
 extern FontDef Font_11x18;
 extern FontDef Font_16x26;
+
+extern ShapeDef Shape_battery;
+extern ShapeDef Shape_battery2;
+extern ShapeDef Shape_heart;
+extern ShapeDef Shape_kafsh;
+extern ShapeDef Shape_SpO2;
+extern ShapeDef Shape_BT;
+extern ShapeDef Shape_NC;
+extern ShapeDef Shape_Connected;
+extern ShapeDef Shape_Location;
+extern ShapeDef Shape_Reject;
+extern ShapeDef Shape_Accept;
+extern ShapeDef Shape_UP;
+extern ShapeDef Shape_DOWN;
+
 
 #endif  // _FONTS_H

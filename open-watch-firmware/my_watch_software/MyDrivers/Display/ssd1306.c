@@ -145,6 +145,17 @@ void ssd1306_DrawPixel(uint8_t x, uint8_t y, SSD1306_COLOR color)
 }
 
 
+void ssd1306_DrawShape(uint8_t x, uint8_t y, ShapeDef shape){
+	uint16_t row_data;
+	for(int i = 0; i < shape.height; i++){
+		row_data = shape.data[i];
+		for(int j = 0; j < shape.width; j++)
+			if((row_data << j) & 0x8000)
+				ssd1306_DrawPixel(x+j, y+i, White);
+	}
+}
+
+
 //
 //  Draw 1 char to the screen buffer
 //  ch      => Character to write

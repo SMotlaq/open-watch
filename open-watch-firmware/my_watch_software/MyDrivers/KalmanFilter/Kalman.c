@@ -1,5 +1,4 @@
 #include "Kalman.h"
-#include "math.h"
 
 void kalman_scaler_init(KalmanScaler* hkalman, float Q, float R){
 	#if ALLXYZ_MODE	

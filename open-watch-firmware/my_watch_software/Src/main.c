@@ -29,7 +29,6 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "system.h"
 #include "ey_iran.h"
 #include "MPU6050.h"
 #include "Kalman.h"
@@ -37,6 +36,9 @@
 #include "ssd1306.h"
 #include "fonts.h"
 #include "stdio.h"
+#include "pages.h"
+#include "xfer.h"
+#include "system.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -47,24 +49,14 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 
-
-#define BATERY_TIMER		htim15		// IT mode - each 2 seconds
-#define FREEEE_TIMER		htim14		// IT mode - each 0.5 seconds
+#define SCREEN_TIMER_RESET (TIM16->CNT = 0)
+#define SCREEN_TIMER		htim16		// IT mode - each 3 seconds
+#define BATERY_TIMER		htim15		// IT mode - each 0.01 seconds
+#define SYSTEM_TIMER		htim14		// IT mode - each 0.5 seconds
 #define KALMAN_TIMER		htim6			// IT mode - each 1 milli second
 #define BUZZER_TIMER		htim3			// PWM mode - 1KHz - Value from 0 to 999
 #define VIBMOT_TIMER		htim1			// PWM mode - 1KHz - Value from 0 to 999
 
-#define DEBUG_UART			huart1 
-#define BLUETOOTH_UART	huart2
-
-#define DEBUG_ENABLE		0
-#define BLE_DEBUG 			1
-
-#if DEBUG_ENABLE
-	#include "stdarg.h"
-	#include "string.h"
-	#include "stdlib.h"
-#endif
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -75,14 +67,13 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-char buf[15];
 uint16_t walk_thresh = 1500;
-uint8_t x_alloc = 22;
-uint8_t y_alloc = 22;
 uint8_t screenEnable;
 uint8_t screenFlag;
+uint8_t pedflag;
 System sys;
 
+int display_fake_delay = 0;
 int _index = 0; 
 int debug = 0;
 
@@ -90,8 +81,7 @@ int debug = 0;
 uint8_t RxBuffer[RX_BUFFER_SIZE];
 
 /* Batery Level */
-uint32_t adcVals[100];
-float voltage = 0.0;
+uint32_t adcVals[128];
 uint32_t sum = 0;
 
 /* PPG Sensor */
@@ -116,13 +106,12 @@ Kalman2D1R KGyro;
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
-void DEBUG(const char* _str, ...);
+
 void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc);
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc);
 void set_vib(int speed, int duration);
 void set_tone(int freq, int duration);
 void set_tone_vib(int freq, int duration);
-float map(uint16_t x, uint16_t in_min, uint16_t in_max, uint16_t out_min, uint16_t out_max);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -169,20 +158,21 @@ int main(void)
   MX_TIM6_Init();
   MX_TIM15_Init();
   MX_TIM14_Init();
+  MX_TIM16_Init();
   /* USER CODE BEGIN 2 */
 	
 	//*/ // Date and Time setting
 	DEBUG("Date and Time setting...  ");
 		RTC_DateTypeDef DateToBeSet;
 		DateToBeSet.Year = 22;
-		DateToBeSet.Month = 7;
-		DateToBeSet.Date = 14;
+		DateToBeSet.Month = 8;
+		DateToBeSet.Date = 2;
 		DateToBeSet.WeekDay = RTC_WEEKDAY_THURSDAY;
 		
 		RTC_TimeTypeDef TimeToBeSet;
-		TimeToBeSet.Hours = 13;
-		TimeToBeSet.Minutes = 54;
-		TimeToBeSet.Seconds = 30;
+		TimeToBeSet.Hours = 19;
+		TimeToBeSet.Minutes = 9;
+		TimeToBeSet.Seconds = 10;
 		
 		HAL_RTC_SetDate(&hrtc, &DateToBeSet, RTC_FORMAT_BIN);
 		HAL_RTC_SetTime(&hrtc, &TimeToBeSet, RTC_FORMAT_BIN);
@@ -190,9 +180,17 @@ int main(void)
 	HAL_Delay(2000);
 	//*/
 	
+	//* // Display initiation
+	DEBUG("Display initiation...  ");
+		ssd1306_Init(&hi2c1);
+	DEBUG("  Done! \n\r ");
+	HAL_Delay(2000);
+	//*/
+	
 	//* // System initiation
 	DEBUG("System initiation...  ");
 		sys = sys_init();
+		HAL_TIM_Base_Start_IT(&SYSTEM_TIMER);
 	DEBUG("  Done! \n\r ");
 	HAL_Delay(2000);
 	//*/
@@ -209,18 +207,11 @@ int main(void)
 				DEBUG("0x%X", i);
 		}
 		DEBUG("\n\rDone! \n\r ");
-		HAL_GPIO_WritePin(MAX_EN_GPIO_Port, MAX_EN_Pin, GPIO_PIN_RESET);	
-	//*/
-
-	//* // Display initializations
-	DEBUG("Display initializations...  ");
-		ssd1306_Init(&hi2c1);
-	DEBUG("  Done! \n\r ");
-	HAL_Delay(2000);
+		HAL_GPIO_WritePin(MAX_EN_GPIO_Port, MAX_EN_Pin, GPIO_PIN_RESET);
 	//*/
 		
-	//* // MPU6050 Configurations
-	DEBUG("MPU6050 Configurations...  ");
+	//* // MPU6050 initiation
+	DEBUG("MPU6050 initiation...  ");
 		MPU6050_Init(&hi2c1);
 		myMpuConfig.Accel_Full_Scale = AFS_SEL_4g;
 		myMpuConfig.ClockSource = Internal_8MHz;
@@ -231,9 +222,9 @@ int main(void)
 	DEBUG("  Done! \n\r ");
 	HAL_Delay(2000);
 	//*/
-		
-	//* // Bluetooth receive DMA
-	DEBUG("Bluetooth settings...  ");
+		 
+	//* // Bluetooth initiation
+	DEBUG("Bluetooth initiation...  ");
 		HAL_UART_Receive_DMA(&BLUETOOTH_UART, (uint8_t*)RxBuffer, RX_BUFFER_SIZE);
 	
 	/* // Bluetooth settings
@@ -255,22 +246,22 @@ int main(void)
 	
 	//* // Baettery level ADC settings
 	DEBUG("Baettery level ADC settings...  ");
-		HAL_ADC_Start_DMA(&hadc, adcVals, 100);
+		HAL_ADC_Start_DMA(&hadc, adcVals, 128);
 		HAL_TIM_Base_Start(&BATERY_TIMER); 
 	DEBUG("  Done! \n\r ");
 	HAL_Delay(2000);
 	//*/
 	
-	/* // MAX30102 initializations
-	DEBUG("MAX30102 initializations...  ");
+	/* // MAX30102 initiation
+	DEBUG("MAX30102 initiation...  ");
 		HAL_GPIO_WritePin(MAX_EN_GPIO_Port, MAX_EN_Pin, GPIO_PIN_SET);
 		max30102_init();
 	DEBUG("  Done! \n\r ");
 	HAL_Delay(2000);
 	//*/
 	
-	//* // Kalman filter initializtions
-	DEBUG("Kalman filter initializtions...  ");
+	//* // Kalman filter initiation
+	DEBUG("Kalman filter initiation...  ");
 		kalman_scaler_init(&KAccel, 0.8, 900);
 		kalman_2d1r_init(&KGyro, 0.1, 1);
 		HAL_TIM_Base_Start_IT(&KALMAN_TIMER);	
@@ -306,28 +297,6 @@ int main(void)
 			set_vib(0, 800);
 			set_vib(300, 300);
 			set_vib(900, 100);
-		//*/
-		
-		/* Screen trigger */
-		/*
-			if(getScreenEable(&sys)){
-				for(uint32_t j=0; j<15; j++){
-					HAL_RTC_GetTime(&hrtc, &CurrentTime, RTC_FORMAT_BIN);
-					ssd1306_Fill(Black);
-					ssd1306_SetCursor(x_alloc, y_alloc);
-					sprintf(buf, "%02d:%02d:%02d", CurrentTime.Hours, CurrentTime.Minutes, CurrentTime.Seconds);
-					ssd1306_WriteString(buf,Font_11x18,White);
-					ssd1306_SetCursor(x_alloc, y_alloc+20);
-					sprintf(buf, " Battery %d%%", (uint8_t)map(voltage, 3000, 3907, 0, 100));
-					ssd1306_WriteString(buf,Font_7x10,White);
-					ssd1306_UpdateScreen(&hi2c1);
-					HAL_Delay(200);
-					_index++;
-				}
-				ssd1306_Fill(Black);
-				ssd1306_UpdateScreen(&hi2c1);
-				setScreenEable(&sys,0);
-			}
 		//*/
 
     /* USER CODE END WHILE */
@@ -391,8 +360,7 @@ void SystemClock_Config(void)
 
 /* USER CODE BEGIN 4 */
  
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	if(htim == &KALMAN_TIMER){
 		MPU6050_Get_RawData(&myAccelRaw, &myGyroRaw);
 		
@@ -435,22 +403,22 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		kalman_2d1r_update(&KGyro); 
 
 		/* Pedometer */
-		if((KAccel.x_hat >= walk_thresh)&&(!getPedFlag(&sys))){
+		if((KAccel.x_hat >= 1000)&&(!getPedFlag(&sys))){
 			setPedFlag(&sys,1);
 			sys.pedometer++;
-			DEBUG("%d\n\r",sys.pedometer);
+			//DEBUG("%d\n\r",sys.pedometer);
 		}
 		else if((KAccel.x_hat < 100)&&(getPedFlag(&sys))){ 
 			setPedFlag(&sys,0);
 		}
 		
 		/* Enable screen */
-		//if((KGyro.wy_hat >= 8000)&&(!getScreenFlag(&sys))){
-		if((KGyro.wy_hat >= 3000)&&(!getScreenFlag(&sys))){
+		if((KGyro.wy_hat >= 4000)&&(!getScreenFlag(&sys))){
 			setScreenFlag(&sys,1);
 		}
-		else if((KAccel.x_hat < 1000)&&(getScreenFlag(&sys))){
+		else if((KAccel.x_hat < 400)&&(getScreenFlag(&sys))){
 			setScreenFlag(&sys,0);
+			HAL_TIM_Base_Start_IT(&SCREEN_TIMER);
 			setScreenEable(&sys,1);
 		}
 		
@@ -477,6 +445,51 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 		
 		//HAL_UART_Transmit(&DEBUG_UART, (uint8_t*)TxBuffer, 24, 10);
 	}
+	else if(htim == &SYSTEM_TIMER){
+		if(getScreenEable(&sys)){
+			switch (sys.state)
+			{
+				case ack_waiting:
+						HAL_TIM_Base_Stop(&SCREEN_TIMER);
+						render_ack_waiting(&sys);
+					break;
+				case hello:
+						if(display_fake_delay<12){
+							render_connected(&sys);
+							display_fake_delay++;
+						}
+						else{
+							sys.state = home;
+							display_fake_delay = 0;
+							SCREEN_TIMER_RESET;
+							HAL_TIM_Base_Start_IT(&SCREEN_TIMER);
+						}
+					break;
+				case home:
+						HAL_RTC_GetTime(&hrtc, &sys.Time, RTC_FORMAT_BIN);
+						HAL_RTC_GetDate(&hrtc, &sys.Date, RTC_FORMAT_BIN);
+						render_home(&sys);
+					break;
+				case bloody_hell:
+						HAL_TIM_Base_Stop(&SCREEN_TIMER);
+						render_bloody_hell(&sys);
+					break;
+				case about:
+						HAL_TIM_Base_Stop(&SCREEN_TIMER);
+						render_about(&sys);
+					break;
+			}
+		}
+		else{
+			ssd1306_Fill(Black);
+			ssd1306_UpdateScreen(&hi2c1);
+		}
+	}
+	else if(htim == &SCREEN_TIMER){
+		HAL_TIM_Base_Stop(&SCREEN_TIMER);
+		setScreenEable(&sys, 0);
+		SCREEN_TIMER_RESET;
+	}
 }
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
@@ -494,35 +507,128 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 		//HAL_UART_Transmit(&BLUETOOTH_UART, (uint8_t*)_sampleBuff[0].iRed, 5, 1000);
 	}
 	else if(GPIO_Pin == KEY4_Pin){
-		DEBUG("UP PRESSED \n\r");
-		walk_thresh += 100;
-		DEBUG("%d\n\r", walk_thresh);
-		y_alloc-=2;
+		DEBUG("UP PRESSED \n");
+		if(!getScreenEable(&sys)){
+			//
+		}
+		else{
+			SCREEN_TIMER_RESET;
+			switch (sys.state)
+			{
+				case ack_waiting:
+						//
+					break;
+				case hello:
+						//
+					break;
+				case home:
+						sys.state = about;
+					break;
+				case bloody_hell:
+						sys.state = home;
+						SCREEN_TIMER_RESET;
+						HAL_TIM_Base_Start_IT(&SCREEN_TIMER);
+					break;
+				case about:
+						sys.state = bloody_hell;
+					break;
+			}
+		}
 	}
 	else if(GPIO_Pin == KEY3_Pin){
-		DEBUG("RIGHT PRESSED \n\r");
+		DEBUG("RIGHT PRESSED \n");
 		sys.pedometer = 0;
-		x_alloc+=2;
+		if(!getScreenEable(&sys)){
+			//
+		}
+		else{
+			SCREEN_TIMER_RESET;
+			switch (sys.state)
+			{
+				case ack_waiting:
+						//
+					break;
+				case hello:
+						//
+					break;
+				case home:
+						sys.state = ack_waiting;
+					break;
+				case bloody_hell:
+						//
+					break;
+				case about:
+						//
+					break;
+			}
+		}
 	}
 	else if(GPIO_Pin == KEY2_Pin){
-		DEBUG("DOWN PRESSED \n\r");
-		walk_thresh -= 100;
-		DEBUG("%d\n\r", walk_thresh);
-		if(getScreenEable(&sys))
-			y_alloc+=2;
-		else
+		DEBUG("DOWN PRESSED \n");
+		if(!getScreenEable(&sys)){
+			sys.state = home;
+			HAL_TIM_Base_Start_IT(&SCREEN_TIMER);
 			setScreenEable(&sys,1);
+		}
+		else{
+			SCREEN_TIMER_RESET;
+			switch (sys.state)
+			{
+				case ack_waiting:
+						//
+					break;
+				case hello:
+						//
+					break;
+				case home:
+						sys.state = bloody_hell;
+					break;
+				case bloody_hell:
+						sys.state = about;
+					break;
+				case about:
+						SCREEN_TIMER_RESET;
+						HAL_TIM_Base_Start_IT(&SCREEN_TIMER);
+						sys.state = home;
+					break;
+			}
+		}
 	}
 	else if(GPIO_Pin == KEY1_Pin){
-		DEBUG("LEFT PRESSED \n\r");
-		x_alloc-=2;
+		DEBUG("LEFT PRESSED \n");
+		if(!getScreenEable(&sys)){
+			//
+		}
+		else{
+			SCREEN_TIMER_RESET;
+			switch (sys.state)
+			{
+				case ack_waiting:
+						SCREEN_TIMER_RESET;
+						HAL_TIM_Base_Start_IT(&SCREEN_TIMER);
+						sys.state = home;
+					break;
+				case hello:
+						//
+					break;
+				case home:
+						//
+					break;
+				case bloody_hell:
+						//
+					break;
+				case about:
+						//
+					break;
+			}
+		}
 	}
 }
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
 	if(huart==&BLUETOOTH_UART){
 		//HAL_UART_Transmit(&BLUETOOTH_UART, (uint8_t*)RxBuffer, RX_BUFFER_SIZE, 1000);
-		RxParser(RxBuffer);
+		RxParser(&sys, RxBuffer);
 	}
 }
 
@@ -532,9 +638,9 @@ void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc){
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
 	sum = 0;
-	for(uint32_t i = 0; i<100; i++)
+	for(uint32_t i = 0; i<128; i++)
 		sum += adcVals[i];
-	voltage = sum/100.0;
+	sys.voltage = sum >> 7;
 	
 }
 
@@ -569,24 +675,7 @@ void set_tone_vib(int freq, int duration){
 	HAL_Delay((int)(duration*0.3));
 }
 
-float map(uint16_t x, uint16_t in_min, uint16_t in_max, uint16_t out_min, uint16_t out_max){
-  return (x - in_min) * (out_max - out_min) / (float)(in_max - in_min) + out_min;
-}
 
-void DEBUG(const char* _str, ...){
-	#if DEBUG_ENABLE
-		va_list args;
-		va_start(args, _str);
-		char buffer[50];
-		memset(buffer, 0, 50);
-		int buffer_size = vsprintf(buffer, _str, args);
-		#if BLE_DEBUG
-			HAL_UART_Transmit(&BLUETOOTH_UART, (uint8_t*)buffer, buffer_size, 1000);
-		#else
-			HAL_UART_Transmit(&DEBUG_UART, (uint8_t*)buffer, buffer_size, 5000);
-		#endif
-	#endif
-}
 /* USER CODE END 4 */
 
 /**

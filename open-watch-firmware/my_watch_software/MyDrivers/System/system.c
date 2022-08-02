@@ -2,17 +2,24 @@
 
 System sys_init(){
 	System sys;
-	sys.pedometer = 0;
-	sys.flags = 0x08;
-	
-	sys.battery = 0;
+	sys.display_collibration_x = 2;
+	sys.display_collibration_y = -2;
+	sys.pedometer = 3;
+	sys.SpO2 = 98.4;
+	sys.heart_beat = 112;
+	sys.flags = 0x88;
+	sys.voltage = 0;
+	sys.state = hello;
+	sprintf(sys.user_name, "Salman");
+	sys.name_xpos = 40;
+	sys.pace_size = 0.0008;
 	
 	return sys;
 }
 
 // Get Flags
-uint8_t getCharging(System* sys){
-	return (sys->flags >> ISCHARGING_MASK) & 0x01;
+uint8_t getConnected(System* sys){
+	return (sys->flags >> ISCONNECTED_MASK) & 0x01;
 }
 
 uint8_t getPSaving(System* sys){
@@ -44,39 +51,43 @@ uint8_t getSoundEnable(System* sys){
 }
 
 // SetFlags
-void setCharging(System* sys, uint8_t state){
-	sys->flags = state ? (sys->flags | (1 << ISCHARGING_MASK)) : (sys->flags & !(1<<ISCHARGING_MASK));
+void setConnected(System* sys, uint8_t state){
+	sys->flags = state ? (sys->flags | (1 << ISCONNECTED_MASK)) : (sys->flags & ~(1<<ISCONNECTED_MASK));
 }
 
 void setPSaving(System* sys, uint8_t state){
-	sys->flags = state ? (sys->flags | (1 << ISPSAVING_MASK)) : (sys->flags & !(1<<ISPSAVING_MASK));
+	sys->flags = state ? (sys->flags | (1 << ISPSAVING_MASK)) : (sys->flags & ~(1<<ISPSAVING_MASK));
 }
 
 void setPPGEnable(System* sys, uint8_t state){
-	sys->flags = state ? (sys->flags | (1 << ISPPGENABLED_MASK)) : (sys->flags & !(1<<ISPPGENABLED_MASK));
+	sys->flags = state ? (sys->flags | (1 << ISPPGENABLED_MASK)) : (sys->flags & ~(1<<ISPPGENABLED_MASK));
 }
 
 void setScreenFlag(System* sys, uint8_t state){
-	sys->flags = state ? (sys->flags | (1 << SCREENFLAG_MASK)) : (sys->flags & !(1<<SCREENFLAG_MASK));
+	sys->flags = state ? (sys->flags | (1 << SCREENFLAG_MASK)) : (sys->flags & ~(1<<SCREENFLAG_MASK));
 }
 
 void setScreenEable(System* sys, uint8_t state){
-	sys->flags = state ? (sys->flags | (1 << SCREENENABLED_MASK)) : (sys->flags & !(1<<SCREENENABLED_MASK));
+	sys->flags = state ? (sys->flags | (1 << SCREENENABLED_MASK)) : (sys->flags & ~(1<<SCREENENABLED_MASK));
 }
 
 void setPedFlag(System* sys, uint8_t state){
-	sys->flags = state ? (sys->flags | (1 << PEDFLAG_MASK)) : (sys->flags & !(1<<PEDFLAG_MASK));
+	sys->flags = state ? (sys->flags | (1 << PEDFLAG_MASK)) : (sys->flags & ~(1<<PEDFLAG_MASK));
 }
 
 void setVibEnable(System* sys, uint8_t state){
-	sys->flags = state ? (sys->flags | (1 << VIBENENABLED_MASK)) : (sys->flags & !(1<<VIBENENABLED_MASK));
+	sys->flags = state ? (sys->flags | (1 << VIBENENABLED_MASK)) : (sys->flags & ~(1<<VIBENENABLED_MASK));
 }
 
 void setSoundEnable(System* sys, uint8_t state){
-	sys->flags = state ? (sys->flags | (1 << SOUNDENABLED_MASK)) : (sys->flags & !(1<<SOUNDENABLED_MASK));
+	sys->flags = state ? (sys->flags | (1 << SOUNDENABLED_MASK)) : (sys->flags & ~(1<<SOUNDENABLED_MASK));
 }
 
 // Main functions
-void RxParser(uint8_t* RxBuffer){
-	
+void RxParser(System* sys, uint8_t* RxBuffer){
+	// set name
+	// set name xpos
+	// set date and time
+	setScreenEable(sys, 1);
+	//DEBUG("%s", (char*)RxBuffer);
 }

@@ -1,7 +1,4 @@
-#ifndef __MAIN_H
-	#include "main.h"
-	#define __MAIN_H
-#endif
+#include "main.h"
 #include "tim.h"
 
 #define ALLXYZ_MODE 0
