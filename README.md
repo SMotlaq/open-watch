@@ -123,7 +123,12 @@ See the [open issues](https://github.com/SMotlaq/open-watch/issues) for a full l
 <!-- PARTS -->
 # Pictures
 
-**Overview**
+**OpenWatch**
+<p> <img src="photos/Pic45.png?raw=true "Fully assembled"" width="700"> </p> 
+
+<!-- ![full](photos/Pic45.png?raw=true "Fully assembled") -->
+
+**PCB Overview**
 <p> <img src="photos/Pic38.jpg?raw=true "Overview - Front"" width="700"> </p> 
 <p> <img src="photos/Pic39.jpg?raw=true "Overview - Back"" width="700"> </p> 
 
