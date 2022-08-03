@@ -123,6 +123,8 @@ extern ShapeDef Shape_Reject;
 extern ShapeDef Shape_Accept;
 extern ShapeDef Shape_UP;
 extern ShapeDef Shape_DOWN;
+extern ShapeDef Shape_clock_LH;
+extern ShapeDef Shape_clock_RH;
 
 
 #endif  // _FONTS_H

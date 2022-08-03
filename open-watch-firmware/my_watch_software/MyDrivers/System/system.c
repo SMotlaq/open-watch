@@ -22,8 +22,8 @@ uint8_t getConnected(System* sys){
 	return (sys->flags >> ISCONNECTED_MASK) & 0x01;
 }
 
-uint8_t getPSaving(System* sys){
-	return (sys->flags >> ISPSAVING_MASK) & 0x01;
+uint8_t getRinging(System* sys){
+	return (sys->flags >> ISRINING_MASK) & 0x01;
 }
 
 uint8_t getPPGEnable(System* sys){
@@ -55,8 +55,8 @@ void setConnected(System* sys, uint8_t state){
 	sys->flags = state ? (sys->flags | (1 << ISCONNECTED_MASK)) : (sys->flags & ~(1<<ISCONNECTED_MASK));
 }
 
-void setPSaving(System* sys, uint8_t state){
-	sys->flags = state ? (sys->flags | (1 << ISPSAVING_MASK)) : (sys->flags & ~(1<<ISPSAVING_MASK));
+void setRinging(System* sys, uint8_t state){
+	sys->flags = state ? (sys->flags | (1 << ISRINING_MASK)) : (sys->flags & ~(1<<ISRINING_MASK));
 }
 
 void setPPGEnable(System* sys, uint8_t state){
@@ -88,6 +88,9 @@ void RxParser(System* sys, uint8_t* RxBuffer){
 	// set name
 	// set name xpos
 	// set date and time
+	// set pac size
 	setScreenEable(sys, 1);
 	//DEBUG("%s", (char*)RxBuffer);
 }
+
+void AddPPData(SAMPLE* samples, uint8_t number(

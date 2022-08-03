@@ -49,13 +49,15 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 
+#define MDELAY_TIMER_VALUE (TIM17->CNT)
+#define MDELAY_TIMER		htim17
 #define SCREEN_TIMER_RESET (TIM16->CNT = 0)
-#define SCREEN_TIMER		htim16		// IT mode - each 3 seconds
+#define SCREEN_TIMER		htim16		// IT mode - each 4 seconds
 #define BATERY_TIMER		htim15		// IT mode - each 0.01 seconds
 #define SYSTEM_TIMER		htim14		// IT mode - each 0.5 seconds
 #define KALMAN_TIMER		htim6			// IT mode - each 1 milli second
 #define BUZZER_TIMER		htim3			// PWM mode - 1KHz - Value from 0 to 999
-#define VIBMOT_TIMER		htim1			// PWM mode - 1KHz - Value from 0 to 999
+#define VIBMOT_TIMER		htim1			// PWM mode - 1KHz - Value from 0 to 4999
 
 /* USER CODE END PD */
 
@@ -107,11 +109,16 @@ Kalman2D1R KGyro;
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
 
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim);
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin);
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart);
 void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc);
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc);
 void set_vib(int speed, int duration);
 void set_tone(int freq, int duration);
 void set_tone_vib(int freq, int duration);
+void MHAL_Delay(uint32_t Delay);
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -159,23 +166,43 @@ int main(void)
   MX_TIM15_Init();
   MX_TIM14_Init();
   MX_TIM16_Init();
+  MX_TIM17_Init();
   /* USER CODE BEGIN 2 */
 	
-	//*/ // Date and Time setting
+	/*/ // Date and Time setting
 	DEBUG("Date and Time setting...  ");
 		RTC_DateTypeDef DateToBeSet;
 		DateToBeSet.Year = 22;
 		DateToBeSet.Month = 8;
-		DateToBeSet.Date = 2;
+		DateToBeSet.Date = 3;
 		DateToBeSet.WeekDay = RTC_WEEKDAY_THURSDAY;
 		
 		RTC_TimeTypeDef TimeToBeSet;
-		TimeToBeSet.Hours = 19;
-		TimeToBeSet.Minutes = 9;
-		TimeToBeSet.Seconds = 10;
+		TimeToBeSet.Hours = 16;
+		TimeToBeSet.Minutes = 4;
+		TimeToBeSet.Seconds = 30;
 		
 		HAL_RTC_SetDate(&hrtc, &DateToBeSet, RTC_FORMAT_BIN);
 		HAL_RTC_SetTime(&hrtc, &TimeToBeSet, RTC_FORMAT_BIN);
+	DEBUG("  Done! \n\r ");
+	HAL_Delay(2000);
+	//*/
+	
+	//*/ // Alarm setting
+	DEBUG("Alarm setting...  ");
+		RTC_AlarmTypeDef sAlarm = {0};
+		sAlarm.AlarmTime.Hours = 17;
+		sAlarm.AlarmTime.Minutes = 11;
+		sAlarm.AlarmTime.Seconds = 0;
+		sAlarm.AlarmTime.SubSeconds = 0;
+		sAlarm.AlarmTime.DayLightSaving = RTC_DAYLIGHTSAVING_NONE;
+		sAlarm.AlarmTime.StoreOperation = RTC_STOREOPERATION_RESET;
+		sAlarm.AlarmMask = RTC_ALARMMASK_DATEWEEKDAY|RTC_ALARMMASK_HOURS;
+		sAlarm.AlarmSubSecondMask = RTC_ALARMSUBSECONDMASK_ALL;
+		sAlarm.AlarmDateWeekDaySel = RTC_ALARMDATEWEEKDAYSEL_WEEKDAY;
+		sAlarm.AlarmDateWeekDay = RTC_WEEKDAY_FRIDAY;
+		sAlarm.Alarm = RTC_ALARM_A;
+		HAL_RTC_SetAlarm_IT(&hrtc, &sAlarm, RTC_FORMAT_BIN);
 	DEBUG("  Done! \n\r ");
 	HAL_Delay(2000);
 	//*/
@@ -298,6 +325,14 @@ int main(void)
 			set_vib(300, 300);
 			set_vib(900, 100);
 		//*/
+		
+		if(getRinging(&sys)){
+			for(int thisNote=0; thisNote<sizeof(melody)/sizeof(int); thisNote++){
+				set_tone(melody[thisNote], 1000/noteDurations[thisNote]);
+				if(!getRinging(&sys))
+					break;
+			}
+		}
 
     /* USER CODE END WHILE */
 
@@ -474,9 +509,17 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 						HAL_TIM_Base_Stop(&SCREEN_TIMER);
 						render_bloody_hell(&sys);
 					break;
+				case pedomedo:
+						HAL_TIM_Base_Stop(&SCREEN_TIMER);
+						render_pedomedo(&sys);
+					break;
 				case about:
 						HAL_TIM_Base_Stop(&SCREEN_TIMER);
 						render_about(&sys);
+					break;
+				case ringing:
+						HAL_TIM_Base_Stop(&SCREEN_TIMER);
+						render_ringing(&sys);
 					break;
 			}
 		}
@@ -492,7 +535,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim){
 	}
 }
 
-void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
 	if (GPIO_Pin == MAX_INT_Pin) {
 		//max30102_cal();
     //_spo2 = max30102_getSpO2();
@@ -513,6 +556,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 		}
 		else{
 			SCREEN_TIMER_RESET;
+			set_tone_vib(500, 100);
 			switch (sys.state)
 			{
 				case ack_waiting:
@@ -529,8 +573,18 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 						SCREEN_TIMER_RESET;
 						HAL_TIM_Base_Start_IT(&SCREEN_TIMER);
 					break;
-				case about:
+				case pedomedo:
 						sys.state = bloody_hell;
+					break;
+				case about:
+						sys.state = pedomedo;
+					break;
+				case ringing:
+						SCREEN_TIMER_RESET;
+						setRinging(&sys, 0);
+						HAL_TIM_Base_Start_IT(&KALMAN_TIMER);
+						HAL_TIM_Base_Start_IT(&SCREEN_TIMER);
+						sys.state = home;
 					break;
 			}
 		}
@@ -543,6 +597,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 		}
 		else{
 			SCREEN_TIMER_RESET;
+			set_tone_vib(500, 100);
 			switch (sys.state)
 			{
 				case ack_waiting:
@@ -552,13 +607,23 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 						//
 					break;
 				case home:
-						sys.state = ack_waiting;
+						sys.state = ringing;
 					break;
 				case bloody_hell:
 						//
 					break;
+				case pedomedo:
+						//
+					break;
 				case about:
 						//
+					break;
+				case ringing:
+						SCREEN_TIMER_RESET;
+						setRinging(&sys, 0);
+						HAL_TIM_Base_Start_IT(&KALMAN_TIMER);
+						HAL_TIM_Base_Start_IT(&SCREEN_TIMER);
+						sys.state = home;
 					break;
 			}
 		}
@@ -572,6 +637,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 		}
 		else{
 			SCREEN_TIMER_RESET;
+			set_tone_vib(500, 100);
 			switch (sys.state)
 			{
 				case ack_waiting:
@@ -584,10 +650,20 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 						sys.state = bloody_hell;
 					break;
 				case bloody_hell:
+						sys.state = pedomedo;
+					break;
+				case pedomedo:
 						sys.state = about;
 					break;
 				case about:
 						SCREEN_TIMER_RESET;
+						HAL_TIM_Base_Start_IT(&SCREEN_TIMER);
+						sys.state = home;
+					break;
+				case ringing:
+						SCREEN_TIMER_RESET;
+						setRinging(&sys, 0);
+						HAL_TIM_Base_Start_IT(&KALMAN_TIMER);
 						HAL_TIM_Base_Start_IT(&SCREEN_TIMER);
 						sys.state = home;
 					break;
@@ -601,12 +677,11 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 		}
 		else{
 			SCREEN_TIMER_RESET;
+			set_tone_vib(500, 100);
 			switch (sys.state)
 			{
 				case ack_waiting:
-						SCREEN_TIMER_RESET;
-						HAL_TIM_Base_Start_IT(&SCREEN_TIMER);
-						sys.state = home;
+						//
 					break;
 				case hello:
 						//
@@ -617,8 +692,18 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin) {
 				case bloody_hell:
 						//
 					break;
+				case pedomedo:
+						//
+					break;
 				case about:
 						//
+					break;
+				case ringing:
+						SCREEN_TIMER_RESET;
+						setRinging(&sys, 0);
+						HAL_TIM_Base_Start_IT(&KALMAN_TIMER);
+						HAL_TIM_Base_Start_IT(&SCREEN_TIMER);
+						sys.state = home;
 					break;
 			}
 		}
@@ -633,7 +718,10 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){
 }
 
 void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc){
-  _index++;
+	sys.state = ringing;
+	HAL_TIM_Base_Stop(&KALMAN_TIMER);
+	setRinging(&sys, 1);
+	setScreenEable(&sys,1);
 }
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* hadc){
@@ -648,18 +736,18 @@ void set_vib(int speed, int duration){
 	HAL_TIM_PWM_Start(&VIBMOT_TIMER, TIM_CHANNEL_4);
 	__HAL_TIM_SET_AUTORELOAD(&VIBMOT_TIMER, 5000);
 	__HAL_TIM_SET_COMPARE(&VIBMOT_TIMER, TIM_CHANNEL_4, speed);
-	HAL_Delay(duration);
+	MHAL_Delay(duration);
 	HAL_TIM_PWM_Stop(&VIBMOT_TIMER, TIM_CHANNEL_4);
-	HAL_Delay((int)(duration*0.3));
+	MHAL_Delay((int)(duration*0.3));
 }
 
 void set_tone(int freq, int duration){
 	HAL_TIM_PWM_Start(&BUZZER_TIMER, TIM_CHANNEL_3);
 	__HAL_TIM_SET_AUTORELOAD(&BUZZER_TIMER, 1000000/freq);
 	__HAL_TIM_SET_COMPARE(&BUZZER_TIMER, TIM_CHANNEL_3, 1000000/freq/2);
-	HAL_Delay(duration);
+	MHAL_Delay(duration);
 	HAL_TIM_PWM_Stop(&BUZZER_TIMER, TIM_CHANNEL_3);
-	HAL_Delay((int)(duration*0.3));
+	MHAL_Delay((int)(duration*0.3));
 }
 
 void set_tone_vib(int freq, int duration){
@@ -669,13 +757,19 @@ void set_tone_vib(int freq, int duration){
 	HAL_TIM_PWM_Start(&BUZZER_TIMER, TIM_CHANNEL_3);
 	__HAL_TIM_SET_AUTORELOAD(&BUZZER_TIMER, 1000000/freq);
 	__HAL_TIM_SET_COMPARE(&BUZZER_TIMER, TIM_CHANNEL_3, 1000000/freq/2);
-	HAL_Delay(duration);
+	MHAL_Delay(duration);
 	HAL_TIM_PWM_Stop(&BUZZER_TIMER, TIM_CHANNEL_3);
 	HAL_TIM_PWM_Stop(&VIBMOT_TIMER, TIM_CHANNEL_4);
-	HAL_Delay((int)(duration*0.3));
+	MHAL_Delay((int)(duration*0.3));
 }
 
 
+void MHAL_Delay(uint32_t Delay){
+	HAL_TIM_Base_Start(&MDELAY_TIMER);
+	while(MDELAY_TIMER_VALUE < Delay);
+	HAL_TIM_Base_Stop(&MDELAY_TIMER);
+	MDELAY_TIMER_VALUE = 0;
+}
 /* USER CODE END 4 */
 
 /**

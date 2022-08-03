@@ -12,6 +12,8 @@ void render_ack_waiting(System* sys);
 void render_home(System* sys);
 void render_connected(System* sys);
 void render_bloody_hell(System* sys);
+void render_pedomedo(System* sys);
 void render_about(System* sys);
+void render_ringing(System* sys);
 
 #endif
