@@ -95,11 +95,10 @@ Do you want to support us in this project?
   - [x] Bluetooth commands
   - [x] Vibration waves
   - [x] Buzzer
-  - [ ] OLED
-    - [ ] UI/UX
+  - [x] OLED
+    - [x] UI/UX
   - [x] Touch buttons
   - [x] Battery level indicator
-  - [ ] Power saving
   - [x] MPU6050
     - [x] Get raw data
     - [x] Kalman filter
@@ -108,12 +107,12 @@ Do you want to support us in this project?
     - [x] Get raw data
     - [ ] Transfer data using Bluetooth
 - [ ] Android programming
-  - [ ] Get blutooth data
-  - [ ] UI/UX
+  - [x] Get blutooth data
+  - [x] UI/UX
   - [ ] PPG data analysis
     - [ ] Heartbeat
     - [ ] SpO2
-- [ ] Assembling
+- [x] Assembling
 - [ ] Final test 😎
 
 See the [open issues](https://github.com/SMotlaq/open-watch/issues) for a full list of proposed features (and known issues).
