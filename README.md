@@ -90,7 +90,7 @@ Do you want to support us in this project?
 - [X] Body design
 - [X] 3D print
 - [x] Soldeing
-- [ ] Firmware programming
+- [x] Firmware programming
   - [x] RTC
   - [x] Bluetooth commands
   - [x] Vibration waves
@@ -103,9 +103,9 @@ Do you want to support us in this project?
     - [x] Get raw data
     - [x] Kalman filter
     - [x] Movement detection
-  - [ ] PPG sensor
+  - [x] PPG sensor
     - [x] Get raw data
-    - [ ] Transfer data using Bluetooth
+    - [x] Transfer data using Bluetooth
 - [ ] Android programming
   - [x] Get blutooth data
   - [x] UI/UX
