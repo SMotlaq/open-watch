@@ -92,6 +92,7 @@ Do you want to support us in this project?
 - [x] Soldeing
 - [x] Firmware programming
   - [x] RTC
+  - [x] Alarm
   - [x] Bluetooth commands
   - [x] Vibration waves
   - [x] Buzzer
@@ -109,6 +110,7 @@ Do you want to support us in this project?
 - [ ] Android programming
   - [x] Get blutooth data
   - [x] UI/UX
+  = [x] Plot the raw PPG signals
   - [ ] PPG data analysis
     - [ ] Heartbeat
     - [ ] SpO2
