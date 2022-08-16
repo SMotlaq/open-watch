@@ -213,6 +213,8 @@ Salman AmiMotlaq - [@SMotlaq](https://github.com/SMotlaq) - pilot.motlaq@gmail.c
 
 Seyedmohammadsaleh Mirzatabatabaei - [@seyedsaleh](https://github.com/seyedsaleh) - seyedsaleh.edu@gmail.com
 
+Amirhossein Aghajari - [@Aghajari](https://github.com/Aghajari) - amirhossein.aghajari.82@gmail.com
+
 Project Link: [https://github.com/SMotlaq/open-watch](https://github.com/SMotlaq/open-watch)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
