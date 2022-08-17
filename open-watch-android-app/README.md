@@ -21,3 +21,7 @@ Whenever the watch sends 5 signal packets (1000 samples) to the app, the PPG alg
 ## Graph
 
 [AXGraphView](https://github.com/Aghajari/AXGraphView) is customized so that it can increase the range of the time (x) domain by zooming and it is possible to move only in the time axis. Also, scrolling will start automatically upon receiving signals from the watch. The coordinate axis has been moved to (0, 0) and the library is ready to display two different graphs (Red and iRed) in one view.
+
+## HRV Chart
+
+[SimpleChart](https://github.com/Aghajari/SimpleChart)'s LineChart is customized to match the graph's grid-lines design and the gradient animation. Also, the y range is calculated more accurately and a linear animation has been added to display the chart.
