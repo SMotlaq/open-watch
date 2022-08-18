@@ -107,4 +107,8 @@ public class PickerLayoutManager extends LinearLayoutManager {
         this.selectedPosition = selectedPosition;
         mRecyclerView.scrollToPosition(selectedPosition);
     }
+
+    public void setRecyclerView(RecyclerView recyclerView) {
+        this.mRecyclerView = recyclerView;
+    }
 }

@@ -34,7 +34,6 @@ public class DispatchQueue extends Thread {
         Looper.prepare();
         handler = new Handler();
         super.run();
-        if (!isInterrupted())
-            Looper.loop();
+        Looper.loop();
     }
 }

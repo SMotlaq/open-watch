@@ -9,12 +9,24 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class IntAdapter extends RecyclerView.Adapter<IntAdapter.StringVH> {
+public class ArrayAdapter<T> extends RecyclerView.Adapter<ArrayAdapter.StringVH> {
 
-    private final int[] values;
+    private final T[] values;
+    private int textColor = Color.WHITE;
+    private final boolean loop;
 
-    public IntAdapter(int[] values) {
+    public ArrayAdapter(T[] values) {
+        this(values, false);
+    }
+
+    public ArrayAdapter(T[] values, boolean loop) {
         this.values = values;
+        this.loop = loop;
+    }
+
+    public void setTextColor(int textColor) {
+        this.textColor = textColor;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -25,12 +37,12 @@ public class IntAdapter extends RecyclerView.Adapter<IntAdapter.StringVH> {
 
     @Override
     public void onBindViewHolder(@NonNull StringVH holder, int position) {
-        holder.bind(values[position]);
+        holder.bind(values[loop ? position % values.length : position], textColor);
     }
 
     @Override
     public int getItemCount() {
-        return values.length;
+        return loop ? Integer.MAX_VALUE : values.length;
     }
 
     protected static class StringVH extends RecyclerView.ViewHolder {
@@ -38,14 +50,18 @@ public class IntAdapter extends RecyclerView.Adapter<IntAdapter.StringVH> {
         public StringVH(@NonNull TextView itemView) {
             super(itemView);
             itemView.setTextSize(20);
-            itemView.setTextColor(Color.WHITE);
             itemView.setGravity(Gravity.CENTER);
             itemView.setLayoutParams(new FrameLayout.LayoutParams(-1,
                     (int) (itemView.getContext().getResources().getDisplayMetrics().density * 40)));
         }
 
-        public void bind(int value) {
-            ((TextView) itemView).setText(String.valueOf(value));
+        public void bind(Object value, int textColor) {
+            if (value == null)
+                return;
+
+            TextView tv = (TextView) itemView;
+            tv.setTextColor(textColor);
+            tv.setText(value.toString());
         }
     }
 }
