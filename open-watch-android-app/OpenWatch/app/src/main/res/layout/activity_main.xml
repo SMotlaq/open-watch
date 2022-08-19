@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.aghajari.axanimation.layouts.AXAFrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".MainActivity">
+
+    <FrameLayout
+        android:id="@+id/login_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:translationX="3dp"
+            android:layout_width="380dp"
+            android:layout_height="380dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="56dp"
+            app:srcCompat="@drawable/watch"/>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/circle"
+        android:layout_marginTop="165dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="162dp"
+        android:layout_height="162dp">
+
+        <FrameLayout
+            android:id="@+id/bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="8dp">
+
+            <FrameLayout
+                android:id="@+id/header_content"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:visibility="gone">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    app:srcCompat="@drawable/good"
+                    app:tint="@color/white" />
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="OpenWatch"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:gravity="center"
+                android:id="@+id/connected_content"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Connected"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"/>
+
+                <FrameLayout
+                    android:id="@+id/start_btn"
+                    android:layout_marginTop="16dp"
+                    android:layout_width="150dp"
+                    android:elevation="2dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/bg_connect">
+
+                    <TextView
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Let's Go"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"/>
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </FrameLayout>
+
+    <com.aghajari.graphview.AXGraphView
+        android:visibility="invisible"
+        android:layout_marginTop="276dp"
+        android:id="@+id/graph_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <LinearLayout
+        android:id="@+id/legend"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|bottom"
+        android:orientation="vertical"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="56dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <View
+                android:background="@color/black"
+                android:id="@+id/legendHR"
+                android:layout_width="20dp"
+                android:layout_height="2dp"
+                android:layout_marginRight="12dp"/>
+
+            <TextView
+                android:id="@+id/legendHRText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Red"
+                android:textColor="@color/black"
+                android:textSize="13sp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <View
+                android:background="@color/black"
+                android:id="@+id/legendSpO2"
+                android:layout_width="20dp"
+                android:layout_height="2dp"
+                android:layout_marginRight="12dp"/>
+
+            <TextView
+                android:id="@+id/legendSpO2Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="iRed"
+                android:textColor="@color/black"
+                android:textSize="13sp"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.aghajari.pathloading.AXPathLoadingView
+        android:id="@+id/path_progress"
+        android:layout_width="100dp"
+        android:layout_height="44dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="150dp"/>
+
+    <TextView
+        android:id="@+id/connectionStatus"
+        android:alpha="0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="120dp"
+        android:text="Connecting..."
+        android:textColor="@color/white"
+        android:textSize="12sp"/>
+
+    <FrameLayout
+        android:layout_gravity="bottom|center_horizontal"
+        android:id="@+id/signInForm"
+        android:visibility="invisible"
+        android:translationY="424dp"
+        android:alpha="0"
+        android:layout_width="match_parent"
+        android:layout_height="424dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_marginHorizontal="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="332dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="60dp"
+            app:contentPadding="24dp"
+            app:cardBackgroundColor="#20000000"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hello!"
+                        android:textColor="@color/white"
+                        android:textSize="26sp"
+                        android:textStyle="bold" />
+
+                    <FrameLayout
+                        android:id="@+id/formDone"
+                        android:layout_gravity="right"
+                        android:background="?selectableItemBackgroundBorderless"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_gravity="center"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            app:tint="@color/white"
+                            app:srcCompat="@drawable/check"/>
+
+                    </FrameLayout>
+                </FrameLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Please fill the form for a better analysis."
+                    android:textColor="@color/white"
+                    android:textSize="14sp"/>
+
+                <LinearLayout
+                    android:layout_marginTop="12dp"
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/nameEdt"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.8"
+                        android:layout_height="wrap_content"
+                        android:hint="Your Name"
+                        android:textColorHint="#BBBBBB"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:imeOptions="actionDone"
+                        android:layout_marginRight="12dp"
+                        android:singleLine="true"/>
+
+                    <LinearLayout
+                        android:layout_marginLeft="12dp"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_marginRight="8dp"
+                            app:tint="@color/white"
+                            app:srcCompat="@drawable/female"/>
+
+                        <androidx.appcompat.widget.SwitchCompat
+                            android:id="@+id/gender"
+                            android:checked="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"/>
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_marginLeft="8dp"
+                            app:tint="@color/white"
+                            app:srcCompat="@drawable/male"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_marginTop="24dp"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="144dp">
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:text="Age"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"/>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/ageRV"
+                            android:layout_marginTop="28dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp"/>
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:text="StepSize (CM)"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"/>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/stepSizeRV"
+                            android:layout_marginTop="28dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="120dp"/>
+                    </FrameLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </FrameLayout>
+
+</com.aghajari.axanimation.layouts.AXAFrameLayout>

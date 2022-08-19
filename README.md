@@ -90,8 +90,9 @@ Do you want to support us in this project?
 - [X] Body design
 - [X] 3D print
 - [x] Soldeing
-- [ ] Firmware programming
+- [x] Firmware programming
   - [x] RTC
+  - [x] Alarm
   - [x] Bluetooth commands
   - [x] Vibration waves
   - [x] Buzzer
@@ -103,12 +104,13 @@ Do you want to support us in this project?
     - [x] Get raw data
     - [x] Kalman filter
     - [x] Movement detection
-  - [ ] PPG sensor
+  - [x] PPG sensor
     - [x] Get raw data
-    - [ ] Transfer data using Bluetooth
+    - [x] Transfer data using Bluetooth
 - [ ] Android programming
   - [x] Get blutooth data
   - [x] UI/UX
+  = [x] Plot the raw PPG signals
   - [ ] PPG data analysis
     - [ ] Heartbeat
     - [ ] SpO2
@@ -210,6 +212,8 @@ MIMIC-III Database (https://mimic.mit.edu)
 Salman AmiMotlaq - [@SMotlaq](https://github.com/SMotlaq) - pilot.motlaq@gmail.com
 
 Seyedmohammadsaleh Mirzatabatabaei - [@seyedsaleh](https://github.com/seyedsaleh) - seyedsaleh.edu@gmail.com
+
+Amirhossein Aghajari - [@Aghajari](https://github.com/Aghajari) - amirhossein.aghajari.82@gmail.com
 
 Project Link: [https://github.com/SMotlaq/open-watch](https://github.com/SMotlaq/open-watch)
 
