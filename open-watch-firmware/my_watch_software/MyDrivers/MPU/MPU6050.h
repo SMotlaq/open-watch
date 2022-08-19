@@ -19,7 +19,6 @@ References:
 
 //Header Files
 #include "main.h"  //dpending on your board
-//#include <string.h>
 #include <stdbool.h>	//Boolean
 #include <math.h>			//Pow()
 

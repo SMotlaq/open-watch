@@ -15,10 +15,7 @@
 #ifndef _SSD1306_H
 #define _SSD1306_H
 
-#ifndef __MAIN_H
-	#include "main.h"
-	#define __MAIN_H
-#endif
+#include "main.h"
 #include "fonts.h"
 
 // I2c address

@@ -38,13 +38,12 @@ my_watch_software\pages.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim
 my_watch_software\pages.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim_ex.h
 my_watch_software\pages.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h
 my_watch_software\pages.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h
-my_watch_software\pages.o: ..\MyDrivers\XFer\xfer.h
-my_watch_software\pages.o: ../Inc/usart.h
 my_watch_software\pages.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-my_watch_software\pages.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
 my_watch_software\pages.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 my_watch_software\pages.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-my_watch_software\pages.o: ..\MyDrivers\pitches.h
+my_watch_software\pages.o: ../Inc/rtc.h
+my_watch_software\pages.o: ..\MyDrivers\XFer\xfer.h
+my_watch_software\pages.o: ../Inc/usart.h
 my_watch_software\pages.o: ..\MyDrivers\Display\ssd1306.h
 my_watch_software\pages.o: ..\MyDrivers\Display\fonts.h
 my_watch_software\pages.o: ../Inc/i2c.h

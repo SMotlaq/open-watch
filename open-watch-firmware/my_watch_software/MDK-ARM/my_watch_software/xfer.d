@@ -39,6 +39,3 @@ my_watch_software\xfer.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_tim_
 my_watch_software\xfer.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h
 my_watch_software\xfer.o: ../Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart_ex.h
 my_watch_software\xfer.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-my_watch_software\xfer.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
-my_watch_software\xfer.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
-my_watch_software\xfer.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h

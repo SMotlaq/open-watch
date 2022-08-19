@@ -299,16 +299,35 @@ static const uint16_t Font16x26 [] = {
 };
 //*/
 
-static const uint16_t battery [] = {0x7FC0, 0x8020, 0xAAB0, 0xAAB0, 0xAAB0, 0x8020, 0x7FC0};
-static const uint16_t battery2 [] = {
+static const uint16_t battery_bar [] = {
+0x8000,
+0x8000,
+0x8000,
+0x8000,
+0x8000,
+0x8000};
+
+static const uint16_t battery_allert [] = {
 0x7FE0,
 0x8010,
-0xBFD0,
-0xBFD8,
-0xBFD8,
-0xBFD8,
-0xBFD8,
-0xBFD0,
+0x8610,
+0x8618,
+0x8618,
+0x8618,
+0x8018,
+0x8610,
+0x8010,
+0x7FE0};
+
+static const uint16_t battery_empty [] = {
+0x7FE0,
+0x8010,
+0x8010,
+0x8018,
+0x8018,
+0x8018,
+0x8018,
+0x8010,
 0x8010,
 0x7FE0};
 
@@ -365,51 +384,39 @@ static const uint16_t SpO2 [] = {
 0x3};
 
 static const uint16_t BT [] = {
-0x800,
-0xC00,
-0xA00,
-0x8900,
-0x4880,
-0x2900,
-0x1A00,
-0xC00,
-0x1A00,
-0x2900,
-0x4880,
-0x8900,
-0xA00,
-0xC00,
-0x800};
+0x1000,
+0x1800,
+0x9400,
+0x5200,
+0x3400,
+0x1800,
+0x3400,
+0x5200,
+0x9400,
+0x1800,
+0x1000};
 
 static const uint16_t NC [] = {
-0x200,
-0x500,
-0x500,
-0x880,
-0x880,
-0x1240,
-0x1240,
-0x2220,
-0x2220,
-0x4010,
-0x4210,
-0x8008,
-0x7FF0};
+0x0,
+0x0,
+0x8200,
+0x4400,
+0x2800,
+0x1000,
+0x2800,
+0x4400,
+0x8200};
 
 static const uint16_t Connected [] = {
-0x0,
-0x60,
-0x60,
-0x60,
-0x360,
-0x360,
-0x360,
-0x1B60,
-0x1B60,
-0x1B60,
-0xDB60,
-0xDB60,
-0xDB60};
+0x300,
+0x300,
+0x300,
+0x1B00,
+0x1B00,
+0x1B00,
+0xDB00,
+0xDB00,
+0xDB00};
 
 static const uint16_t Location [] = {
 0xE00,
@@ -428,30 +435,6 @@ static const uint16_t Location [] = {
 0xE00,
 0xE00,
 0x400};
-
-static const uint16_t Reject [] = {
-0xC060,
-0xE0E0,
-0x71C0,
-0x3B80,
-0x1F00,
-0xE00,
-0x1F00,
-0x3B80,
-0x71C0,
-0xE0E0,
-0xC060};
-
-static const uint16_t Accept [] = {
-0x60,
-0xE0,
-0x1C0,
-0x380,
-0xC700,
-0xEE00,
-0x7C00,
-0x3800,
-0x1000};
 
 static const uint16_t UP [] = {
 0x2000,
@@ -533,17 +516,16 @@ FontDef Font_7x10 = {7,10,Font7x10};
 FontDef Font_11x18 = {11,18,Font11x18};
 FontDef Font_16x26 = {16,26,Font16x26};
 
-ShapeDef Shape_battery = {12, 7, battery};
-ShapeDef Shape_battery2 = {13, 10, battery2};
+ShapeDef Shape_battery_bar = {1, 6, battery_bar};
+ShapeDef Shape_battery_empty = {13, 10, battery_empty};
+ShapeDef Shape_battery_allert = {13, 10, battery_allert};
 ShapeDef Shape_heart = {16, 15, heart};
 ShapeDef Shape_kafsh = {15, 16, kafsh};
 ShapeDef Shape_SpO2 = {16, 15, SpO2};
-ShapeDef Shape_BT = {9, 15, BT};
-ShapeDef Shape_NC = {13, 13, NC};
-ShapeDef Shape_Connected = {11, 13, Connected};
+ShapeDef Shape_BT = {7, 11, BT};
+ShapeDef Shape_NC = {7, 9, NC};
+ShapeDef Shape_Connected = {8, 9, Connected};
 ShapeDef Shape_Location = {11, 16, Location};
-ShapeDef Shape_Reject = {11, 11, Reject};
-ShapeDef Shape_Accept = {11, 9, Accept};
 ShapeDef Shape_UP = {5, 3, UP};
 ShapeDef Shape_DOWN = {5, 3, DOWN};
 ShapeDef Shape_clock_LH = {16, 31, clock_LH};

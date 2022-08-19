@@ -469,11 +469,6 @@
               <FilePath>..\MyDrivers\MPU\MPU6050.c</FilePath>
             </File>
             <File>
-              <FileName>max30100_for_stm32_hal.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\MyDrivers\MAX30102\max30100_for_stm32_hal.c</FilePath>
-            </File>
-            <File>
               <FileName>Kalman.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\MyDrivers\KalmanFilter\Kalman.c</FilePath>
@@ -502,6 +497,11 @@
               <FileName>xfer.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\MyDrivers\XFer\xfer.c</FilePath>
+            </File>
+            <File>
+              <FileName>max30102_for_stm32_hal.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\MyDrivers\MAX30102\max30102_for_stm32_hal.c</FilePath>
             </File>
           </Files>
         </Group>

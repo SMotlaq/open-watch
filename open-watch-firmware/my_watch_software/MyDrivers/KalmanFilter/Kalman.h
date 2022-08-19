@@ -1,5 +1,6 @@
 #include "main.h"
 #include "tim.h"
+#include "math.h"
 
 #define ALLXYZ_MODE 0
 #define LOWMEM_MODE 1  
