@@ -107,13 +107,13 @@ Do you want to support us in this project?
   - [x] PPG sensor
     - [x] Get raw data
     - [x] Transfer data using Bluetooth
-- [ ] Android programming
+- [x] Android programming
   - [x] Get blutooth data
   - [x] UI/UX
-  = [x] Plot the raw PPG signals
-  - [ ] PPG data analysis
-    - [ ] Heartbeat
-    - [ ] SpO2
+  - [x] Plot the raw PPG signals
+  - [x] PPG data analysis
+    - [x] Heartbeat
+    - [x] SpO2
 - [x] Assembling
 - [ ] Final test 😎
 
