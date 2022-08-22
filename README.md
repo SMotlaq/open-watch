@@ -115,7 +115,7 @@ Do you want to support us in this project?
     - [x] Heartbeat
     - [x] SpO2
 - [x] Assembling
-- [ ] Final test 😎
+- [x] Final test 😎
 
 See the [open issues](https://github.com/SMotlaq/open-watch/issues) for a full list of proposed features (and known issues).
 
