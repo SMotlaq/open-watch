@@ -16,4 +16,13 @@
         <item name="android:windowTranslucentNavigation">true</item>
 
     </style>
+
+    <style name="AghajariDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowAnimationStyle">@style/AghajariDialogAnim</item>
+    </style>
+
+    <style name="AghajariDialogAnim">
+        <item name="android:windowEnterAnimation">@anim/dialog_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_out</item>
+    </style>
 </resources>

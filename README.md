@@ -107,15 +107,15 @@ Do you want to support us in this project?
   - [x] PPG sensor
     - [x] Get raw data
     - [x] Transfer data using Bluetooth
-- [ ] Android programming
+- [x] Android programming
   - [x] Get blutooth data
   - [x] UI/UX
-  = [x] Plot the raw PPG signals
-  - [ ] PPG data analysis
-    - [ ] Heartbeat
-    - [ ] SpO2
+  - [x] Plot the raw PPG signals
+  - [x] PPG data analysis
+    - [x] Heartbeat
+    - [x] SpO2
 - [x] Assembling
-- [ ] Final test 😎
+- [x] Final test 😎
 
 See the [open issues](https://github.com/SMotlaq/open-watch/issues) for a full list of proposed features (and known issues).
 
@@ -218,14 +218,6 @@ Amirhossein Aghajari - [@Aghajari](https://github.com/Aghajari) - amirhossein.ag
 Project Link: [https://github.com/SMotlaq/open-watch](https://github.com/SMotlaq/open-watch)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
----
-<div align="center">
-<p>
- <img src="https://user-images.githubusercontent.com/47852354/138564509-b5dffb4e-f48b-4db5-b8a4-1385ef2b22c8.png" width="110">
- <img src="https://user-images.githubusercontent.com/47852354/138607395-e18bfc7a-204c-495a-914f-bd5cf8436ca4.jpg" width="70">
-</p>
-</div>
 
 
 

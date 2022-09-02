@@ -3,6 +3,7 @@ package com.openwatch.util;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Path;
 import android.os.Build;
 import android.view.View;
@@ -31,6 +32,17 @@ public class Utils {
                 v.setSystemUiVisibility(v.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
             } else {
                 v.setSystemUiVisibility(v.getSystemUiVisibility() ^ View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            }
+        }
+    }
+
+    public static void setNavigationBarLight(Activity activity, boolean light) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            View v = activity.getWindow().getDecorView();
+            if (light) {
+                v.setSystemUiVisibility(v.getSystemUiVisibility() | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
+            } else {
+                v.setSystemUiVisibility(v.getSystemUiVisibility() ^ View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
             }
         }
     }
@@ -80,20 +92,89 @@ public class Utils {
         ((PickerLayoutManager) view.stepSizeRV.getLayoutManager()).setSelectedPosition(stepSize / 5 - 5);
     }
 
-    public static int getStepSize(Context context){
+    public static int getStepSize(Context context) {
         return context.getSharedPreferences("OpenWatch", Context.MODE_PRIVATE)
                 .getInt("stepSize", 30);
     }
 
-    public static String getName(Context context){
+    public static String getName(Context context) {
         return context.getSharedPreferences("OpenWatch", Context.MODE_PRIVATE)
                 .getString("name", "");
+    }
+
+    public static int getAge(Context context) {
+        int this_year = Calendar.getInstance().get(Calendar.YEAR);
+        return this_year - context.getSharedPreferences("OpenWatch", Context.MODE_PRIVATE)
+                .getInt("birthYear", this_year - 20);
+    }
+
+    public static boolean getGender(Context context) {
+        return context.getSharedPreferences("OpenWatch", Context.MODE_PRIVATE)
+                .getBoolean("gender", true);
+    }
+
+    public static int[] getAlarmPositions(Context context) {
+        SharedPreferences pref = context.getSharedPreferences("OpenWatch", Context.MODE_PRIVATE);
+        int[] res = new int[3];
+        if (pref.contains("alarm_h")) {
+            res[0] = pref.getInt("alarm_h", 0);
+            res[1] = pref.getInt("alarm_m", 0);
+            res[2] = pref.getInt("alarm_d", 0);
+        } else {
+            Calendar c = Calendar.getInstance();
+            res[0] = c.get(Calendar.HOUR_OF_DAY);
+            res[1] = c.get(Calendar.MINUTE);
+        }
+        return res;
+    }
+
+    public static void saveAlarm(Context context, int h, int m, int d) {
+        SharedPreferences.Editor pref = context.getSharedPreferences("OpenWatch", Context.MODE_PRIVATE).edit();
+        pref.putInt("alarm_h", h);
+        pref.putInt("alarm_m", m);
+        pref.putInt("alarm_d", d);
+        pref.commit();
+    }
+
+    public static void deleteAlarm(Context context) {
+        SharedPreferences.Editor pref = context.getSharedPreferences("OpenWatch", Context.MODE_PRIVATE).edit();
+        pref.remove("alarm_h");
+        pref.remove("alarm_m");
+        pref.remove("alarm_d");
+        pref.commit();
+    }
+
+    public static boolean hasAlarm(Context context) {
+        SharedPreferences pref = context.getSharedPreferences("OpenWatch", Context.MODE_PRIVATE);
+        return pref.contains("alarm_h");
     }
 
     public static void hideSoftKeyboard(View edt) {
         edt.clearFocus();
         InputMethodManager imm = (InputMethodManager) edt.getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(edt.getWindowToken(), 0);
+    }
+
+    public static String[] getDays() {
+        return new String[]{
+                "Everyday",
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+                "Sunday"
+        };
+    }
+
+    public static int getColorByIndex(int fromColor, int toColor, float percentage) {
+        float percentage2 = 1 - percentage;
+        return Color.rgb(
+                Math.round((Color.red(fromColor) * percentage) + (Color.red(toColor) * percentage2)),
+                Math.round((Color.green(fromColor) * percentage) + (Color.green(toColor) * percentage2)),
+                Math.round((Color.blue(fromColor) * percentage) + (Color.blue(toColor) * percentage2))
+        );
     }
 
 }

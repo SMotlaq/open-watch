@@ -16,6 +16,7 @@ import com.openwatch.packet.MessageReceiver;
 import com.openwatch.packet.PPGAlgorithms;
 import com.openwatch.packet.PPGData;
 import com.openwatch.packet.PacketUtil;
+import com.openwatch.packet.WatchData;
 import com.openwatch.util.DispatchQueue;
 import com.openwatch.util.Utils;
 
@@ -24,18 +25,15 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.UUID;
 
+import static com.openwatch.packet.PPGAlgorithms.*;
+
 import static com.openwatch.packet.PacketUtil.HF;
 
 public class BluetoothThread extends Thread {
-
-    private static final int RX_BUFFER_SIZE = 811;
-    private static final int RX_BUFFER_CAPACITY = RX_BUFFER_SIZE + 101;
-    private static final long HEART_REFRESH_TIME = 800; //ms
 
     private final static Handler handler = new Handler(Looper.getMainLooper());
 
@@ -49,6 +47,10 @@ public class BluetoothThread extends Thread {
     private ArrayList<Byte> rxBuffer;
     private Field elementData;
     private boolean isFirstPacket, justRejected;
+
+    private int currentPacketIndex = 0;
+    private final Object[] data = new Object[SUM_PACKET_COUNT * EACH_PACKET_SIZE];
+    private double prevSpO2 = 0;
 
     private final Runnable runnable = new Runnable() {
         @Override
@@ -71,7 +73,6 @@ public class BluetoothThread extends Thread {
             elementData = rxBuffer.getClass().getDeclaredField("elementData");
             elementData.setAccessible(true);
         } catch (Exception ignore) {
-            ignore.printStackTrace();
         }
     }
 
@@ -117,6 +118,7 @@ public class BluetoothThread extends Thread {
             handler.post(() -> receiver.receive(MessageReceiver.TYPE_WAITING, null));
 
             rxBuffer.clear();
+            currentPacketIndex = 0;
 
             byte[] buffer = new byte[100];
             int numBytes;
@@ -143,12 +145,16 @@ public class BluetoothThread extends Thread {
 
     private void rxParser() throws Exception {
         if (rxBuffer.get(0) != HF || rxBuffer.get(RX_BUFFER_SIZE - 1) != HF) {
-            System.out.println("INVALID **************************");
             interrupt();
             return;
         }
 
-        System.out.println(":) VALID **************************");
+        if (rxBuffer.get(1) != null && rxBuffer.get(2) != null && rxBuffer.get(3) != null) {
+            int battery = rxBuffer.get(1);
+            int stepCount = (((int) rxBuffer.get(2)) << 8) + (int) rxBuffer.get(3);
+            handler.post(() -> receiver.receive(MessageReceiver.TYPE_WATCH_DATA,
+                    new WatchData(battery, stepCount)));
+        }
 
         if (isFirstPacket) {
             if (rxBuffer.get(4) == 1) {
@@ -156,8 +162,6 @@ public class BluetoothThread extends Thread {
                 out.write(PacketUtil.generateNamePacket(Utils.getName(activity)));
                 Thread.sleep(100);
                 out.write(PacketUtil.generateTimePacket(Utils.getStepSize(activity)));
-                Thread.sleep(100);
-                out.write(PacketUtil.generateHealthPacket());
 
                 queue = new DispatchQueue(() ->
                         queue.postRunnable(runnable, HEART_REFRESH_TIME));
@@ -168,13 +172,23 @@ public class BluetoothThread extends Thread {
             }
             isFirstPacket = false;
         } else {
-
             Object[] elements = (Object[]) elementData.get(rxBuffer);
             if (elements == null)
                 return;
 
-            PPGData out = PPGAlgorithms.test(elements, 800);
-            handler.post(() -> receiver.receive(MessageReceiver.TYPE_DATA, out));
+            System.arraycopy(elements, 10, data,
+                    currentPacketIndex * EACH_PACKET_SIZE, EACH_PACKET_SIZE);
+            currentPacketIndex++;
+
+            if (currentPacketIndex >= SUM_PACKET_COUNT) {
+                PPGData ppgData = PPGAlgorithms.algorithm(activity, data, data.length, prevSpO2);
+                prevSpO2 = ppgData.getSpO2();
+
+                handler.post(() -> receiver.receive(MessageReceiver.TYPE_DATA, ppgData));
+                currentPacketIndex = 0;
+
+                out.write(PacketUtil.generateHealthPacket(ppgData));
+            }
         }
     }
 
@@ -200,6 +214,9 @@ public class BluetoothThread extends Thread {
         forceClose();
     }
 
+    public boolean isConnected() {
+        return !isInterrupted() && socket != null && socket.isConnected();
+    }
 
     private void forceClose() {
         // INTERRUPT MAY CALL SEVERAL TIMES
@@ -210,9 +227,19 @@ public class BluetoothThread extends Thread {
             if (queue != null)
                 queue.recycle();
 
+            queue = null;
             out = null;
             socket.close();
         } catch (IOException ignore) {
+        }
+    }
+
+    public void updateAlarm(int[] res) {
+        if (out != null && isConnected()) {
+            try {
+                out.write(PacketUtil.generateAlarmPacket(res));
+            } catch (IOException ignore) {
+            }
         }
     }
 

@@ -1,10 +1,5 @@
 package com.openwatch;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.ColorUtils;
-
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ArgbEvaluator;
@@ -18,29 +13,42 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.RelativeSizeSpan;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.ColorUtils;
+
 import com.aghajari.axanimation.AXAnimation;
-import com.aghajari.graphview.AXGraphFormula;
-import com.aghajari.graphview.AXGraphOptions;
 import com.aghajari.xmlbypass.XmlByPass;
 import com.aghajari.xmlbypass.XmlByPassAttr;
 import com.aghajari.xmlbypass.XmlLayout;
 import com.openwatch.packet.MessageReceiver;
-
+import com.openwatch.packet.PPGAlgorithms;
 import com.openwatch.packet.PPGData;
-import com.openwatch.util.IntAdapter;
+import com.openwatch.packet.WatchData;
+import com.openwatch.util.ArrayAdapter;
 import com.openwatch.util.KeyboardHeightProvider;
 import com.openwatch.util.PickerLayoutManager;
 import com.openwatch.util.Utils;
 
+import java.text.MessageFormat;
+import java.util.Locale;
+
 @XmlByPass(layouts = {@XmlLayout(layout = "*")})
 @XmlByPassAttr(name = "textColorHint", format = "color", codeName = "hintTextColor")
 public class MainActivity extends AppCompatActivity implements MessageReceiver {
+
+    public static final boolean ONLY_PHONE_DEBUG = false;
 
     private static final int[][] COLORS = {
             new int[]{0xFFFF9190, 0xFF5E72EB},
@@ -48,8 +56,11 @@ public class MainActivity extends AppCompatActivity implements MessageReceiver {
             new int[]{0xFFC5227A, 0xFF7F19CD},
     };
 
-    private int colorIndex = 0;
+    private int colorIndex = 0, currentIndex = 3;
     private GraphFormula graphFormula;
+    private HRVHandler hrvHandler;
+    private AlarmDialog alarmDialog;
+
     private activity_main view;
     private float r = 0;
     private boolean isWhiteLoading = true;
@@ -65,8 +76,8 @@ public class MainActivity extends AppCompatActivity implements MessageReceiver {
                 if (result.getResultCode() == RESULT_OK) {
                     startScan();
                 } else {
-                    Toast.makeText(MainActivity.this,
-                            "You should enable your bluetooth!", Toast.LENGTH_SHORT).show();
+                    view.connectionStatus.setText("Bluetooth Disconnected!");
+                    view.path_progress.cancelAnimation();
                 }
             }
     );
@@ -89,6 +100,8 @@ public class MainActivity extends AppCompatActivity implements MessageReceiver {
         });*/
 
         initSplashMode();
+        bindAlarm();
+        hrvHandler = new HRVHandler(this, view);
     }
 
     // BLUETOOTH
@@ -121,7 +134,10 @@ public class MainActivity extends AppCompatActivity implements MessageReceiver {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        bluetoothThread.interrupt();
+        if (bluetoothThread != null) {
+            bluetoothThread.interrupt();
+            //PPGAlgorithms.terminate();
+        }
     }
 
     // END OF BLUETOOTH
@@ -167,35 +183,23 @@ public class MainActivity extends AppCompatActivity implements MessageReceiver {
 
     private void initGraph() {
         graphFormula = new GraphFormula(view.graph_view);
-        setBackground(COLORS[colorIndex]);
+        setBackground(lastColors);
 
-        AXGraphOptions options = new AXGraphOptions(this);
-        options.scrollEnabled = true;
-        options.minGraphX = 0;
-        options.maxGraphX = 1000 * 200f;
-        options.minZoom = 1f;
-        options.maxZoom = 1f;
-        options.minGraphY = 0;
-        options.drawYText = false;
-        options.drawXText = false;
-
-        options.xDividerInterval = 200f;
-        options.yDividerInterval = 10000f;
-        options.axisPaint.setColor(options.gridLinePaint.getColor());
-        options.xDividerIntervalInPx = 150;
-        options.yDividerIntervalInPx = 150;
-
-        view.graph_view.setGraphOptions(options);
+        //*/
+        if (ONLY_PHONE_DEBUG)
+            view.postDelayed(() -> receive(MessageReceiver.TYPE_DATA, PPGAlgorithms.test(this)),
+                    1400);
+        //*/
     }
 
     // END OF INITIAL STATE
 
     // BACKGROUND ANIMATION
 
-    private int lastColor;
+    private int[] lastColors;
 
     private void setBackground(int[] colors) {
-        lastColor = colors[0];
+        lastColors = colors;
 
         GradientDrawable gd = new GradientDrawable();
         gd.setColors(colors);
@@ -215,6 +219,12 @@ public class MainActivity extends AppCompatActivity implements MessageReceiver {
 
         if (view.path_progress != null)
             updateLoadingColor();
+
+        if (hrvHandler != null)
+            hrvHandler.updateColor(colors);
+
+        if (alarmDialog != null)
+            alarmDialog.updateColor(colors);
     }
 
     private void updateLoadingColor() {
@@ -223,9 +233,9 @@ public class MainActivity extends AppCompatActivity implements MessageReceiver {
             view.path_progress.setProgressColor(Color.WHITE);
             view.connectionStatus.setTextColor(Color.WHITE);
         } else {
-            view.path_progress.setTrackColor(ColorUtils.setAlphaComponent(lastColor, 30));
-            view.path_progress.setProgressColor(lastColor);
-            view.connectionStatus.setTextColor(lastColor);
+            view.path_progress.setTrackColor(ColorUtils.setAlphaComponent(lastColors[0], 30));
+            view.path_progress.setProgressColor(lastColors[0]);
+            view.connectionStatus.setTextColor(lastColors[0]);
         }
     }
 
@@ -330,17 +340,17 @@ public class MainActivity extends AppCompatActivity implements MessageReceiver {
             });
             heightProvider.start();
 
-            int[] age = new int[99];
+            Integer[] age = new Integer[99];
             for (int i = 0; i < 99; i++) {
                 age[i] = i + 2;
             }
-            int[] stepSize = new int[20];
+            Integer[] stepSize = new Integer[20];
             for (int i = 0, j = 25; i < 20; i++, j += 5) {
                 stepSize[i] = j;
             }
 
-            view.ageRV.setAdapter(new IntAdapter(age));
-            view.stepSizeRV.setAdapter(new IntAdapter(stepSize));
+            view.ageRV.setAdapter(new ArrayAdapter<>(age));
+            view.stepSizeRV.setAdapter(new ArrayAdapter<>(stepSize));
 
             PickerLayoutManager ageLM, stepSizeLM;
             view.ageRV.setLayoutManager(ageLM = new PickerLayoutManager(this));
@@ -431,7 +441,10 @@ public class MainActivity extends AppCompatActivity implements MessageReceiver {
         animator.start();
 
         AXAnimation.create()
-                .withSectionStartAction(a -> Utils.setStatusBarLight(MainActivity.this, true))
+                .withSectionStartAction(a -> {
+                    Utils.setStatusBarLight(MainActivity.this, true);
+                    Utils.setNavigationBarLight(MainActivity.this, true);
+                })
                 .duration(400)
                 .scale(1f)
                 .start(view.title);
@@ -440,15 +453,16 @@ public class MainActivity extends AppCompatActivity implements MessageReceiver {
             isWhiteLoading = false;
             updateLoadingColor();
 
-            // TODO Start connecting bluetooth
-            checkForBluetooth();
+            if (!ONLY_PHONE_DEBUG)
+                checkForBluetooth();
         }, 280);
 
-        /*/
-        view.bg.setOnClickListener(v -> {
-            connectAnimation();
-            view.bg.setOnClickListener(null);
-        });
+        //*/
+        if (ONLY_PHONE_DEBUG)
+            view.bg.setOnClickListener(v -> {
+                connectAnimation();
+                view.bg.setOnClickListener(null);
+            });
         //*/
 
 
@@ -460,6 +474,8 @@ public class MainActivity extends AppCompatActivity implements MessageReceiver {
     }
 
     private void connectAnimation() {
+        initGraph();
+
         int screenWidth = view.getMeasuredWidth();
         int screenHeight = view.getMeasuredHeight();
 
@@ -510,6 +526,8 @@ public class MainActivity extends AppCompatActivity implements MessageReceiver {
                 .duration(400)
                 .withSectionStartAction(a ->
                         Utils.setStatusBarLight(MainActivity.this, false))
+                .withEndAction(a ->
+                        Utils.setNavigationBarLight(MainActivity.this, false))
                 .scale(2f)
                 .start(view.title);
 
@@ -553,6 +571,9 @@ public class MainActivity extends AppCompatActivity implements MessageReceiver {
     private void letsGoAnimation() {
         FrameLayout.LayoutParams lp = (FrameLayout.LayoutParams)
                 view.bg.getLayoutParams();
+
+        ((ViewGroup.MarginLayoutParams) view.statusLayout.getLayoutParams())
+                .topMargin += Utils.getStatusBarHeight(this) + 20;
 
         view.removeView(view.login_content);
         lp.leftMargin = 0;
@@ -630,6 +651,36 @@ public class MainActivity extends AppCompatActivity implements MessageReceiver {
                 .alpha(0f, 1f)
                 .translationY(view.legend.getMeasuredHeight() / 2f, 0f)
                 .start(view.legend);
+
+        Utils.setNavigationBarLight(MainActivity.this, false);
+
+        view.alarm.setOnClickListener(v -> {
+            if (ONLY_PHONE_DEBUG || (bluetoothThread != null && bluetoothThread.isConnected())) {
+                alarmDialog = new AlarmDialog(this, lastColors, this::bindAlarm);
+                alarmDialog.setOnCancelListener(d -> alarmDialog = null);
+                alarmDialog.setOnDismissListener(d -> alarmDialog = null);
+                alarmDialog.show();
+            }
+        });
+    }
+
+    public void bindAlarm() {
+        if (Utils.hasAlarm(this)) {
+            int[] res = Utils.getAlarmPositions(this);
+            String h = res[0] >= 10 ? String.valueOf(res[0]) : "0" + res[0];
+            String m = res[1] >= 10 ? String.valueOf(res[1]) : "0" + res[1];
+            String d = Utils.getDays()[res[2]];
+            view.alarm_text.setText(MessageFormat.format("{0}:{1} {2}", h, m, d));
+
+            if (bluetoothThread != null)
+                bluetoothThread.updateAlarm(res);
+
+        } else {
+            view.alarm_text.setText("Set alarm");
+
+            if (bluetoothThread != null)
+                bluetoothThread.updateAlarm(null);
+        }
     }
 
     // END OF PAGE ANIMATION
@@ -655,12 +706,47 @@ public class MainActivity extends AppCompatActivity implements MessageReceiver {
                 }
                 break;
             case MessageReceiver.TYPE_CONNECT:
-                initGraph();
                 connectAnimation();
                 break;
             case MessageReceiver.TYPE_DATA:
+                PPGData ppgData = (PPGData) data;
+
                 if (graphFormula != null)
-                    graphFormula.addData(view.graph_view, (PPGData) data);
+                    graphFormula.addData(view.graph_view, ppgData);
+
+                if (hrvHandler != null && (graphFormula != null && graphFormula.size() > 1))
+                    hrvHandler.addData(ppgData);
+
+                SpannableStringBuilder st = new SpannableStringBuilder(
+                        ppgData.getFormattedHR() + "\nbpm");
+                st.setSpan(new RelativeSizeSpan(0.7f), st.length() - 3, st.length(),
+                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                view.hrText.setText(st);
+
+                st = new SpannableStringBuilder(
+                        ppgData.getReadableSpO2() + "%");
+                st.setSpan(new RelativeSizeSpan(0.7f), st.length() - 1, st.length(),
+                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                view.spo2Text.setText(st);
+
+                if (currentIndex != ppgData.getIndex())
+                    switch (currentIndex = ppgData.getIndex()) {
+                        case 1:
+                            view.index_img.setImageResource(R.drawable.bad);
+                            break;
+                        case 2:
+                            view.index_img.setImageResource(R.drawable.neut);
+                            break;
+                        default:
+                            view.index_img.setImageResource(R.drawable.good);
+                    }
+
+                break;
+            case MessageReceiver.TYPE_WATCH_DATA:
+                WatchData watchData = (WatchData) data;
+                view.stepCountText.setText(String.format(Locale.US, "%.2f km",
+                        (watchData.getStepCount() * Utils.getStepSize(this) / 100000.0)));
+                view.batteryText.setText(String.format(Locale.US, "%d%%", ((WatchData) data).getBattery()));
                 break;
         }
     }

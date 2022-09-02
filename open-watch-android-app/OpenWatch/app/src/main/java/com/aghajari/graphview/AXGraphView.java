@@ -669,13 +669,14 @@ public class AXGraphView extends View {
 
     private void setupTranslation(float dX, float dY) {
         distanceX = -1 * dX;
-        distanceY = -1 * dY;
+        // CUSTOMIZED: DISABLE Y SCROLL
+        distanceY = 0/*-1 * dY*/;
 
         if (contentSize != null) {
             float[] values = new float[9];
             matrix.getValues(values);
             float totX = values[Matrix.MTRANS_X] + distanceX;
-            float totY = values[Matrix.MTRANS_Y] + distanceY;
+            //float totY = values[Matrix.MTRANS_Y] + distanceY;
             float sx = values[Matrix.MSCALE_X];
 
             Rect viewableRect = new Rect();
@@ -683,11 +684,11 @@ public class AXGraphView extends View {
             float offscreenWidth = contentSize.width() - (viewableRect.right - viewableRect.left);
             float offscreenHeight = contentSize.height() - (viewableRect.bottom - viewableRect.top);
             float maxDx = (contentSize.width() - (contentSize.width() / sx)) * sx;
-            float maxDy = (contentSize.height() - (contentSize.height() / sx)) * sx;
+            //float maxDy = (contentSize.height() - (contentSize.height() / sx)) * sx;
             if (totX > 0 && distanceX > 0) distanceX = 0;
-            if (totY > 0 && distanceY > 0) distanceY = 0;
+            //if (totY > 0 && distanceY > 0) distanceY = 0;
             if (totX * -1 > offscreenWidth + maxDx && distanceX < 0) distanceX = 0;
-            if (totY * -1 > offscreenHeight + maxDy && distanceY < 0) distanceY = 0;
+            //if (totY * -1 > offscreenHeight + maxDy && distanceY < 0) distanceY = 0;
         }
 
         if (distanceX != 0 && animation != null)
@@ -733,10 +734,10 @@ public class AXGraphView extends View {
         return animationDuration;
     }
 
-    public void animateX(float dx) {
+    public void animateX(float dx, long duration) {
         Matrix m = new Matrix(matrix);
         m.postTranslate(dx * org_scale, 0);
-        postMatrixAnimation(m, 1200);
+        postMatrixAnimation(m, duration);
     }
 
     public boolean isPointVisible(float fx) {
