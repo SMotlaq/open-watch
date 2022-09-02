@@ -28,7 +28,7 @@ System sys_init(){
 							(0 << SCREENFLAG_MASK)		| 
 							(1 << SCREENENABLED_MASK)	|
 							(0 << PEDFLAG_MASK)				| 
-							(0 << VIBENENABLED_MASK)	| 
+							(1 << VIBENENABLED_MASK)	| 
 							(1 << SOUNDENABLED_MASK);
 	
 	sys.display_collibration_x = 2;
