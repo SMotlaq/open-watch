@@ -164,8 +164,10 @@ See the [open issues](https://github.com/SMotlaq/open-watch/issues) for a full l
 
 
 
-<!-- RESULTS -->
-# Results
+<!-- STARS -->
+# Star history
+
+[![Star History Chart](https://api.star-history.com/svg?repos=SMotlaq/open-watch&type=Date)](https://star-history.com/#SMotlaq/open-watch&Date)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
